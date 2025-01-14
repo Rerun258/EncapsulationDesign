@@ -1,0 +1,11 @@
+# Ignore Visual Studio files
+.vs/
+
+# Ignore compiled files
+*.exe
+*.obj
+*.dll
+
+# Ignore other unwanted files
+*.log
+*.tmp
