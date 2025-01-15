@@ -14,13 +14,15 @@
  *       like a puzzle.
  *
  * 5. How long did it take for you to complete the assignment?
- *      ~1 hr
+ *      ~3 hours, with the assistance of ChatGPT.
  *
  **************************************************************/
 
 #include <iostream>  // for CIN and COUT
 #include <cmath> // for triginomotry
+#include <string> // for string to double
 using namespace std;
+#define M_PI 3.14159265358979323846
 
 #define WEIGHT   15103.000   // Weight in KG
 #define GRAVITY     -1.625   // Vertical acceleration due to gravity, in m/s^2
@@ -41,8 +43,8 @@ using namespace std;
  **************************************************/
 double computeDistance(double start, double velocity, double acceleration, double time) 
 {
-   start = start + velocity * time + (1.0 % 2.0) * acceleration * (time * time);
-   return start;
+   double newStart = start + velocity * time + (1.0 / 2.0) * acceleration * (time * time);
+   return newStart;
 }
 
 /**************************************************
@@ -57,7 +59,7 @@ double computeDistance(double start, double velocity, double acceleration, doubl
 *     a : acceleration, in meters/second^2
 ***************************************************/
 double computeAcceleration(double force, double mass)
-{
+{  
    return force / mass;
 }
 
@@ -150,7 +152,8 @@ double computeHorizontalComponent(double angle, double total)
 ***********************************************/
 double computeTotalComponent(double x, double y)
 {
-   return sqrt((pow(x, 2.0)) + pow(y, 2.0));
+   double powered = pow(x, 2.0) + pow(y, 2.0);
+   return sqrt(powered);
 }
 
 
@@ -177,13 +180,13 @@ double radiansFromDegrees(double degrees)
 * OUTPUT
 *      response : the user's response
 ***************************************************/
-string prompt(string message) 
+double prompt(string message) 
 {
-
    string response;
    cout << message;
    cin >> response;
-   return response;
+   double responseNum = stod(response); // convert users respons into double
+   return responseNum; //double.pharse(responseNum);
 }
 
 /****************************************************************
@@ -192,6 +195,7 @@ string prompt(string message)
 ****************************************************************/
 int main()
 {
+
    // Prompt for input and variables to be computed
    double dx = prompt("What is your horizontal velocity (m/s)? ");
    double dy = prompt("What is your vertical velocity (m/s)? ");
@@ -200,21 +204,49 @@ int main()
    double aDegrees = prompt("What is the angle of the LM where 0 is up (degrees)? ");
    double t = prompt("What is the time interval (s)? ");
 
-   double aRadians = radiansFromDegrees(aDegrees);                   // Angle in radians
-   double accelerationThrust = computeAcceleration(THRUST, WEIGHT);  // Acceleration due to thrust 
-   double ddxThrust = computeHorizontalComponent(aRadians, THRUST);  // Horizontal acceleration due to thrust
-   double ddyThrust = computeVerticalComponent(aRadians, THRUST);    // Vertical acceleration due to thrust
-   double ddx = computeHorizontalComponent(aRadians, dx);            // Total horizontal acceleration
-   double ddy = computeVerticalComponent(aRadians, dy);              // Total vertical acceleration
-   double v = computeTotalComponent(dx, dy);                         // Total velocity
 
-   
+   //cout << "\n\n-------test code -------- \n\n";
+   //double aRadiansTest = radiansFromDegrees(aDegrees); // Should be -0.785398 (since -45 degrees is PI/4)
+   //cout << aRadiansTest << " should be -0.785398\n";
 
+   //double accelerationThrustTest = computeAcceleration(THRUST, WEIGHT); // Should be approximately 2.979 (from THRUST/WEIGHT)
+   //cout << accelerationThrustTest << " should be 2.979\n";
+
+   //double ddxThrustTest = computeHorizontalComponent(aRadiansTest, accelerationThrustTest); // Should be approximately -2.106
+   //cout << ddxThrustTest << " should be -2.106\n";
+   //double ddyThrustTest = computeVerticalComponent(aRadiansTest, accelerationThrustTest);   // Should be approximately 2.106
+   //cout << ddyThrustTest << " should be 2.106\n";
+
+
+   //double ddxTest = 0;//computeHorizontalComponent(aRadiansTest, dx);       // Approximately 2.106
+   //cout << ddxTest << "should be 2.106\n";
+   //double ddyTest = ddyThrustTest + GRAVITY;  // Approximately -3.731 (since GRAVITY is -1.625)
+   //cout << ddyTest << "should be -1.625\n";
+
+
+   //cout << "\n\n-------test code -------- \n\n";
+
+  
+   double aRadians;
+   double accelerationThrust;
+	double ddxThrust;
+	double ddyThrust;
+	double ddx;
+	double ddy;
+   double v;
 
    // Go through the simulator five times
    for (int i = 0; i < 5; i++)
    {
-      // Double check, cause it's AI.
+		aRadians = radiansFromDegrees(aDegrees);                                // Angle in radians
+		accelerationThrust = computeAcceleration(THRUST, WEIGHT);               // Acceleration due to thrust 
+		ddxThrust = computeHorizontalComponent(aRadians, accelerationThrust);   // Horizontal acceleration due to thrust
+		ddyThrust = computeVerticalComponent(aRadians, accelerationThrust);     // Vertical acceleration due to thrust
+      ddx = ddxThrust;                                                        // Total horizontal acceleration
+		ddy = ddyThrust + GRAVITY;                                              // Total vertical acceleration
+		v = computeTotalComponent(dx, dy);                                      // Total velocity
+
+
       // Update the position before updating the velocity
       x = computeDistance(x, dx, ddx, t);
       y = computeDistance(y, dy, ddy, t);
@@ -231,31 +263,6 @@ int main()
       cout << "\tNew velocity:   (" << dx << ", " << dy << ") m/s\n";
       cout << "\tTotal velocity:  " << v << " m/s\n\n";
    }
-
-
-
-
-
-
-
-
-   // Go through the simulator five times
-   for (i = 0; i < 5; i++) 
-   {
-
-
-      //x = computeDistance();
-      
-   // Hint: Update the position _before_ updating the velocity
-   
-   // Output
-   cout.setf(ios::fixed | ios::showpoint);
-   cout.precision(2);
-   cout << "\tNew position:   (" << x << ", " << y << ")m\n";
-   cout << "\tNew velocity:   (" << dx << ", " << dy << ")m/s\n";
-   cout << "\tTotal velocity:  " << v << "m/s\n\n";
-   }
-   
 
 
    return 0;
