@@ -199,7 +199,7 @@ double prompt(string message)
 *      t : time
 *      round: fix for visualization of time
 * OUTPUT
-*      Lunar position for each second.
+*      Lunar position for each second. Prints to console.
 * 
 * Code Side Effects: Changes variables passed into the function.
 ***************************************************/
@@ -214,6 +214,8 @@ void lunarPosition(double &x, double &y, double &dx, double &dy, double &aDegree
 	double v;
 
    int printTime = 0;
+
+	cout << "\nFor the next " << t << " seconds with the main engine on, the position of the lander is: \n" << endl;
 
 	// Go through the simulator five times.
 	for (double i = 0.0; i < t; i++)
@@ -257,7 +259,7 @@ void lunarPosition(double &x, double &y, double &dx, double &dy, double &aDegree
 
       printTime++;
 
-		cout << (printTime + round) << "s - x,y:(" << x << ", " << y << ")m  dx,dy:(" << dx << ", " << dy << ")m/s  speed:" << v << "m/s  angle:" << aDegrees << "deg" << endl;
+		cout << " " << (printTime + round) << "s - x,y:(" << x << ", " << y << ")m  dx,dy:(" << dx << ", " << dy << ")m/s  speed:" << v << "m/s  angle:" << aDegrees << "deg" << endl;
 
 	}
 }
@@ -285,7 +287,7 @@ int main()
    // Passed by refferance changes outside of the function are made.
    lunarPosition(x, y, dx, dy, aDegrees, t, 0); 
 
-   aDegrees = prompt("\nWhat is the New angle of the LM where 0 is up (degrees)? ");
+   aDegrees = prompt("\nWhat is the new angle of the LM where 0 is up (degrees)? ");
  
 	lunarPosition(x, y, dx, dy, aDegrees, t, 5); // Passed by refferance changes outside of the function are made.
 
