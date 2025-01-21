@@ -1,6 +1,6 @@
 /*************************************************************
  * 1. Name:
- *      -your name-
+ *      Elijah, McCain
  * 2. Assignment Name:
  *      Practice 03: Angle Class
  * 3. Assignment Description:
@@ -31,7 +31,7 @@ class Angle
    friend TestAngle;
 
    // Angle, stored in radians.
-   double angle;
+   double radians;
 
    public:
 
@@ -44,37 +44,37 @@ class Angle
       ******************************************/
       double getDegrees()
       {
-         return convertToDegrees(angle);
+         return convertToDegrees(radians);
       }
 
-		/*****************************************
+      /*****************************************
       * GET RADIANS
       * Takes no parameters and return the angle in radians.
       *
-      * OUTPUT: 
+      * OUTPUT:
       *  angle, in radians
-		******************************************/
+      ******************************************/
       double getRadians()
       {
-         return angle;
+         return radians;
       }
 
-		/*****************************************
+      /*****************************************
       * SET DEGREES
-		* Takes a degrees as a parameter and updates the attribute
-		* with the passed parameter. If the parameter is above 360 or
-		* below zero, then it will "unwrap" so the radians is between
-		* 0 and 2PI
+      * Takes a degrees as a parameter and updates the attribute
+      * with the passed parameter. If the parameter is above 360 or
+      * below zero, then it will "unwrap" so the radians is between
+      * 0 and 2PI
       *
       * INPUT:
       * OUTPUT:
-		******************************************/
+      ******************************************/
       void setDegrees(double aDegree)
       {
-         angle = normalize(convertToRadians(aDegree));
+         radians = normalize(convertToRadians(aDegree));
       }
 
-		/*****************************************
+      /*****************************************
       * SET RADIANS
       * Takes a radian as a parameter and updates the attribute
       * with the passed parameter. If the parameter is above 2PI
@@ -82,41 +82,40 @@ class Angle
       *
       * INPUT:
       * OUTPUT:
-		******************************************/
-      void setRadians(aRadian)
+      ******************************************/
+      void setRadians(double aRadian)
       {
-         angle = normalize(aRadian);
-
+         radians = normalize(aRadian);
       }
 
-		/*****************************************
-      * DISPLAY 
+      /*****************************************
+      * DISPLAY
       * Takes a ostream & out as a parameter display the value,
       * in degrees, to 1 decimal place of accuracy.
       *
-      * OUTPUT: 
-		******************************************/
-      void display()
+      * OUTPUT:
+      ******************************************/
+      void display(ostream &out)
       {
-			cout.setf(ios::fixed);     // "fixed" means don't use scientific notation.
-			cout.setf(ios::showpoint); // "showpoint" means always show the decimal point.
-			cout.precision(1);         // Set the precision to 1 decimal place of accuracy.
-         
-         double displayAngle = convertToDegrees(angle);
+         cout.setf(ios::fixed);     // "fixed" means don't use scientific notation.
+         cout.setf(ios::showpoint); // "showpoint" means always show the decimal point.
+         cout.precision(1);         // Set the precision to 1 decimal place of accuracy.
 
-         cout << "\nAngle (in degrees): " << displayAngle << "\n" << endl;
+         //double displayAngle = convertToDegrees(radians);
+
+         cout << &out;
       }
 
    private:
 
       /*****************************************
       * NORMALIZE
-      * Takes a radian as a parameter and reduce it to between 0 and 2PI. 
+      * Takes a radian as a parameter and reduce it to between 0 and 2PI.
       *
-      * INPUT: 
+      * INPUT:
       *  aRadian: angle in radians
       *
-      * OUTPUT: 
+      * OUTPUT:
       *  aRadian: normalized radians
       ******************************************/
       double normalize(double aRadian)
@@ -134,39 +133,37 @@ class Angle
          return aRadian;
       }
 
-		/*****************************************
-      * CONVERT TO DEGREES 
+      /*****************************************
+      * CONVERT TO DEGREES
       * Takes a radians as a parameter and returns degrees.
       *
       * INPUT:
       *  aRadian: angle in radians
       *
-      * OUTPUT: 
+      * OUTPUT:
       *  degrees: angle in degrees
-		******************************************/
+      ******************************************/
       double convertToDegrees(double aRadian)
       {
          double degrees = (aRadian * 180) / M_PI;
          return degrees;
       }
 
-		/*****************************************
+      /*****************************************
       * CONVERT TO RADIANS
       * Takes a degrees as a parameter and returns radians.
-      * 
+      *
       * INPUT:
       *  aDegree: angle in degrees
-      * 
+      *
       * OUTPUT:
       *  radians: angle in radians
-		******************************************/
+      ******************************************/
       double convertToRadians(double aDegree)
       {
          double radians = aDegree * (M_PI / 180);
          return radians;
       }
 
-      
+
 };
-
-

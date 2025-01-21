@@ -9,8 +9,6 @@
 
 #include "testAngle.h"
 
-
-
 /************************************
  * MAIN
  * Simple driver
