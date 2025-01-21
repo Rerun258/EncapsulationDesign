@@ -94,6 +94,7 @@ class Angle
       * in degrees, to 1 decimal place of accuracy.
       *
       * OUTPUT:
+      *  Prints to console.
       ******************************************/
       void display(ostream &out)
       {
@@ -101,9 +102,7 @@ class Angle
          cout.setf(ios::showpoint); // "showpoint" means always show the decimal point.
          cout.precision(1);         // Set the precision to 1 decimal place of accuracy.
 
-         //double displayAngle = convertToDegrees(radians);
-
-         cout << &out;
+         out << getDegrees();
       }
 
    private:
@@ -125,7 +124,7 @@ class Angle
             aRadian -= TWO_PI;
          }
 
-         while (aRadian < TWO_PI)
+         while (aRadian < 0)
          {
             aRadian += TWO_PI;
          }
@@ -145,7 +144,7 @@ class Angle
       ******************************************/
       double convertToDegrees(double aRadian)
       {
-         double degrees = (aRadian * 180) / M_PI;
+         double degrees = aRadian * (180 / M_PI);
          return degrees;
       }
 
