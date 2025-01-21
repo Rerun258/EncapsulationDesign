@@ -67,7 +67,7 @@ class Angle
       * 0 and 2PI
       *
       * INPUT:
-      * OUTPUT:
+      *  aDegree: angle in degrees
       ******************************************/
       void setDegrees(double aDegree)
       {
@@ -81,7 +81,7 @@ class Angle
       * or below zero, then it will "unwrap."
       *
       * INPUT:
-      * OUTPUT:
+      *  aRadian: angle in radians
       ******************************************/
       void setRadians(double aRadian)
       {
@@ -163,6 +163,5 @@ class Angle
          double radians = aDegree * (M_PI / 180);
          return radians;
       }
-
 
 };
