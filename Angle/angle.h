@@ -6,9 +6,10 @@
  * 3. Assignment Description:
  *      A class to represent an angle
  * 4. What was the hardest part? Be as specific as possible.
- *      -a paragraph or two about how the assignment went for you-
+ *      Complying with the test cases when we couldn't figure out
+ *       what was going wrong. Debugging, essentialy.
  * 5. How long did it take for you to complete the assignment?
- *      -total time in hours: reading the assignment, submitting, etc.
+ *      ~3 hours
  **************************************************************/
 
 #pragma once
