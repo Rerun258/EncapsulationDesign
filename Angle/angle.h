@@ -19,6 +19,7 @@
 #include <math.h>    // for floor()
 #include <iostream>  // for cout
 #include <cassert>   // for assert()
+#include <cmath>
 using namespace std;
 
 class TestAngle;
@@ -42,10 +43,12 @@ class Angle
       * OUTPUT:
       *  angle, in degrees
       ******************************************/
-      double getDegrees()
+      double getDegrees() 
       {
-         return convertToDegrees(radians);
+         double degrees = radians * (180 / M_PI);
+         return degrees;  
       }
+
 
       /*****************************************
       * GET RADIANS
@@ -98,11 +101,11 @@ class Angle
       ******************************************/
       void display(ostream &out)
       {
-         cout.setf(ios::fixed);     // "fixed" means don't use scientific notation.
-         cout.setf(ios::showpoint); // "showpoint" means always show the decimal point.
-         cout.precision(1);         // Set the precision to 1 decimal place of accuracy.
-
-         out << getDegrees();
+         out.setf(ios::fixed);     // "fixed" means don't use scientific notation.
+         out.setf(ios::showpoint); // "showpoint" means always show the decimal point.
+         out.precision(1);         // Set the precision to 1 decimal place of accuracy.
+         //cout << getDegrees() << endl; test code
+         out << getDegrees() << "degrees";
       }
 
    private:
@@ -144,7 +147,7 @@ class Angle
       ******************************************/
       double convertToDegrees(double aRadian)
       {
-         double degrees = aRadian * (180 / M_PI);
+         double degrees = round(normalize(aRadian) * (180 / M_PI));
          return degrees;
       }
 
@@ -161,7 +164,7 @@ class Angle
       double convertToRadians(double aDegree)
       {
          double radians = aDegree * (M_PI / 180);
-         return radians;
+         return normalize(radians);
       }
 
 };
