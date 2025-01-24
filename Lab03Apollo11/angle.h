@@ -7,6 +7,14 @@
  *    Everything we need to know about a direction
  ************************************************************************/
 
+
+ /* DELETE ME WHEN DONE
+ * Ticket 1:  minutes
+ * Ticket 2:  minutes
+ * Ticket 3:  minutes
+ * Ticket 4:  minutes
+ */
+
 #pragma once
 
 #define _USE_MATH_DEFINES
@@ -30,16 +38,27 @@ public:
    friend TestLander;
    
    // Constructors
-   Angle()                 : radians(-99.9)  {}
-   Angle(const Angle& rhs) : radians(-99.9)  {}
-   Angle(double degrees)   : radians(-99.9)  {}
+   Angle() : radians(-99.9)  
+   {
+
+   }
+
+   Angle(const Angle& rhs) : radians(-99.9)  
+   {
+   
+   }
+
+   Angle(double degrees) : radians(-99.9)
+   {
+
+   }
 
    // Getters
-   double getDegrees() const { return -99.9; }
-   double getRadians() const { return -99.9; }
+   double getDegrees() const { return radians * (180 / M_PI); }
+   double getRadians() const { return radians; }
 
    // Setters
-   void setDegrees(double degrees) { }
+   void setDegrees(double degrees) { radians = (degrees * (2 * M_PI)) / 360; }
    void setRadians(double radians) { }
    void setUp()                    { }
    void setDown()                  { }
