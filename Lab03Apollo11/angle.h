@@ -52,7 +52,7 @@ class Angle
       // Setters
       void setDegrees(double degrees) 
       { 
-         degrees = (degrees * (2 * M_PI)) / 360;
+         degrees = (degrees * (2.0 * M_PI)) / 360;
          radians = normalize(degrees); 
       }
 
@@ -63,25 +63,25 @@ class Angle
 
       void setUp()
       {
-         // 0°
+         // 0Â°
          setDegrees(0.0);
       }
 
       void setRight()
       {
-         // 90°
+         // 90Â°
          setDegrees(90.0);
       }
 
       void setLeft()
       {
-         // 270°
+         // 270Â°
          setDegrees(270.0);
       }
 
       void setDown() 
       {
-         // 180°
+         // 180Â°
          setDegrees(180.0);
       }
 
