@@ -45,14 +45,9 @@ public:
    void addDDX(double ddx)           { this->ddx += ddx ; }
    void addDDY(double ddy)           { this->ddy += ddy; }
    void add(const Acceleration& rhs);
-   //{
-   //   addDDX(rhs.ddx);
-   //   addDDY(rhs.ddy);
-   //}
+
 
 private:
    double ddx;     // horizontal acceleration
    double ddy;     // vertical acceleration
 };
-
-
