@@ -60,10 +60,27 @@ public:
    // Setters
    void setDegrees(double degrees) { radians = (degrees * (2 * M_PI)) / 360; }
    void setRadians(double radians) { }
-   void setUp()                    { }
-   void setDown()                  { }
-   void setRight()                 { }
-   void setLeft()                  { }
+
+   void setUp()
+   {
+      setDegrees(0.0);
+   }
+
+   void setDown()
+   {
+      setDegrees(180.0);
+   }
+
+   void setRight()
+   {
+      setDegrees(90.0);
+   }
+
+   void setLeft()
+   {
+      setDegrees(270.0);
+   }
+
    void reverse()                  { }
    Angle& add(double delta) { radians = -99.9; return *this; }
 
