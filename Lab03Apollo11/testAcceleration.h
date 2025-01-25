@@ -66,6 +66,7 @@ private:
     *********************************************/
    void constructor_default()
    {  // setup
+      
       // exercise
       Acceleration a;
 
