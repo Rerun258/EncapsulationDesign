@@ -38,21 +38,11 @@ public:
    friend TestLander;
    
    // Constructors
-   Angle() : radians(-99.9)  
-   {
+   Angle() : radians(0.0) { }
 
-   }
+   Angle(const Angle& rhs): radians(rhs.getRadians()) { }
 
-   Angle(const Angle& rhs): radians(rhs.getRadians()) 
-   {
-      
-      setRadians(radians);
-   }
-
-   Angle(double degrees) : radians(-99.9)
-   {
-
-   }
+   Angle(double degrees) : radians(degrees* M_PI / 180) { }
 
    // Getters
    double getDegrees() const { return radians * (180 / M_PI); }
@@ -61,12 +51,13 @@ public:
    // Setters
    void setDegrees(double degrees) 
    { 
-      radians = (degrees * (2 * M_PI)) / 360; 
+      degrees = (degrees * (2 * M_PI)) / 360;
+      radians = normalize(degrees); 
    }
 
-   void setRadians(double aradians)
+   void setRadians(double aRadian)
    {
-      radians = aradians;
+      radians = normalize(aRadian);
    }
 
    void setUp()
@@ -95,24 +86,15 @@ public:
 
    void reverse() 
    {
-
+      radians += M_PI;
    }
 
-   Angle& add(double delta) { radians = -99.9; return *this; }
+   Angle& add(double delta) { radians += delta; return *this; }
 
 private:
-   double normalize(double radians) const;
-   //{
-   //   while (radians > (2 * M_PI)) 
-   //   {
-   //      radians -= (2 * M_PI);
-   //   }
-   //   while (radians < (2 * M_PI))
-   //   {
-   //      radians += (2 * M_PI);
-   //   }
-   //}
+   double normalize(double radians);
 
-   double radians;   // 360 degrees equals 2 PI radians
+   double radians;
+   // 360 degrees equals 2 PI radians
 };
 
