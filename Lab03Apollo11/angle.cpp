@@ -1,36 +1,21 @@
 /***********************************************************************
- * Source File:
- *    ANGLE
- * Author:
- *    Br. Helfrich
+ * Source:
+ *    Angle
  * Summary:
- *    Everything we need to know about a direction
+ *    Just call the Angle unit tests
+ * Author:
+ *    James Helfrich
  ************************************************************************/
 
-#include "angle.h"
-#include <math.h>  // for floor()
-#include <cassert>
-
-#define TWO_PI 6.28318530718
-
-using namespace std;
+#include "testAngle.h"
 
 /************************************
- * ANGLE : NORMALIZE
-************************************/
-double Angle::normalize(double aRadian)
+ * MAIN
+ * Simple driver
+ ***********************************/
+int main()
 {
-	// Use fmod to find the remainder of aRadian divided by TWO_PI
-   aRadian = fmod(aRadian, TWO_PI); 
+   TestAngle().run();
 
-   if (aRadian < 0)
-   {
-      aRadian += TWO_PI; 
-   }
-   if (aRadian > TWO_PI) 
-   {
-      aRadian -= TWO_PI;
-   }
-
-   return aRadian;
+   return 0;
 }
