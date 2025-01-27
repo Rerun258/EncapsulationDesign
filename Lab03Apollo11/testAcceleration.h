@@ -304,9 +304,9 @@ private:
 
       // verify
       assertEquals(a.ddx, 0.8414);
-      std::cout << "ddx = " << a.ddx << std::endl;
+
       assertEquals(a.ddy, 0.5403);
-      std::cout << "ddy = " << a.ddy << std::endl;
+
       assertEquals(angle.radians, 1.0);
       
 
