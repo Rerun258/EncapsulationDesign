@@ -15,32 +15,22 @@
 
 using namespace std;
 
- /************************************
-  * ANGLE : NORMALIZE
-  ************************************/
+/************************************
+ * ANGLE : NORMALIZE
+************************************/
 double Angle::normalize(double aRadian)
 {
-   //while (aRadian > TWO_PI)
-   //{
-   //   aRadian -= TWO_PI;
-   //}
+	// Use fmod to find the remainder of aRadian divided by TWO_PI
+   aRadian = fmod(aRadian, TWO_PI); 
 
-   //while (aRadian < 0)
-   //{
-   //   aRadian += TWO_PI;
-   //}
-
-   aRadian = fmod(aRadian, TWO_PI); // Use fmod to find the remainder of aRadian divided by TWO_PI
    if (aRadian < 0)
    {
-      aRadian += TWO_PI; // Adjust the result for negative angles
+      aRadian += TWO_PI; 
    }
-   if (aRadian > 0)
+   if (aRadian > TWO_PI) 
    {
-      aRadian -= TWO_PI; // Adjust the result for negative angles
+      aRadian -= TWO_PI;
    }
 
    return aRadian;
 }
-
-

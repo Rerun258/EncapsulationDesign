@@ -27,12 +27,11 @@ void Acceleration::add(const Acceleration& acceleration)
  *  set from angle and direction
  *********************************************/
 void Acceleration::set(const Angle & angle, double magnitude)
-{
-
+{   
    // Convert angle to radians if it's not already in radians
    double radians = angle.getRadians(); 
 
    // Calculate the components of the acceleration
-   ddx = magnitude * cos(radians); 
-   ddy = magnitude * sin(radians); 
+   ddx = magnitude * sin(radians);
+   ddy = magnitude * cos(radians);
 }
