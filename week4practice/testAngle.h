@@ -12,6 +12,7 @@
 #include "angle.h"
 #include "unitTest.h"
 #include <sstream>
+#include <cassert>
 
  /************************************
   * TEST ANGLE

@@ -8,17 +8,16 @@
  ************************************************************************/
 
 
- /* DELETE ME WHEN DONE
- * Ticket 1: ~45 minutes
- * Ticket 2: ~60 minutes
- * Ticket 3: ~45 minutes
- * Ticket 4: ~45 minutes
- */
-
 #pragma once
 
-#define _USE_MATH_DEFINES
 #include <math.h>   // for M_PI which is 3.14159
+#include <ostream>
+#include <iostream>
+
+using namespace std;
+
+#define _USE_MATH_DEFINES
+#define M_PI 3.14159265358979323846
 #define TWO_PI 6.28318530718
 
 class TestPosition;
@@ -43,17 +42,38 @@ public:
 
    Angle(const Angle& rhs) : radians(rhs.getRadians()) {}
 
-   Angle(double degrees) : radians(degrees* M_PI / 180) {}
+   Angle(double degrees) : radians(degrees * (M_PI / 180.0)) {}
 
+   Angle& add(double delta)
+   {
+      radians += delta;
+
+      // Normalize the angle after addition
+      radians = normalize(radians);
+
+      return *this;
+   }
 
    // Getters
-   double getDegrees() const { return radians * (180 / M_PI); }
+   double getDegrees() const { return radians * (180.0 / M_PI); }
    double getRadians() const { return radians; }
+
+   double convertToDegrees(double aRadian) const
+   {
+      double degrees = round(normalize(aRadian) * (180.0 / M_PI));
+      return degrees;
+   }
+
+   double convertToRadians(double aDegree) const
+   {
+      double radians = aDegree * (M_PI / 180.0);
+      return normalize(radians);
+   }
 
    // Setters
    void setDegrees(double degrees)
    {
-      degrees = (degrees * (2 * M_PI)) / 360;
+      degrees = (degrees * (2.0 * M_PI)) / 360.0;
       radians = normalize(degrees);
    }
 
@@ -91,35 +111,37 @@ public:
       radians += M_PI;
    }
 
-   Angle& add(double delta)
+   void display(ostream& out) const
    {
-      radians += delta;
-
-      // Normalize the angle after addition
-      radians = normalize(radians);
-
-      return *this;
+      out.setf(ios::fixed);     // "fixed" means don't use scientific notation.
+      out.setf(ios::showpoint); // "showpoint" means always show the decimal point.
+      out.precision(1);         // Set the precision to 1 decimal place of accuracy.
+      //cout << getDegrees() << endl; test code
+      out << getDegrees() << "degrees";
    }
+
 
 private:
-   double normalize(double aRadian)
-   {
-      // Use fmod to find the remainder of aRadian divided by TWO_PI
-      aRadian = fmod(aRadian, TWO_PI);
-
-      if (aRadian < 0)
-      {
-         aRadian += TWO_PI;
-      }
-      if (aRadian > TWO_PI)
-      {
-         aRadian -= TWO_PI;
-      }
-
-      return aRadian;
-   }
+   double normalize(double aRadian) const;
+   
 
    double radians;
    // 360 degrees equals 2 PI radians
 };
 
+double Angle::normalize(double aRadian) const
+{
+   // Use fmod to find the remainder of aRadian divided by TWO_PI
+   aRadian = fmod(aRadian, TWO_PI);
+
+   if (aRadian < 0)
+   {
+      aRadian += TWO_PI;
+   }
+   if (aRadian > TWO_PI)
+   {
+      aRadian -= TWO_PI;
+   }
+
+   return aRadian;
+}
