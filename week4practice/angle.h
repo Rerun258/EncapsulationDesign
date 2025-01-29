@@ -42,7 +42,10 @@ public:
 
    Angle(const Angle& rhs) : radians(rhs.getRadians()) {}
 
-   Angle(double degrees) : radians(degrees * (M_PI / 180.0)) {}
+   Angle(double degrees) 
+   {
+      setDegrees(degrees);
+   }
 
    Angle& add(double delta)
    {
@@ -58,6 +61,18 @@ public:
    double getDegrees() const { return radians * (180.0 / M_PI); }
    double getRadians() const { return radians; }
 
+
+   // Setters
+   void setDegrees(double degrees)
+   {
+      degrees = (degrees * (2.0 * M_PI)) / 360.0;
+      radians = normalize(degrees);
+   }
+
+   void setRadians(double aRadian) { radians = normalize(aRadian); }
+
+
+   // Converters
    double convertToDegrees(double aRadian) const
    {
       double degrees = round(normalize(aRadian) * (180.0 / M_PI));
@@ -70,40 +85,28 @@ public:
       return normalize(radians);
    }
 
-   // Setters
-   void setDegrees(double degrees)
-   {
-      degrees = (degrees * (2.0 * M_PI)) / 360.0;
-      radians = normalize(degrees);
-   }
-
-   void setRadians(double aRadian)
-   {
-      radians = normalize(aRadian);
-   }
-
    void setUp()
    {
       // 0°
-      setDegrees(0.0);
+      radians = 0.0;
    }
 
    void setRight()
    {
       // 90°
-      setDegrees(90.0);
+      radians = M_PI * 0.5;
    }
 
    void setLeft()
    {
       // 270°
-      setDegrees(270.0);
+      radians = M_PI * 1.5;
    }
 
    void setDown()
    {
       // 180°
-      setDegrees(180.0);
+      radians = M_PI;
    }
 
    void reverse()
@@ -123,11 +126,11 @@ public:
 
 private:
    double normalize(double aRadian) const;
-   
 
    double radians;
    // 360 degrees equals 2 PI radians
 };
+
 
 double Angle::normalize(double aRadian) const
 {
