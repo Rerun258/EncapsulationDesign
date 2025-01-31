@@ -46,9 +46,14 @@ void Simulator::display()
    ground.draw(gout);
 
    // draw the lander
+   posLander.setX(200.0);
+   posLander.setY(300.0);
    gout.drawLander(posLander, a.getRadians());
 
    // draw a star
+   posStar.setX(150.0);
+   posStar.setY(375.0);
+   
    gout.drawStar(posStar, phase);
 }
 
@@ -65,6 +70,8 @@ void callBack(const Interface* pUI, void* p)
 
    // draw the game
    pSimulator->display();
+
+   pSimulator->phase = (pSimulator->phase + 2) % 256;
 
    // handle input
    if (pUI->isRight())
