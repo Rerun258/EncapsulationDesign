@@ -53,6 +53,7 @@ void Simulator::display()
    // draw a star
    posStar.setX(150.0);
    posStar.setY(375.0);
+	
    
    gout.drawStar(posStar, phase);
 }
@@ -75,9 +76,9 @@ void callBack(const Interface* pUI, void* p)
 
    // handle input
    if (pUI->isRight())
-      ;   // rotate right here
+      pSimulator->a.add(-.1);   // rotate right here
    if (pUI->isLeft())
-      ;   // rotate left here
+      pSimulator->a.add(.1);   // rotate left here
 
 
 }
