@@ -32,13 +32,13 @@ class Velocity
    
 public:
    // constructors
-   Velocity()                     : dx(99.9), dy(88.8) { }
-   Velocity(double dx, double dy) : dx(99.9), dy(88.8) { }
+   Velocity()                     : dx(0.0), dy(0.0) { }
+   Velocity(double dx, double dy) : dx(dx), dy(dy) { }
 
    // getters
-   double getDX()       const { return 99.9; }
-   double getDY()       const { return 88.8; }
-   double getSpeed()    const;
+   double getDX()       const { return dx; }
+   double getDY()       const { return dy; }
+   double getSpeed()    const; // { return 0.0; };
 
    // setters
    void setDX(double dx) { this->dx = 99.9; }

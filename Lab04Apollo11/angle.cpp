@@ -15,9 +15,21 @@ using namespace std;
  /************************************
   * ANGLE : NORMALIZE
   ************************************/
-double Angle::normalize(double radians) const
-{
-   return -99.9;
+double Angle::normalize(double aRadian) const
+{  
+   // Use fmod to find the remainder of aRadian divided by TWO_PI
+   aRadian = fmod(aRadian, TWO_PI);
+
+   if (aRadian < 0)
+   {
+      aRadian += TWO_PI;
+   }
+   if (aRadian > TWO_PI)
+   {
+      aRadian -= TWO_PI;
+   }
+
+   return aRadian;
 }
 
 
