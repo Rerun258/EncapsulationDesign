@@ -36,12 +36,13 @@ public:
 
    bool operator == (const Position & rhs) const
    {
-      return false;
+      // Make sure that our x = rhs x and our y = rhs y.
+      return this->x == rhs.getX() && this->y == rhs.getY();
    }
 
    bool operator != (const Position & rhs) const
    {
-      return false;
+      return !(*this == rhs);
    }
 
    // setters
