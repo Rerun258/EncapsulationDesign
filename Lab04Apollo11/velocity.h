@@ -38,7 +38,7 @@ public:
    // getters
    double getDX()       const { return dx; }
    double getDY()       const { return dy; }
-   double getSpeed()    const; // { return 0.0; };
+   double getSpeed()    const; 
 
    // setters
    void setDX(double dx) { this->dx = dx; }
