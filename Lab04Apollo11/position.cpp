@@ -28,8 +28,10 @@ Position::Position(double x, double y) : x(x), y(y)
  *****************************************/
 void Position::add(const Acceleration & a, const Velocity & v, double t)
 {
-   double s = 0.0;
-   x = 99.9;
-   y = 88.8;
+	double newX = getX() + (v.getDX() * t) + (0.5 * a.getDDX() * (t * t));
+	setX(newX);
+
+	double newY = getY() + (v.getDY() * t) + (0.5 * a.getDDY() * (t * t));
+	setY(newY);
 }
 

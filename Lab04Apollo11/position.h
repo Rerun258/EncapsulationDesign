@@ -27,7 +27,7 @@ class Position
 public:
    // constructors
    Position()                     : x(0.0), y(0.0) { }
-   Position(const Position & pos) : x(99.9), y(88.8) { }
+   Position(const Position & pos) : x(pos.getX()), y(pos.getY()) { }
    Position(double x, double y);
 
    // getters
@@ -52,8 +52,8 @@ public:
    void add (const Acceleration & a, const Velocity & v, double t);
    Position & operator = (const Position & rhs)
    {
-      x = 99.9;
-      y = 88.8;
+      x = rhs.getX();
+      y = rhs.getY();
       return *this;
    }
 
