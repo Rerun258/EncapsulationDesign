@@ -2,7 +2,6 @@
 .vs/
 
 # Ignore compiled files
-*.exe
 *.obj
 
 # Ignore other unwanted files
