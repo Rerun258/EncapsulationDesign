@@ -4,7 +4,6 @@
 # Ignore compiled files
 *.exe
 *.obj
-*.dll
 
 # Ignore other unwanted files
 *.log
