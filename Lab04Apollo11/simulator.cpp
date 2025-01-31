@@ -27,9 +27,11 @@ public:
    // display stuff on the screen
    void display();
   
-//   unsigned char phase;
-//   Angle a;
+   unsigned char phase;
+   Angle a;
    Ground ground;
+   Position posLander;
+   Position posStar;
 };
 
 /**********************************************************
@@ -44,10 +46,10 @@ void Simulator::display()
    ground.draw(gout);
 
    // draw the lander
-   //gout.drawLander(posLander, a.getRadians());
+   gout.drawLander(posLander, a.getRadians());
 
    // draw a star
-   //gout.drawStar(posStar, phase);
+   gout.drawStar(posStar, phase);
 }
 
 
