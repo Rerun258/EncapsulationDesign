@@ -63,6 +63,9 @@ void updateBalance(string fileName)
 ******************/
 void writeBalance(string fileName, double balance)
 {
+   // TODO: Cause to write on new line. 
+   // Currently, it just updates the line.
+
    ofstream fout;
    fout.open(fileName);
 
