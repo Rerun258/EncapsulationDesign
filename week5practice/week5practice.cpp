@@ -3,53 +3,86 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
 /*****************
 * READ BALANCE
 * Returns balance from file.
+* 
+* INPUT
+*  string fileName: filename
 ******************/
-double readBalance()
+double readBalance(string fileName)
 {
-   // TODO: Pull balance from file.
-   return 0.0;
+   //Open file and read balance.
+   ifstream fin;
+   double balance;
+
+   fin.open(fileName);
+
+   fin >> balance;
+
+   fin.close();
+
+   return balance;
 }
 
 /*****************
 * UPDATE BALANCE
 * Update balance in file by user input.
+* 
+* INPUT
+*  string fileName: filename
 ******************/
-void updateBalance()
+void updateBalance(string fileName)
 {
+   // Ask user for change.
    double change;
 
-   std::cout << "Change: ";
-   std::cin >> change;
+   cout << "Change: ";
+   cin >> change;
 
-   // TODO: Update file here.
-   // 
-   // Displaying balance will be handled by main via displayBalance.
+   // Add change to balance.
+   double balance = readBalance(fileName);
+   balance = balance + change;
+
+   // Write updated balance to file.
+   ofstream fout;
+   fout.open(fileName);
+
+   fout << balance;
+
+   fout.close();
 }
 
 /*****************
 * WRITE BALANCE
 * Write a new balance in file.
 ******************/
-void writeBalance()
+void writeBalance(string fileName, double balance)
 {
-  
+   ofstream fout;
+   fout.open(fileName);
+
+   fout << balance;
+
+   fout.close();
 }
 
 /*****************
 * DISPLAY BALANCE
 * Display balance onto the console.
+* 
+* INPUT
+*  string fileName: filename
 ******************/
-void displayBalance()
+void displayBalance(string fileName)
 {
-   double balance = readBalance();
+   double balance = readBalance(fileName);
 
-   std::cout << "Account balance: $" << balance << endl;
+   cout << "Account balance: $" << balance << endl;
 }
 
 /*****************
@@ -57,5 +90,20 @@ void displayBalance()
 ******************/
 int main()
 {
-    std::cout << "Hello World!\n";
+   string fileName = "data.txt";
+   
+    
+   if (false) 
+   {
+      // TODO: Get the error check working.
+   }
+
+   else
+   {
+      displayBalance(fileName);
+      updateBalance(fileName);
+      displayBalance(fileName);
+      
+   }
+
 }
