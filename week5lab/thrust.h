@@ -30,7 +30,8 @@ public:
    // Get rotation in radians per second
    double rotation() const
    {
-      return 99.9;
+		keyDownCallback('left', 0, 0);
+      return ;
    }
 
    // get main engine thrust in  m / s ^ 2

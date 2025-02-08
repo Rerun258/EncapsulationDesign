@@ -118,8 +118,15 @@ void drawCallback()
  *************************************************************************/
 void keyDownCallback(int key, int x, int y)
 {
-   // Even though this is a local variable, all the members are static
-   // so we are actually getting the same version as in the constructor.
+   if (key == GLUT_KEY_LEFT)
+   {
+      leftPressed = true;
+   }
+   else if (key == GLUT_KEY_RIGHT)
+   {
+      rightPressed = true;
+   }
+
    Interface ui;
    ui.keyEvent(key, true /*fDown*/);
 }

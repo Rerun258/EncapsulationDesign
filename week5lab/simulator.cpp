@@ -25,6 +25,7 @@ class Simulator
 public:
    Simulator(const Position & posUpperRight) : ground(posUpperRight) {}
    Ground ground;
+   Star star;
 };
 
 
@@ -43,6 +44,8 @@ void callBack(const Interface* pUI, void* p)
 
    // draw the ground
    pSimulator->ground.draw(gout);
+   pSimulator->star.draw(gout);
+   
 }
 
 /*********************************
