@@ -45,10 +45,7 @@ public:
    double   getMaxSpeed()    const { return 4.0; }
 
    // draw the lander on the screen
-   void draw(const Thrust& thrust, ogstream& gout) const
-   {
-
-   };
+   void draw(const Thrust& thrust, ogstream& gout) const;
 
    // handle input
    Acceleration input(const Thrust& thrust, double gravity);
