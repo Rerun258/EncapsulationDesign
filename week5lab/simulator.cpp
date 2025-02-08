@@ -57,10 +57,10 @@ void callBack(const Interface* pUI, void* p)
       star.draw(gout);
    }
 
-   const Lander& lander
+   //const Lander& lander
 
    // draw the ground
-   pSimulator->ground.draw(gout);
+   //pSimulator->ground.draw(gout);
    
 }
 
