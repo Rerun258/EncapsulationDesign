@@ -50,14 +50,14 @@ void callBack(const Interface* pUI, void* p)
 
    ogstream gout;
 
-   // draw the ground
-   pSimulator->ground.draw(gout);
-
    // twinkle twinkle little stars (thank you chatgpt)
    for (Star& star : pSimulator->stars)
    {
       star.draw(gout);
    }
+
+   // draw the ground
+   pSimulator->ground.draw(gout);
    
 }
 

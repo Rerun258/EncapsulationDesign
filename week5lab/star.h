@@ -28,7 +28,6 @@ public:
    {
       phase = (phase + random(1, 5)) % 256;
       gout.drawStar(pos, phase);
-      
    }
 
 
