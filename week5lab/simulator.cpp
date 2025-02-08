@@ -34,6 +34,7 @@ public:
 
    Ground ground;
    vector<Star> stars;
+   Position posLander;
 };
 
 

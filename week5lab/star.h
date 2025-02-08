@@ -27,7 +27,7 @@ public:
    void draw(ogstream& gout)
    {
       phase = (phase + random(1, 5)) % 256;
-      gout.drawStar(pos, phase);
+      //gout.drawStar(pos, phase);
    }
 
 
