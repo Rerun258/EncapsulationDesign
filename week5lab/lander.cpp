@@ -50,5 +50,11 @@ Acceleration Lander :: input(const Thrust& thrust, double gravity)
  *******************************************************************/
 void Lander :: coast(Acceleration & acceleration, double time)
 {
-   pos.setX(-99.9);
+   // Update position based on current velocity and acceleration
+   pos.setX(pos.getX() + velocity.getDX() * time + 0.5 * acceleration.getDDX() * time * time);
+   pos.setY(pos.getY() + velocity.getDY() * time + 0.5 * acceleration.getDDY() * time * time);
+
+   // Update velocity based on acceleration
+   velocity.setDX(velocity.getDX() + acceleration.getDDX() * time);
+   velocity.setDY(velocity.getDY() + acceleration.getDDY() * time);
 }
