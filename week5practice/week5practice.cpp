@@ -4,6 +4,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <list>
+#include <iomanip>
+#include <sstream>
 
 using namespace std;
 
@@ -63,14 +66,35 @@ void updateBalance(string fileName)
 ******************/
 void writeBalance(string fileName, double balance)
 {
-   // TODO: Cause to write on new line. 
-   // Currently, it just updates the line.
+   // Declare a list to hold the lines read from the file
+   list<string> lines;
 
-   ofstream fout;
-   fout.open(fileName);
+   // Open the file for reading
+   ifstream fin(fileName);
 
-   fout << balance;
+   // Read the current contents of the file into the list
+   string line;
+   while (getline(fin, line)) {
+      lines.push_back(line);
+   }
 
+   // Close the input stream
+   fin.close();
+
+   // Format the new balance to 2 decimal places and add to the list
+   stringstream ss;
+   ss << fixed << setprecision(2) << balance;
+   lines.push_back(ss.str());
+
+   // Open the file for writing
+   ofstream fout(fileName);
+
+   // Write all lines back to the file, each on a new line
+   for (const auto& line : lines) {
+      fout << line << "\n";
+   }
+
+   // Close the output stream
    fout.close();
 }
 
@@ -95,17 +119,23 @@ int main()
 {
    string fileName = "data.txt";
    
-    
-   if (false) 
+	ifstream fin;
+	fin.open(fileName);
+   if (fin.fail()) 
    {
-      // TODO: Get the error check working.
+      cout << "Error!";
+      fin.close(); 
+		return 1;
    }
+   
 
    else
    {
+      fin.close();  
       displayBalance(fileName);
       updateBalance(fileName);
       displayBalance(fileName);
+		writeBalance(fileName, 1000);
       
    }
 
