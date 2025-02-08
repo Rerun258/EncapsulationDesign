@@ -30,13 +30,17 @@ public:
    // Get rotation in radians per second
    double rotation() const
    {
-      if (Interface::isLeft())
+      if (clockwise && counterClockwise)
       {
-         return -0.1;  // Rotation value when the left key is pressed
+         return 0.0;  // No rotation if both are true
       }
-      else if (Interface::isRightPress())
+      else if (clockwise)
       {
-         return 0.1;  // Rotation value when the right key is pressed
+         return 0.1;  // Rotation value when clockwise is true
+      }
+      else if (counterClockwise)
+      {
+         return -0.1;  // Rotation value when counterClockwise is true
       }
 
       return 0.0;  // No rotation
@@ -45,13 +49,15 @@ public:
    // get main engine thrust in  m / s ^ 2
    double mainEngineThrust() const
    {
-      return 99.9;
+      const double force = 45000.0;  // Force in Newtons
+      const double mass = 15103.0;   // Mass in kilograms
+      return force / mass;           // Acceleration in m/s^2
    }
 
    // reflect what is firing
-   bool isMain()    const { return true; }
-   bool isClock()   const { return true; }
-   bool isCounter() const { return true; }
+   bool isMain()    const { return mainEngine; }
+   bool isClock()   const { return clockwise; }
+   bool isCounter() const { return counterClockwise; }
 
    // set the thrusters
    void set(const Interface * pUI)
