@@ -9,20 +9,20 @@
 
 #pragma once
 
-#include "uiInteract.h"  // for Interface
+#include "uiInteract.h"
 
 class TestLander;
 class TestThrust;
 
- /*****************************************************
-  * THRUST
-  * Represents activation of thrusters
-  *****************************************************/
+/*****************************************************
+ * THRUST
+ * Represents activation of thrusters
+ *****************************************************/
 class Thrust
 {
    friend TestLander;
    friend TestThrust;
-   
+
 public:
    // Thrust is initially turned off
    Thrust() : mainEngine(false), clockwise(false), counterClockwise(false) {}
@@ -46,7 +46,7 @@ public:
       return 0.0;  // No rotation
    }
 
-   // get main engine thrust in  m / s ^ 2
+   // Get main engine thrust in m/s^2
    double mainEngineThrust() const
    {
       const double force = 45000.0;  // Force in Newtons
@@ -54,17 +54,17 @@ public:
       return force / mass;           // Acceleration in m/s^2
    }
 
-   // reflect what is firing
-   bool isMain()    const { return mainEngine; }
-   bool isClock()   const { return clockwise; }
+   // Reflect what is firing
+   bool isMain() const { return mainEngine; }
+   bool isClock() const { return clockwise; }
    bool isCounter() const { return counterClockwise; }
 
-   // set the thrusters
-   void set(const Interface * pUI)
+   // Set the thrusters
+   void set(const Interface* pUI)
    {
-      mainEngine       = true;
-      clockwise        = true;
-      counterClockwise = true;
+      mainEngine = pUI->isDown() > 0;
+      clockwise = pUI->isRight() > 0;
+      counterClockwise = pUI->isLeft() > 0;
    }
 
 private:
@@ -72,3 +72,4 @@ private:
    bool clockwise;
    bool counterClockwise;
 };
+
