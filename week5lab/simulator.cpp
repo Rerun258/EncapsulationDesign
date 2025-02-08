@@ -37,6 +37,7 @@ public:
    Angle angle;
    Thrust thrust;
    Position posLander;
+   Star star1;
 };
 
 
@@ -53,11 +54,15 @@ void callBack(const Interface* pUI, void* p)
 
    ogstream gout;
 
-   // twinkle twinkle little stars (thank you chatgpt)
+   // twinkle twinkle little stars (thank you chatgpt, you did nothing for me)
    for (Star& star : pSimulator->stars)
    {
       star.draw(gout);
    }
+
+   // seizure in the sky
+   pSimulator->star1.reset(400.0, 400.0);
+   pSimulator->star1.draw(gout);
 
    // draw the ground
    pSimulator->ground.draw(gout);
