@@ -30,8 +30,16 @@ public:
    // Get rotation in radians per second
    double rotation() const
    {
-		keyDownCallback('left', 0, 0);
-      return ;
+      if (Interface::isLeft())
+      {
+         return -0.1;  // Rotation value when the left key is pressed
+      }
+      else if (Interface::isRightPress())
+      {
+         return 0.1;  // Rotation value when the right key is pressed
+      }
+
+      return 0.0;  // No rotation
    }
 
    // get main engine thrust in  m / s ^ 2
