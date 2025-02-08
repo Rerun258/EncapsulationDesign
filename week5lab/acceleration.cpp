@@ -18,8 +18,8 @@
  *********************************************/
 void Acceleration::add(const Acceleration& acceleration)
 {
-   ddx = -99.9;
-   ddy = -88.8;
+   ddx += acceleration.getDDX();
+   ddy += acceleration.getDDY();
 }
 
 /*********************************************
@@ -28,6 +28,10 @@ void Acceleration::add(const Acceleration& acceleration)
  *********************************************/
 void Acceleration::set(const Angle & angle, double magnitude)
 {
-   ddx = -99.9;
-   ddy = -88.8;
+   // Convert angle to radians if it's not already in radians
+   double radians = angle.getRadians();
+
+   // Calculate the components of the acceleration
+   ddx = magnitude * sin(radians);
+   ddy = magnitude * cos(radians);
 }
