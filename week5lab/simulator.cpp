@@ -13,6 +13,7 @@
 #include "test.h"        // for the unit tests
 #include <cmath>         // for SQRT
 #include <cassert>       // for ASSERT
+#include <vector>        // for VECTORS
 using namespace std;
 
 
@@ -23,9 +24,16 @@ using namespace std;
 class Simulator
 {
 public:
-   Simulator(const Position & posUpperRight) : ground(posUpperRight) {}
+   Simulator(const Position & posUpperRight) : ground(posUpperRight) 
+   {
+      for (int i = 0; i < 50; ++i)
+      {
+         stars.push_back(Star());
+      }
+   }
+
    Ground ground;
-   Star star;
+   vector<Star> stars;
 };
 
 
@@ -44,7 +52,12 @@ void callBack(const Interface* pUI, void* p)
 
    // draw the ground
    pSimulator->ground.draw(gout);
-   pSimulator->star.draw(gout);
+
+   // twinkle twinkle little stars (thank you chatgpt)
+   for (Star& star : pSimulator->stars)
+   {
+      star.draw(gout);
+   }
    
 }
 
