@@ -31,7 +31,7 @@ void Lander :: reset(const Position & posUpperRight)
  ***************************************************************/
 void Lander :: draw(const Thrust & thrust, ogstream & gout) const
 {
-   
+   gout.drawLander(pos, angle.getRadians());
 }
 
 /***************************************************************

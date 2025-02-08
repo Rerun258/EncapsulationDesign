@@ -34,6 +34,8 @@ public:
 
    Ground ground;
    vector<Star> stars;
+   Angle angle;
+   Thrust thrust;
    Position posLander;
 };
 
@@ -57,11 +59,26 @@ void callBack(const Interface* pUI, void* p)
       star.draw(gout);
    }
 
-   //const Lander& lander
-
    // draw the ground
-   //pSimulator->ground.draw(gout);
-   
+   pSimulator->ground.draw(gout);
+   if (pUI->isRight())
+   {
+      pSimulator->angle.add(-0.1);
+   }
+   if (pUI->isLeft())
+   {
+      pSimulator->angle.add(0.1);
+   }
+   if (pUI->isUp())
+   {
+      pSimulator->thrust.mainEngineThrust();
+   }
+   if (pUI->isDown())
+   {
+      
+   }
+
+   gout.drawLander(pSimulator->posLander, pSimulator->angle.getRadians());
 }
 
 /*********************************

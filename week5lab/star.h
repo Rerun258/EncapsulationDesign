@@ -33,6 +33,6 @@ public:
 
    private:
       Position pos;
-      unsigned char phase;
+      unsigned char phase = 1;
 
    };
