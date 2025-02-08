@@ -26,13 +26,13 @@ public:
 
    void draw(ogstream& gout)
    {
-      phase = (phase + random(1, 5)) % 256;
-      //gout.drawStar(pos, phase);
+      phase = (phase + 1) % 256;
+      gout.drawStar(pos, phase);
    }
 
 
    private:
       Position pos;
-      unsigned char phase;
+      unsigned char phase = 1;
 
    };

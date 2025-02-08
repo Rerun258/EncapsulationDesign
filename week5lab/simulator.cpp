@@ -34,7 +34,6 @@ public:
 
    Ground ground;
    vector<Star> stars;
-   Position posLander;
 };
 
 
@@ -59,7 +58,7 @@ void callBack(const Interface* pUI, void* p)
 
    // draw the ground
    pSimulator->ground.draw(gout);
-   
+   gout.drawLander();
 }
 
 /*********************************
