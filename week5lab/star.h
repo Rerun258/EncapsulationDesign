@@ -20,14 +20,20 @@ class Star
 public:
    void reset(double width, double height)
    {
-       width = random(0, 500);
-       height = random(0, 500);
+      pos.setX(random(0.0, width));
+      pos.setY(random(100.0, height));
    }
 
-   void draw(ogstream& gout) const;
+   void draw(ogstream& gout)
+   {
+      phase = (phase + random(1, 5)) % 256;
+      gout.drawStar(pos, phase);
+      
+   }
 
 
-private:
-    Position pos;
-    unsigned char phase;
-};
+   private:
+      Position pos;
+      unsigned char phase;
+
+   };
