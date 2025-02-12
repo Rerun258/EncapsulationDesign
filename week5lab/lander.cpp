@@ -65,9 +65,11 @@ Acceleration Lander::input(const Thrust& thrust, double gravity)
    // Main engines.
    if (thrust.isMain())
    {
+      // These variables exist because of a bug in VS22.
       double lt = LANDER_THRUST;
       double lw = LANDER_WEIGHT;
       double power = (lt / lw);
+
       a.addDDX(-sin(angle.getRadians()) * power);
       a.addDDY(cos(angle.getRadians()) * power);
       fuel = FUEL_MAIN_THRUST;

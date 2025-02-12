@@ -14,8 +14,8 @@
 #include <cmath>         // for SQRT
 #include <cassert>       // for ASSERT
 #include <vector>        // for VECTORS
-using namespace std;
 
+using namespace std;
 
 /*************************************************************************
  * SIMULATOR
@@ -24,7 +24,8 @@ using namespace std;
 class Simulator
 {
 public:
-   Simulator(const Position & posUpperRight) : ground(posUpperRight) 
+   Simulator(const Position & posUpperRight) 
+   : ground(posUpperRight), lander(posUpperRight)
    {
       for (int i = 0; i < 50; ++i)
       {
@@ -36,8 +37,8 @@ public:
    vector<Star> stars;
    Angle angle;
    Thrust thrust;
-   Position posLander;
-   Star star1;
+   Lander lander;
+   
 };
 
 
@@ -60,19 +61,15 @@ void callBack(const Interface* pUI, void* p)
       star.draw(gout);
    }
 
-   // seizure in the sky
-   pSimulator->star1.reset(400.0, 400.0);
-   pSimulator->star1.draw(gout);
-
    // draw the ground
    pSimulator->ground.draw(gout);
    if (pUI->isRight())
    {
-      pSimulator->angle.add(-0.1);
+      
    }
    if (pUI->isLeft())
    {
-      pSimulator->angle.add(0.1);
+      
    }
    if (pUI->isUp())
    {
@@ -83,7 +80,11 @@ void callBack(const Interface* pUI, void* p)
       
    }
 
-   gout.drawLander(pSimulator->posLander, pSimulator->angle.getRadians());
+   pSimulator->lander.draw(pSimulator->thrust, gout);
+
+   Acceleration acceleration = pSimulator->lander.input(pSimulator->thrust, -9.8); // Gravity
+   pSimulator->lander.coast(acceleration, 0.1); // Assume time step of 0.1s
+
 }
 
 /*********************************
