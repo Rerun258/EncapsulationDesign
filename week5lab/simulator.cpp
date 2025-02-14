@@ -17,6 +17,8 @@
 
 using namespace std;
 
+#define MOON_GRAVITY = 1.625
+
 /*************************************************************************
  * SIMULATOR
  * Everything pertaining to the simulator.
@@ -65,16 +67,24 @@ void callBack(const Interface* pUI, void* p)
    pSimulator->ground.draw(gout);
    if (pUI->isRight())
    {
+      pSimulator->thrust.isClock();
       
+      pSimulator->lander.input(pSimulator->thrust, -1.625);
    }
+
    if (pUI->isLeft())
    {
-      
+      pSimulator->thrust.isCounter();
+      pSimulator->lander.input(pSimulator->thrust, -1.625);
    }
+
    if (pUI->isUp())
    {
       pSimulator->thrust.mainEngineThrust();
+      
+      pSimulator->lander.input(pSimulator->thrust, -1.625);
    }
+
    if (pUI->isDown())
    {
       
@@ -82,8 +92,8 @@ void callBack(const Interface* pUI, void* p)
 
    pSimulator->lander.draw(pSimulator->thrust, gout);
 
-   Acceleration acceleration = pSimulator->lander.input(pSimulator->thrust, -9.8); // Gravity
-   pSimulator->lander.coast(acceleration, 0.1); // Assume time step of 0.1s
+   //Acceleration acceleration = pSimulator->lander.input(pSimulator->thrust, -9.8); // Gravity
+   //pSimulator->lander.coast(acceleration, 0.1); // Assume time step of 0.1s
 
 }
 
