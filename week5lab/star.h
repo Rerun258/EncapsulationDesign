@@ -24,18 +24,18 @@ public:
    void reset(double width, double height)
    {
       pos.setX(random(0.0, width));
-      pos.setY(random(0.0, height));
+      pos.setY(random(height/2, height));
       phase = random(0, 255);
    }
 
-   void draw(ogstream& gout)
+   void draw(ogstream & gout)
    {
       gout.drawStar(pos, phase++);
    }
 
 
-   private:
-      Position pos;
-      unsigned char phase;
+private:
+   Position pos;
+   unsigned char phase;
 
    };

@@ -72,7 +72,7 @@ Acceleration Lander::input(const Thrust& thrust, double gravity)
 
       a.addDDX(-sin(angle.getRadians()) * power);
       a.addDDY(cos(angle.getRadians()) * power);
-      fuel = FUEL_MAIN_THRUST;
+      fuel -= FUEL_MAIN_THRUST;
    }
 
    // Clockwise
