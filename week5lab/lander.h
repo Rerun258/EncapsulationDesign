@@ -15,6 +15,15 @@
 #include "uiDraw.h"    // for DRAW* and RANDOM
 #include "angle.h"     // for ANGLE
 
+
+#define LANDER_WIDTH       20;         // width of the lander
+#define MAX_SPEED          4.00;       // maximum speed to land
+#define LANDER_WEIGHT      15103.00;   // weight of the lander (KG)
+#define LANDER_THRUST      45000.00;   // thrust of main engine (N)
+#define FUEL_MAIN_THRUST   10.00;      // amount of fuel consumed in main thruster
+#define FUEL_ROTATE        1.00;       // amount of fuel consumed in rotation thrusters
+#define FUEL_MAX           5000.00;    // total amount of fuel
+
 enum Status { PLAYING, SAFE, DEAD };
 
 class TestLander;
@@ -29,20 +38,20 @@ class Lander
 
 public:
    // to create a lander, we need to know something about the board
-   Lander(const Position& posUpperRight) : status(DEAD), fuel(99.0) {}
+   Lander(const Position& posUpperRight) : status(PLAYING) { reset(posUpperRight); }
 
    // reset the lander and its position
    void reset(const Position& posUpperRight);
 
    // get the status of the lander
-   bool     isDead()         const { return status == DEAD; }
-   bool     isLanded()       const { return status == SAFE; }
-   bool     isFlying()       const { return status == PLAYING; }
-   Position getPosition()    const { return pos; }
-   double   getSpeed()       const { return velocity.getSpeed(); }
-   int      getFuel()        const { return fuel; }
-   int      getWidth()       const { return 20; }
-   double   getMaxSpeed()    const { return 4.0; }
+   bool     isDead()         const { return status == DEAD;       }
+   bool     isLanded()       const { return status == SAFE;       }
+   bool     isFlying()       const { return status == PLAYING;    }
+   Position getPosition()    const { return pos;                  }
+   double   getSpeed()       const { return velocity.getSpeed();  }
+   int      getFuel()        const { return (int)fuel;            }
+   int      getWidth()       const { return LANDER_WIDTH;         }
+   double   getMaxSpeed()    const { return MAX_SPEED;            }
 
    // draw the lander on the screen
    void draw(const Thrust& thrust, ogstream& gout) const;
@@ -54,10 +63,18 @@ public:
    void coast(Acceleration& acceleration, double time);
 
    // straighten the lander and put it on the ground
-   void land() { angle.setUp(); }
+   void land() 
+   { 
+      angle.setUp();
+      status = SAFE;
+   }
 
    // we are dead. Draw the lander upside down
-   void crash() { angle.setDown(); }
+   void crash() 
+   { 
+      status = DEAD;
+      angle.setDown(); 
+   }
 
 private:
    Status   status;      // are we dead or not?

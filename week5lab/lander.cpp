@@ -10,7 +10,6 @@
 #include "lander.h"
 #include "acceleration.h"
 
-
  /***************************************************************
   * RESET
   * Reset the lander and its position to start the game over
@@ -18,12 +17,20 @@
 void Lander :: reset(const Position & posUpperRight)
 {
    angle.setUp();
-   status = PLAYING;
-   fuel = 5000.0;
+
+   // The velocity is random.
    velocity.setDX(random(-10.0, -4.0));
    velocity.setDY(random(-2.0, 2.0));
+
+   // The position is at the righthand side of the screen.
    pos.setX(posUpperRight.getX() - 1.0);
-   pos.setY(random((posUpperRight.getY() * 0.75), (posUpperRight.getY() * 0.95)));
+   pos.setY(random(posUpperRight.getY() * 0.75, posUpperRight.getY() * 0.95));
+
+   // Status is playing.
+   status = PLAYING;
+
+   // Fueled up and ready to go.
+   fuel = FUEL_MAX;
 }
 
 /***************************************************************
@@ -32,7 +39,13 @@ void Lander :: reset(const Position & posUpperRight)
  ***************************************************************/
 void Lander :: draw(const Thrust & thrust, ogstream & gout) const
 {
+   // Make the lander exist in space.
    gout.drawLander(pos, angle.getRadians());
+
+   // Only fire engines if we are still firing.
+   if (isFlying() && fuel > 0.0)
+      gout.drawLanderFlames(pos, angle.getRadians(), thrust.isMain(), 
+         thrust.isClock(), thrust.isCounter());
 }
 
 /***************************************************************
@@ -41,31 +54,45 @@ void Lander :: draw(const Thrust & thrust, ogstream & gout) const
  ***************************************************************/
 Acceleration Lander::input(const Thrust& thrust, double gravity)
 {
-   double ax = 0.0;
-   double ay = 0.0;
+   Acceleration a;
 
-   // Use the public method to check if the main engine is active
-   if (thrust.isMain() && fuel > 0)
-   {
-      // Calculate thrust components using angle
-      ax = thrust.mainEngineThrust() * cos(angle.getRadians());
-      ay = thrust.mainEngineThrust() * sin(angle.getRadians()) - gravity;
+   a.addDDY(gravity);
 
-      // Reduce fuel
-      fuel -= 10.0;
-      if (fuel < 0)
-      {
-         fuel = 0;  // Prevent negative fuel
-      }
-   }
-   else
+   // pffftttttt (we're out of fuel)
+   if (fuel == 0.0)
+      return a;
+
+   // Main engines.
+   if (thrust.isMain())
    {
-      // When the main engine is off, only gravity affects the vertical acceleration
-      ay = -gravity;
+      // These variables exist because of a bug in VS22.
+      double lt = LANDER_THRUST;
+      double lw = LANDER_WEIGHT;
+      double power = (lt / lw);
+
+      a.addDDX(-sin(angle.getRadians()) * power);
+      a.addDDY(cos(angle.getRadians()) * power);
+      fuel = FUEL_MAIN_THRUST;
    }
 
-   Acceleration acceleration(ax, ay);
-   return acceleration;
+   // Clockwise
+   if (thrust.isClock())
+   {
+      angle.add(0.1);
+      fuel -= FUEL_ROTATE;
+   }
+
+   // Counter-clockwise
+   if (thrust.isCounter())
+   {
+      angle.add(-0.1);
+      fuel -= FUEL_ROTATE;
+   }
+
+   if (fuel < 0.0)
+      fuel = 0.0;
+
+   return a;
 }
 
 /******************************************************************
@@ -75,10 +102,8 @@ Acceleration Lander::input(const Thrust& thrust, double gravity)
 void Lander :: coast(Acceleration & acceleration, double time)
 {
    // Update position based on current velocity and acceleration
-   pos.setX(pos.getX() + velocity.getDX() * time + 0.5 * acceleration.getDDX() * time * time);
-   pos.setY(pos.getY() + velocity.getDY() * time + 0.5 * acceleration.getDDY() * time * time);
+   pos.add(acceleration, velocity, time);
 
    // Update velocity based on acceleration
-   velocity.setDX(velocity.getDX() + acceleration.getDDX() * time);
-   velocity.setDY(velocity.getDY() + acceleration.getDDY() * time);
+   velocity.add(acceleration, time);
 }
