@@ -10,6 +10,7 @@
 #include "lander.h"
 #include "acceleration.h"
 
+
  /***************************************************************
   * RESET
   * Reset the lander and its position to start the game over
@@ -40,14 +41,27 @@ void Lander :: draw(const Thrust & thrust, ogstream & gout) const
  ***************************************************************/
 Acceleration Lander::input(const Thrust& thrust, double gravity)
 {
-   // Calculate thrust components using angle
-   double ax = thrust.mainEngineThrust() * cos(angle.getRadians());
-   double ay = thrust.mainEngineThrust() * sin(angle.getRadians()) - gravity;
+   double ax = 0.0;
+   double ay = 0.0;
 
-   // Reduce fuel
-   if (fuel)
+   // Use the public method to check if the main engine is active
+   if (thrust.isMain() && fuel > 0)
    {
-      fuel -= 10.0;  // Adjust the fuel consumption as needed
+      // Calculate thrust components using angle
+      ax = thrust.mainEngineThrust() * cos(angle.getRadians());
+      ay = thrust.mainEngineThrust() * sin(angle.getRadians()) - gravity;
+
+      // Reduce fuel
+      fuel -= 10.0;
+      if (fuel < 0)
+      {
+         fuel = 0;  // Prevent negative fuel
+      }
+   }
+   else
+   {
+      // When the main engine is off, only gravity affects the vertical acceleration
+      ay = -gravity;
    }
 
    Acceleration acceleration(ax, ay);
