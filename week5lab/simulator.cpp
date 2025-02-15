@@ -107,7 +107,7 @@ void callBack(const Interface* pUI, void* p)
          pSimulator->running = true;
       }
 
-      / /User presses Q, exit game.
+      // User presses Q, exit game.
       if (pUI->isQ())
       {
          exit(0);
