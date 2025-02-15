@@ -23,8 +23,8 @@ public:
    // Set the location and phase of the star randomly.
    void reset(double width, double height)
    {
-      pos.setX(random(0.0, width));
-      pos.setY(random(height/2, height));
+      pos.setX(random(0.0, height));
+      pos.setY(random(0.0, height));
       phase = random(0, 255);
    }
 

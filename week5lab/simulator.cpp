@@ -31,7 +31,9 @@ public:
    {
       for (int i = 0; i < 50; ++i)
       {
-         stars.push_back(Star());
+         Star star;
+         star.reset(400, 400);
+         stars.push_back(star);
       }
    }
 
