@@ -14,9 +14,6 @@
 #include <cmath>         // for SQRT
 #include <cassert>       // for ASSERT
 #include <vector>        // for VECTORS
-#include <thread>
-#include <chrono>
-
 
 using namespace std;
 
@@ -73,6 +70,7 @@ void callBack(const Interface* pUI, void* p)
       pSimulator->lander.draw(pSimulator->thrust, gout);
       pSimulator->ground.draw(gout);
 
+      // Draw final stats.
       Position goutPos;
       goutPos.setX(20.0);
       goutPos.setY(370.0);
@@ -81,37 +79,39 @@ void callBack(const Interface* pUI, void* p)
       gout << "ALTITUDE: " << pSimulator->lander.getPosition().getY() << " METERS" << endl;
       gout << "SPEED: " << pSimulator->lander.getSpeed() << " M/S" << endl;
 
-      goutPos.setX(20.0);
-      goutPos.setY(370.0);
+      //Draw ending message.
+      goutPos.setX(100.0);
+      goutPos.setY(200.0);
       gout.setPosition(goutPos);
 
       if (pSimulator->lander.isDead())
       {
          gout << "HOUSTON, WE HAVE A FRIGGIN PROBLEM.";
-
-         if (pUI->isDown()) // Assuming the space bar is detected with isDown
-         {
-            pSimulator->lander.reset(Position(400, 400));
-            pSimulator->ground.reset();
-            pSimulator->running = true;
-         }
       }
 
       if (pSimulator->lander.isLanded())
       {
-         gout << "WE DID IT.";
+         gout << "WE DID IT!";
+      }
 
-         if (pUI->isDown()) // Assuming the space bar is detected with isDown
-         {
-            pSimulator->lander.reset(Position(400, 400)); 
-            pSimulator->ground.reset(); 
-            pSimulator->running = true; 
-         }
-         
+      if (pSimulator->lander.isFlying())
+      {
+         gout << "UH, HOUSTON? TIME HAS STOPPED.";
+      }
+
+      if (pUI->isSpace())
+      { 
+         pSimulator->lander.reset(Position(400,400));
+         pSimulator->ground.reset();
+         pSimulator->running = true;
       }
 
       return;
+      
    }
+
+   if (pUI->isQ())
+      pSimulator->running = false;
 
    // Draw the ground
    pSimulator->ground.draw(gout);
@@ -121,23 +121,18 @@ void callBack(const Interface* pUI, void* p)
 
    if (pSimulator->ground.hitGround(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()))
    {
-      std::cout << "CRASHED" << std::endl;
       pSimulator->lander.crash();
-      gout << "CRASHED";
       pSimulator->running = false;
 
-
-
+      //pSimulator->lander.reset(Position(400, 400)); 
+      //pSimulator->ground.reset(); 
+      //pSimulator->running = true; 
    }
 
    if (pSimulator->ground.onPlatform(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()))
    {
-      std::cout << "LANDED" << std::endl;
       pSimulator->lander.land();
-      gout << "LANDED!";
       pSimulator->running = false;
-
-
    }
 
    // If the lander is still playing, update as usual.
@@ -147,6 +142,7 @@ void callBack(const Interface* pUI, void* p)
       Acceleration acceleration = pSimulator->lander.input(pSimulator->thrust, -MOON_GRAVITY); // Gravity
       pSimulator->lander.coast(acceleration, 0.1); // Update with a time step of 0.1s
    }
+   
    Position goutPos;
    goutPos.setX(20.0);
    goutPos.setY(370.0);
