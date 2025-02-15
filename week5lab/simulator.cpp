@@ -64,10 +64,34 @@ void callBack(const Interface* pUI, void* p)
       star.draw(gout);
    }
 
+   // Once Lander has landed or crashed, only update the current status and exit.
    if (!pSimulator->running)
    {
       pSimulator->lander.draw(pSimulator->thrust, gout);
       pSimulator->ground.draw(gout);
+
+      Position goutPos;
+      goutPos.setX(20.0);
+      goutPos.setY(370.0);
+      gout.setPosition(goutPos);
+      gout << "FUEL: " << pSimulator->lander.getFuel() << " LBS" << endl;
+      gout << "ALTITUDE: " << pSimulator->lander.getPosition().getY() << " METERS" << endl;
+      gout << "SPEED: " << pSimulator->lander.getSpeed() << " M/S" << endl;
+
+      goutPos.setX(20.0);
+      goutPos.setY(370.0);
+      gout.setPosition(goutPos);
+
+      if (pSimulator->lander.isDead())
+      {
+         gout << "HOUSTON, WE HAVE A FRIGGIN PROBLEM.";
+      }
+
+      if (pSimulator->lander.isLanded())
+      {
+         gout << "WE DID IT.";
+      }
+
       return;
    }
 
@@ -94,6 +118,7 @@ void callBack(const Interface* pUI, void* p)
    {
       std::cout << "CRASHED" << std::endl;
       pSimulator->lander.crash();
+      gout << "CRASHED";
       pSimulator->running = false;
    }
 
@@ -101,16 +126,25 @@ void callBack(const Interface* pUI, void* p)
    {
       std::cout << "LANDED" << std::endl;
       pSimulator->lander.land();
+      gout << "LANDED!";
       pSimulator->running = false;
    }
 
-
+   // If the lander is still playing, update as usual.
    if (pSimulator->running)
    {
       // Compute acceleration and update lander
       Acceleration acceleration = pSimulator->lander.input(pSimulator->thrust, -MOON_GRAVITY); // Gravity
       pSimulator->lander.coast(acceleration, 0.1); // Update with a time step of 0.1s
    }
+   Position goutPos;
+   goutPos.setX(20.0);
+   goutPos.setY(370.0);
+   gout.setPosition(goutPos);
+   gout << "FUEL: " << pSimulator->lander.getFuel() << " LBS" << endl;
+   gout << "ALTITUDE: " << pSimulator->lander.getPosition().getY() << " METERS" << endl;
+   gout << "SPEED: " << pSimulator->lander.getSpeed() << " M/S" << endl;
+
 
    // Draw the lander
    pSimulator->lander.draw(pSimulator->thrust, gout);
