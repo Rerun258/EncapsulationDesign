@@ -99,6 +99,13 @@ void callBack(const Interface* pUI, void* p)
          gout << "UH, HOUSTON? TIME HAS STOPPED.";
       }
 
+      if (pUI->isSpace())
+      { 
+         pSimulator->lander.reset(Position(400,400));
+         pSimulator->ground.reset();
+         pSimulator->running = true;
+      }
+
       return;
       
    }
@@ -126,10 +133,6 @@ void callBack(const Interface* pUI, void* p)
    {
       pSimulator->lander.land();
       pSimulator->running = false;
-
-      //pSimulator->lander.reset(Position(400,400));
-		//pSimulator->ground.reset();
-		//pSimulator->running = true;
    }
 
    // If the lander is still playing, update as usual.
