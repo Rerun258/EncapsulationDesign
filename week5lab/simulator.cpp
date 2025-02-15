@@ -77,19 +77,6 @@ void callBack(const Interface* pUI, void* p)
    // Handle user input
    pSimulator->thrust.set(pUI);
 
-   if (pSimulator->thrust.isClock())
-   {
-      std::cout << "Right arrow pressed (clockwise)" << std::endl;
-   }
-   if (pSimulator->thrust.isCounter())
-   {
-      std::cout << "Left arrow pressed (counterclockwise)" << std::endl;
-   }
-   if (pSimulator->thrust.isMain())
-   {
-      std::cout << "Down arrow pressed (main engine)" << std::endl;
-   }
-
    if (pSimulator->ground.hitGround(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()))
    {
       std::cout << "CRASHED" << std::endl;
