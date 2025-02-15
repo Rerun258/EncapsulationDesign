@@ -99,11 +99,17 @@ void callBack(const Interface* pUI, void* p)
          gout << "UH, HOUSTON? TIME HAS STOPPED.";
       }
 
+      // User presses SPACE, play new game.
       if (pUI->isSpace())
       { 
          pSimulator->lander.reset(Position(400,400));
          pSimulator->ground.reset();
          pSimulator->running = true;
+      }
+
+      if (pUI->isQ())
+      {
+         exit(0);
       }
 
       return;
