@@ -120,6 +120,10 @@ void callBack(const Interface* pUI, void* p)
       pSimulator->lander.crash();
       gout << "CRASHED";
       pSimulator->running = false;
+
+      pSimulator->lander.reset(Position(400, 400)); 
+      pSimulator->ground.reset(); 
+      pSimulator->running = true; 
    }
 
    if (pSimulator->ground.onPlatform(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()))
@@ -128,6 +132,10 @@ void callBack(const Interface* pUI, void* p)
       pSimulator->lander.land();
       gout << "LANDED!";
       pSimulator->running = false;
+
+      pSimulator->lander.reset(Position(400,400));
+		pSimulator->ground.reset();
+		pSimulator->running = true;
    }
 
    // If the lander is still playing, update as usual.
