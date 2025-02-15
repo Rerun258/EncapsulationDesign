@@ -91,7 +91,7 @@ void callBack(const Interface* pUI, void* p)
 
       if (pSimulator->lander.isLanded())
       {
-         gout << "WE DID IT!";
+         gout << "THE EAGLE HAS LANDED. RAHHH.";
       }
 
       if (pSimulator->lander.isFlying())
