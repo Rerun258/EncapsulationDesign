@@ -99,15 +99,15 @@ void callBack(const Interface* pUI, void* p)
          gout << "UH, HOUSTON? TIME HAS STOPPED.";
       }
 
+      // Wait for space bar press to reset the game
       if (pUI->isSpace())
-      { 
-         pSimulator->lander.reset(Position(400,400));
+      {
+         pSimulator->lander.reset(Position(400, 400));
          pSimulator->ground.reset();
          pSimulator->running = true;
       }
 
       return;
-      
    }
 
    if (pUI->isQ())
@@ -119,20 +119,21 @@ void callBack(const Interface* pUI, void* p)
    // Handle user input
    pSimulator->thrust.set(pUI);
 
+   // Check for collision
    if (pSimulator->ground.hitGround(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()))
    {
-      pSimulator->lander.crash();
-      pSimulator->running = false;
-
-      //pSimulator->lander.reset(Position(400, 400)); 
-      //pSimulator->ground.reset(); 
-      //pSimulator->running = true; 
-   }
-
-   if (pSimulator->ground.onPlatform(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()))
-   {
-      pSimulator->lander.land();
-      pSimulator->running = false;
+      // Check the speed and landing platform conditions
+      if (pSimulator->lander.getSpeed() > 4.0 ||
+         !pSimulator->ground.onPlatform(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()))
+      {
+         pSimulator->lander.crash();
+         pSimulator->running = false;
+      }
+      else
+      {
+         pSimulator->lander.land();
+         pSimulator->running = false;
+      }
    }
 
    // If the lander is still playing, update as usual.
@@ -142,7 +143,7 @@ void callBack(const Interface* pUI, void* p)
       Acceleration acceleration = pSimulator->lander.input(pSimulator->thrust, -MOON_GRAVITY); // Gravity
       pSimulator->lander.coast(acceleration, 0.1); // Update with a time step of 0.1s
    }
-   
+
    Position goutPos;
    goutPos.setX(20.0);
    goutPos.setY(370.0);
@@ -151,12 +152,11 @@ void callBack(const Interface* pUI, void* p)
    gout << "ALTITUDE: " << pSimulator->lander.getPosition().getY() << " METERS" << endl;
    gout << "SPEED: " << pSimulator->lander.getSpeed() << " M/S" << endl;
 
-
    // Draw the lander
    pSimulator->lander.draw(pSimulator->thrust, gout);
-
-
 }
+
+
 
 /*********************************
  * Main is pretty sparse.  Just initialize
