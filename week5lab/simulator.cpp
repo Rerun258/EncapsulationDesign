@@ -14,6 +14,9 @@
 #include <cmath>         // for SQRT
 #include <cassert>       // for ASSERT
 #include <vector>        // for VECTORS
+#include <thread>
+#include <chrono>
+
 
 using namespace std;
 
@@ -85,11 +88,26 @@ void callBack(const Interface* pUI, void* p)
       if (pSimulator->lander.isDead())
       {
          gout << "HOUSTON, WE HAVE A FRIGGIN PROBLEM.";
+
+         if (pUI->isDown()) // Assuming the space bar is detected with isDown
+         {
+            pSimulator->lander.reset(Position(400, 400));
+            pSimulator->ground.reset();
+            pSimulator->running = true;
+         }
       }
 
       if (pSimulator->lander.isLanded())
       {
          gout << "WE DID IT.";
+
+         if (pUI->isDown()) // Assuming the space bar is detected with isDown
+         {
+            pSimulator->lander.reset(Position(400, 400)); 
+            pSimulator->ground.reset(); 
+            pSimulator->running = true; 
+         }
+         
       }
 
       return;
@@ -108,9 +126,8 @@ void callBack(const Interface* pUI, void* p)
       gout << "CRASHED";
       pSimulator->running = false;
 
-      pSimulator->lander.reset(Position(400, 400)); 
-      pSimulator->ground.reset(); 
-      pSimulator->running = true; 
+
+
    }
 
    if (pSimulator->ground.onPlatform(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()))
@@ -120,9 +137,7 @@ void callBack(const Interface* pUI, void* p)
       gout << "LANDED!";
       pSimulator->running = false;
 
-      pSimulator->lander.reset(Position(400,400));
-		pSimulator->ground.reset();
-		pSimulator->running = true;
+
    }
 
    // If the lander is still playing, update as usual.
