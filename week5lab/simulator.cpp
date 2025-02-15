@@ -124,9 +124,6 @@ void callBack(const Interface* pUI, void* p)
       pSimulator->lander.crash();
       pSimulator->running = false;
 
-      //pSimulator->lander.reset(Position(400, 400)); 
-      //pSimulator->ground.reset(); 
-      //pSimulator->running = true; 
    }
 
    if (pSimulator->ground.onPlatform(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()))
