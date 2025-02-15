@@ -28,7 +28,7 @@ class Simulator
 {
 public:
    Simulator(const Position & posUpperRight) 
-   : ground(posUpperRight), lander(posUpperRight)
+   : ground(posUpperRight), lander(posUpperRight), running(true)
    {
       for (int i = 0; i < 50; ++i)
       {
@@ -43,6 +43,7 @@ public:
    Angle angle;
    Thrust thrust;
    Lander lander;
+   bool running;
    
 };
 
@@ -63,6 +64,13 @@ void callBack(const Interface* pUI, void* p)
       star.draw(gout);
    }
 
+   if (!pSimulator->running)
+   {
+      pSimulator->lander.draw(pSimulator->thrust, gout);
+      pSimulator->ground.draw(gout);
+      return;
+   }
+
    // Draw the ground
    pSimulator->ground.draw(gout);
 
@@ -79,12 +87,30 @@ void callBack(const Interface* pUI, void* p)
    }
    if (pSimulator->thrust.isMain())
    {
-      std::cout << "Up arrow pressed (main engine)" << std::endl;
+      std::cout << "Down arrow pressed (main engine)" << std::endl;
    }
 
-   // Compute acceleration and update lander
-   Acceleration acceleration = pSimulator->lander.input(pSimulator->thrust, -MOON_GRAVITY); // Gravity
-   pSimulator->lander.coast(acceleration, 0.1); // Update with a time step of 0.1s
+   if (pSimulator->ground.hitGround(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()))
+   {
+      std::cout << "CRASHED" << std::endl;
+      pSimulator->lander.crash();
+      pSimulator->running = false;
+   }
+
+   if (pSimulator->ground.onPlatform(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()))
+   {
+      std::cout << "LANDED" << std::endl;
+      pSimulator->lander.land();
+      pSimulator->running = false;
+   }
+
+
+   if (pSimulator->running)
+   {
+      // Compute acceleration and update lander
+      Acceleration acceleration = pSimulator->lander.input(pSimulator->thrust, -MOON_GRAVITY); // Gravity
+      pSimulator->lander.coast(acceleration, 0.1); // Update with a time step of 0.1s
+   }
 
    // Draw the lander
    pSimulator->lander.draw(pSimulator->thrust, gout);
