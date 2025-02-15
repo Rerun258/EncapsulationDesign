@@ -95,6 +95,10 @@ void callBack(const Interface* pUI, void* p)
       std::cout << "CRASHED" << std::endl;
       pSimulator->lander.crash();
       pSimulator->running = false;
+
+      pSimulator->lander.reset(Position(400, 400)); 
+      pSimulator->ground.reset(); 
+      pSimulator->running = true; 
    }
 
    if (pSimulator->ground.onPlatform(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()))
@@ -102,6 +106,10 @@ void callBack(const Interface* pUI, void* p)
       std::cout << "LANDED" << std::endl;
       pSimulator->lander.land();
       pSimulator->running = false;
+
+      pSimulator->lander.reset(Position(400,400));
+		pSimulator->ground.reset();
+		pSimulator->running = true;
    }
 
 
