@@ -138,8 +138,18 @@ void callBack(const Interface* pUI, void* p)
    // Lander lands
    if (pSimulator->ground.onPlatform(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()))
    {
-      pSimulator->lander.land();
-      pSimulator->running = false;
+      // If lands above max speed, they're dead.
+      if (pSimulator->lander.getSpeed() > pSimulator->lander.getMaxSpeed())
+      {
+         pSimulator->lander.crash();
+         pSimulator->running = false;
+      }
+
+      else
+      {
+         pSimulator->lander.land();
+         pSimulator->running = false;
+      }
    }
 
    // If the lander is still playing, update as usual.
