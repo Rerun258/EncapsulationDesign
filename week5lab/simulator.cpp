@@ -17,7 +17,8 @@
 
 using namespace std;
 
-#define MOON_GRAVITY = 1.625
+const double MOON_GRAVITY = 1.625;
+
 
 /*************************************************************************
  * SIMULATOR
@@ -64,28 +65,30 @@ void callBack(const Interface* pUI, void* p)
    pSimulator->ground.draw(gout);
 
    // Handle user input
-   Thrust thrust;
-   if (pUI->isRight())
+   pSimulator->thrust.set(pUI);
+
+   if (pSimulator->thrust.isClock())
    {
-      thrust.isClock();
+      std::cout << "Right arrow pressed (clockwise)" << std::endl;
    }
-   if (pUI->isLeft())
+   if (pSimulator->thrust.isCounter())
    {
-      thrust.isCounter();
+      std::cout << "Left arrow pressed (counterclockwise)" << std::endl;
    }
-   if (pUI->isUp())
+   if (pSimulator->thrust.isMain())
    {
-      thrust.mainEngineThrust();
+      std::cout << "Up arrow pressed (main engine)" << std::endl;
    }
 
    // Compute acceleration and update lander
-   Acceleration acceleration = pSimulator->lander.input(thrust, -1.625); // Gravity
+   Acceleration acceleration = pSimulator->lander.input(pSimulator->thrust, -MOON_GRAVITY); // Gravity
    pSimulator->lander.coast(acceleration, 0.1); // Update with a time step of 0.1s
 
    // Draw the lander
-   pSimulator->lander.draw(thrust, gout);
-}
+   pSimulator->lander.draw(pSimulator->thrust, gout);
 
+
+}
 
 /*********************************
  * Main is pretty sparse.  Just initialize

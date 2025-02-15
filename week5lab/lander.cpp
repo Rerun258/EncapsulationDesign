@@ -66,27 +66,27 @@ Acceleration Lander::input(const Thrust& thrust, double gravity)
    if (thrust.isMain())
    {
       // These variables exist because of a bug in VS22.
-      double lt = LANDER_THRUST; 
-      double lw = LANDER_WEIGHT; 
-      double power = (lt / lw); 
+      double lt = LANDER_THRUST;
+      double lw = LANDER_WEIGHT;
+      double power = (lt / lw);
 
-      a.addDDX(-sin(angle.getRadians()) * power); 
-      a.addDDY(cos(angle.getRadians()) * power); 
-      fuel -= FUEL_MAIN_THRUST; 
+      a.addDDX(-sin(angle.getRadians()) * power);
+      a.addDDY(cos(angle.getRadians()) * power);
+      fuel -= FUEL_MAIN_THRUST;
    }
 
    // Clockwise
-   if (thrust.isClock()) 
+   if (thrust.isClock())
    {
-      angle.add(0.1); 
-      fuel -= FUEL_ROTATE; 
+      angle.add(0.1);
+      fuel -= FUEL_ROTATE;
    }
 
    // Counter-clockwise
-   if (thrust.isCounter()) 
+   if (thrust.isCounter())
    {
-      angle.add(-0.1); 
-      fuel -= FUEL_ROTATE; 
+      angle.add(-0.1);
+      fuel -= FUEL_ROTATE;
    }
 
    if (fuel < 0.0)
