@@ -51,51 +51,41 @@ public:
  **************************************/
 void callBack(const Interface* pUI, void* p)
 {
-   // the first step is to cast the void pointer into a game object. This
-   // is the first step of every single callback function in OpenGL. 
-   Simulator * pSimulator = (Simulator *)p;
-
+   Simulator* pSimulator = (Simulator*)p;
    ogstream gout;
 
-   // twinkle twinkle little stars (thank you chatgpt, you did nothing for me)
+   // Draw the stars
    for (Star& star : pSimulator->stars)
    {
       star.draw(gout);
    }
 
-   // draw the ground
+   // Draw the ground
    pSimulator->ground.draw(gout);
+
+   // Handle user input
+   Thrust thrust;
    if (pUI->isRight())
    {
-      pSimulator->thrust.isClock();
-      
-      pSimulator->lander.input(pSimulator->thrust, -1.625);
+      thrust.isClock();
    }
-
    if (pUI->isLeft())
    {
-      pSimulator->thrust.isCounter();
-      pSimulator->lander.input(pSimulator->thrust, -1.625);
+      thrust.isCounter();
    }
-
    if (pUI->isUp())
    {
-      pSimulator->thrust.mainEngineThrust();
-      
-      pSimulator->lander.input(pSimulator->thrust, -1.625);
+      thrust.mainEngineThrust();
    }
 
-   if (pUI->isDown())
-   {
-      
-   }
+   // Compute acceleration and update lander
+   Acceleration acceleration = pSimulator->lander.input(thrust, -1.625); // Gravity
+   pSimulator->lander.coast(acceleration, 0.1); // Update with a time step of 0.1s
 
-   pSimulator->lander.draw(pSimulator->thrust, gout);
-
-   //Acceleration acceleration = pSimulator->lander.input(pSimulator->thrust, -9.8); // Gravity
-   //pSimulator->lander.coast(acceleration, 0.1); // Assume time step of 0.1s
-
+   // Draw the lander
+   pSimulator->lander.draw(thrust, gout);
 }
+
 
 /*********************************
  * Main is pretty sparse.  Just initialize
