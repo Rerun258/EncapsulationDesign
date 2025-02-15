@@ -107,6 +107,7 @@ void callBack(const Interface* pUI, void* p)
          pSimulator->running = true;
       }
 
+      / /User presses Q, exit game.
       if (pUI->isQ())
       {
          exit(0);
@@ -116,8 +117,10 @@ void callBack(const Interface* pUI, void* p)
       
    }
 
+   // User presses Q mid-flight, set game to freeze.
    if (pUI->isQ())
       pSimulator->running = false;
+
 
    // Draw the ground
    pSimulator->ground.draw(gout);
@@ -125,13 +128,14 @@ void callBack(const Interface* pUI, void* p)
    // Handle user input
    pSimulator->thrust.set(pUI);
 
+   // Lander crashes
    if (pSimulator->ground.hitGround(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()))
    {
       pSimulator->lander.crash();
       pSimulator->running = false;
-
    }
 
+   // Lander lands
    if (pSimulator->ground.onPlatform(pSimulator->lander.getPosition(), pSimulator->lander.getWidth()))
    {
       pSimulator->lander.land();
@@ -146,6 +150,7 @@ void callBack(const Interface* pUI, void* p)
       pSimulator->lander.coast(acceleration, 0.1); // Update with a time step of 0.1s
    }
    
+   // Continually update stats in top left corner.
    Position goutPos;
    goutPos.setX(20.0);
    goutPos.setY(370.0);
