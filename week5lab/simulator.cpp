@@ -29,12 +29,12 @@ class Simulator
 {
 public:
    Simulator(const Position & posUpperRight) 
-   : ground(posUpperRight), lander(posUpperRight), running(true)
+   : ground(posUpperRight), lander(posUpperRight), running(true), tracker(posUpperRight)
    {
-      for (int i = 0; i < 50; ++i)
+      for (int i = 0; i < 100; ++i)
       {
          Star star;
-         star.reset(400, 400);
+         star.reset(800, 800);
          stars.push_back(star);
       }
    }
@@ -44,6 +44,7 @@ public:
    Angle angle;
    Thrust thrust;
    Lander lander;
+   Lander tracker;
    bool running;
    
 };
@@ -103,7 +104,7 @@ void callBack(const Interface* pUI, void* p)
       // User presses SPACE, play new game.
       if (pUI->isSpace())
       { 
-         pSimulator->lander.reset(Position(400,400));
+         pSimulator->lander.reset(Position(800,800));
          pSimulator->ground.reset();
          pSimulator->running = true;
       }
@@ -159,6 +160,10 @@ void callBack(const Interface* pUI, void* p)
       // Compute acceleration and update lander
       Acceleration acceleration = pSimulator->lander.input(pSimulator->thrust, -MOON_GRAVITY); // Gravity
       pSimulator->lander.coast(acceleration, 0.1); // Update with a time step of 0.1s
+      Position trackerY;
+      trackerY.setX(pSimulator->lander.getX());
+      trackerY.setY(800.0);
+      pSimulator->tracker.reset(trackerY);
    }
    
    // Continually update stats in top left corner.
@@ -173,6 +178,9 @@ void callBack(const Interface* pUI, void* p)
 
    // Draw the lander
    pSimulator->lander.draw(pSimulator->thrust, gout);
+   Thrust thrustTracker;
+   
+   pSimulator->tracker.draw(thrustTracker, gout);
 
 
 }
@@ -198,7 +206,7 @@ int main(int argc, char** argv)
 
    
    // Initialize OpenGL
-   Position posUpperRight(400, 400);
+   Position posUpperRight(800, 800);
    Interface ui("Lunar Lander", posUpperRight);
 
    // Initialize the game class

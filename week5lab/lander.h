@@ -22,7 +22,7 @@
 #define LANDER_THRUST      45000.00;   // thrust of main engine (N)
 #define FUEL_MAIN_THRUST   10.00;      // amount of fuel consumed in main thruster
 #define FUEL_ROTATE        1.00;       // amount of fuel consumed in rotation thrusters
-#define FUEL_MAX           5000.00;    // total amount of fuel
+#define FUEL_MAX           50000.00;    // total amount of fuel
 
 enum Status { PLAYING, SAFE, DEAD };
 
@@ -48,6 +48,7 @@ public:
    bool     isLanded()       const { return status == SAFE;       }
    bool     isFlying()       const { return status == PLAYING;    }
    Position getPosition()    const { return pos;                  }
+   double   getX()           const { return pos.getX();           }
    double   getSpeed()       const { return velocity.getSpeed();  }
    int      getFuel()        const { return (int)fuel;            }
    int      getWidth()       const { return LANDER_WIDTH;         }
