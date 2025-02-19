@@ -11,6 +11,8 @@
 
 #include <cassert>
 
+using namespace std;
+
 class TestWallet;
 
  /************************************
@@ -19,6 +21,65 @@ class TestWallet;
 class Wallet
 {
    friend TestWallet;
+   
+   Wallet()
+   {
+      accountSam = 0;
+      accountSue = 0;
+      pCurrentAccount = &accountSam;
+      cout << *pCurrentAccount;
+   }
+   
+   private:
+      double accountSam;
+      double accountSue;
+      double * pCurrentAccount;
+   
+public:
+   void updateSam(double amount)
+   {
+      
+   }
+   
+   void updateSue(double amount)
+   {
+      
+   }
+   
+   void updateCurrent(double amount)
+   {
+      
+   }
+   
+   void chooseSam()
+   {
+      
+   }
+   
+   void chooseSue()
+   {
+      
+   }
+   
+   void chooseCurrent()
+   {
+      
+   }
+   
+   double getSam()
+   {
+      return 0.0;
+   }
+   
+   double getSue()
+   {
+      return 0.0;
+   }
+   
+   double getCurrent()
+   {
+      return 0.0;
+   }
 
 };
 
