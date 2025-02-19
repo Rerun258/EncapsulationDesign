@@ -1,6 +1,6 @@
 /*************************************************************
  * 1. Name:
- *      -your name-
+ *      Elijah
  * 2. Module
  *      WALLET
  * 3. Assignment Description:
@@ -36,49 +36,61 @@ class Wallet
       double * pCurrentAccount;
    
 public:
+   
+   // Update accounts
    void updateSam(double amount)
    {
-      
+      accountSam += amount;
    }
    
    void updateSue(double amount)
    {
-      
+      accountSue += amount;
    }
    
    void updateCurrent(double amount)
    {
-      
+      *pCurrentAccount += amount;
    }
    
+   // Choose an account
    void chooseSam()
    {
-      
+      pCurrentAccount = &accountSam;
    }
    
    void chooseSue()
    {
-      
+      pCurrentAccount = &accountSue;
    }
    
    void chooseCurrent()
    {
+      if (accountSam > accountSue)
+      {
+         pCurrentAccount = &accountSam;
+      }
       
+      else
+      {
+         pCurrentAccount = &accountSue;
+      }
    }
    
+   // Pull from an account
    double getSam()
    {
-      return 0.0;
+      return accountSam;
    }
    
    double getSue()
    {
-      return 0.0;
+      return accountSue;
    }
    
    double getCurrent()
    {
-      return 0.0;
+      return *pCurrentAccount;
    }
 
 };
