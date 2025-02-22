@@ -70,6 +70,7 @@ int main()
 
    //find find inital velocity
    //Dx i need the angle
+
    Angle a; // inital angel
    a.setDegrees(75.0);
 	Velocity v = Velocity(INITIAL_VELOCITY, a); // inital velocity
@@ -80,9 +81,10 @@ int main()
 
    
 
-   for (double i = 0.00; i <= 20.01; i += TIME_UNIT)
+   for (int i = 0; i <= 20; i++)
    {
-      
+      //cout << "new x position: " << v.getDX() * (i) + (1 / 2) * acc.getDDX() << endl;
+		cout << "new y position: " << v.getDY() * (i)+(1 / 2) * acc.getDDY() << endl; 
    }
 
    cout << "Distance: " << acc.getDDX() << "m  Altitude: " << acc.getDDY() << "m" << endl;
