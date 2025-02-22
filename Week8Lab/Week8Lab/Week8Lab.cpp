@@ -8,6 +8,7 @@
 #include <cassert>
 #include "angle.h"
 #include "velocity.h"
+#include "AirDensity.h"
 
 using namespace std;
 
@@ -16,7 +17,7 @@ using namespace std;
 #define DIAMETER 0.15489         // m
 #define RADIUS 0.077445          // m
 #define AREA 0.018842            // m^2
-#define TIME_UNIT 0.01           // seconds
+#define TIME_UNIT 1           // seconds
 
 //********McClain's Code********
 
@@ -89,5 +90,9 @@ int main()
    }
 
    cout << "Distance: " << acc.getDDX() << "m  Altitude: " << acc.getDDY() << "m" << endl;
+
+	AirDensity airDensity;
+
+	cout << endl << endl << "air density: " << airDensity.getAirDensity(500) << endl;
    return 0;
 }

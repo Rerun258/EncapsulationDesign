@@ -128,14 +128,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="acceleration.cpp" />
+    <ClCompile Include="AirDensity.cpp" />
     <ClCompile Include="angle.cpp" />
+    <ClCompile Include="DragCoefficent.cpp" />
+    <ClCompile Include="MachSpeed.cpp" />
     <ClCompile Include="velocity.cpp" />
     <ClCompile Include="Week8Lab.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acceleration.h" />
+    <ClInclude Include="AirDensity.h" />
     <ClInclude Include="angle.h" />
     <ClInclude Include="ArtilleryTest.h" />
+    <ClInclude Include="DragCoefficent.h" />
+    <ClInclude Include="MachSpeed.h" />
     <ClInclude Include="missile.h" />
     <ClInclude Include="velocity.h" />
   </ItemGroup>
