@@ -7,12 +7,12 @@
 
 using namespace std;
 
-#define MASS = 46.7              // kg
-#define INITIAL_VELOCITY = 827   // m/s
-#define DIAMETER = 0.15489       //m
-#define RADIUS = 0.077445        //m
-#define AREA = 0.018842          //m^2
-#define TIME_UNIT = 0.01         //seconds
+#define MASS 46.7                // kg
+#define INITIAL_VELOCITY 827.0   // m/s
+#define DIAMETER 0.15489         //m
+#define RADIUS 0.077445          //m
+#define AREA 0.018842            //m^2
+#define TIME_UNIT 0.01           //seconds
 
 //********McClain's Code********
 
@@ -51,5 +51,10 @@ int main() {
    testcalLienearInterpolationHeight();
    std::cout << "calLienearInterpolationHeight(0, 1.225, 1000, 1.112, 200): " << calLienearInterpolationHeight(0, 1.225, 1000, 1.112, 200) << std::endl;
 
+
+   for (double i; i < 20.0; i += TIME_UNIT)
+   {
+
+   }
    return 0;
 }
