@@ -38,16 +38,20 @@ public:
 	{
 		return altitude;
 	}
+
 	void setAltitude(double altitude)
 	{
 		this->altitude = altitude;
 	}
+
 	double getDistance() {
 		return distance;
 	}
+
 	void setDistance(double distance) {
 		this->distance = distance;
 	}
+
    double getArea()
    {
       return AREA;
