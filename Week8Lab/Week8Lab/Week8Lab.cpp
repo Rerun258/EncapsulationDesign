@@ -10,7 +10,8 @@
 #include "velocity.h"
 #include "AirDensity.h"
 #include "MachSpeed.h"
-#include "DragCoefficient.h" // Add this line to include the DragCoefficient header
+#include "DragCoefficent.h" // Add this line to include the DragCoefficient header
+#include "missile.h"
 
 using namespace std;
 
@@ -58,6 +59,7 @@ void testcalLienearInterpolationHeight() {
 
 int main() 
 {
+	Missile m;
    testcalLienearInterpolationHeight();
    std::cout << "calLienearInterpolationHeight(0, 1.225, 1000, 1.112, 200): " << calLienearInterpolationHeight(0, 1.225, 1000, 1.112, 200) << std::endl;
 
@@ -100,7 +102,7 @@ int main()
 	cout << "\n\nSpeed of sound:" << MachSpeed().getMachSpeed(0) << endl;
 	cout << "Mach speed: " << 827 / MachSpeed().getMachSpeed(0)  << endl;
 	cout << "drag coefficient: " << DragCoefficient().getDragCoefficient(827/MachSpeed().getMachSpeed(0)) << endl; 
-    
 
+   cout << "\n\n\n force: " << .5 * DragCoefficient().getDragCoefficient(827 / MachSpeed().getMachSpeed(0)) * AirDensity().getAirDensity(0) * (827 * 827) * m.getArea();
    return 0;
 }
