@@ -127,10 +127,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="acceleration.cpp" />
+    <ClCompile Include="angle.cpp" />
+    <ClCompile Include="velocity.cpp" />
     <ClCompile Include="Week8Lab.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="acceleration.h" />
+    <ClInclude Include="angle.h" />
     <ClInclude Include="ArtilleryTest.h" />
+    <ClInclude Include="velocity.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
