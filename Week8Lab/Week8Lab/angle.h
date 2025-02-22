@@ -19,17 +19,13 @@ using namespace std;
 #define M_PI 3.14159265358979323846
 #define TWO_PI 6.28318530718
 
-class TestPosition;
-class TestVelocity;
-class TestAcceleration;
-class TestAngle;
 
+/************************************
+ * ANGLE
+ ************************************/
 class Angle
 {
 public:
-   friend TestAcceleration;
-   friend TestVelocity;
-   friend TestAngle;
 
    // Constructors
    Angle() : radians(0.0) {}

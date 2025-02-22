@@ -8,12 +8,6 @@
  ************************************************************************/
 
 #pragma once
-#include "angle.h"
- // for unit tests
-class TestPosition;
-class TestVelocity;
-class TestAcceleration;
-class TestLander;
 
 // for add()
 class Acceleration;
@@ -25,15 +19,11 @@ class Angle;
  *********************************************/
 class Velocity
 {
-   // for unit tests
-   friend TestPosition;
-   friend TestVelocity;
-   friend TestLander;
 
 public:
    // constructors
    Velocity() : dx(0.0), dy(0.0) {}
-   Velocity(double V, Angle a) {
+   Velocity(double V, Angle& a) {
 		set(a, V);
    }
    
