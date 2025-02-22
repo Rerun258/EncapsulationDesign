@@ -63,25 +63,25 @@ int main()
    cout << "What is the angle? ";
    cin >> userAngle;
 
-   for (double i = 0.00; i <= 20.01; i += TIME_UNIT)
-   {
-      cout << "seconds: " << i << endl;
-   }
 
    //********McClain's Code********
 
-// initalV = 8.2m/s
+   // initalV = 8.2m/s
 
-//find find inital velocity
-//Dx i need the angle
+   //find find inital velocity
+   //Dx i need the angle
    Angle a; // inital angel
-   a.setDegrees(10.0);
-	Velocity v = Velocity(8.2, a); // inital velocity
+   a.setDegrees(75.0);
+	Velocity v = Velocity(INITIAL_VELOCITY, a); // inital velocity
 	Acceleration acc; 
-	acc.set(a, 8.2); // inital acceleration
+	acc.set(a, v.getSpeed()); // inital acceleration
 
 
+   for (double i = 0.00; i <= 20.01; i += TIME_UNIT)
+   {
+      
+   }
 
-   
+   cout << "Distance: " << acc.getDDX() << "m  Altitude: " << acc.getDDY() << "m" << endl;
    return 0;
 }
