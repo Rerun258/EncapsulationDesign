@@ -136,6 +136,7 @@
     <ClInclude Include="acceleration.h" />
     <ClInclude Include="angle.h" />
     <ClInclude Include="ArtilleryTest.h" />
+    <ClInclude Include="missile.h" />
     <ClInclude Include="velocity.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
