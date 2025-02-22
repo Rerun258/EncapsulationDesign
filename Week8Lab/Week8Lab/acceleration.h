@@ -47,6 +47,8 @@ public:
    void add(const Acceleration& rhs);
 
 
+
+
 private:
    double ddx;     // horizontal acceleration
    double ddy;     // vertical acceleration

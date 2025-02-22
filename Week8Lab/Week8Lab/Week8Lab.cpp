@@ -83,8 +83,9 @@ int main()
 
    for (int i = 0; i <= 20; i++)
    {
-      //cout << "new x position: " << v.getDX() * (i) + (1 / 2) * acc.getDDX() << endl;
+      cout << "new x position: " << v.getDX() * (i) + (1 / 2) * acc.getDDX() << endl;
 		cout << "new y position: " << v.getDY() * (i)+(1 / 2) * acc.getDDY() << endl; 
+		v.add(acc, TIME_UNIT);
    }
 
    cout << "Distance: " << acc.getDDX() << "m  Altitude: " << acc.getDDY() << "m" << endl;
