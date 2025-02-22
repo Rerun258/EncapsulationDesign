@@ -1,13 +1,18 @@
+#include "acceleration.h" // Add this line to include the Acceleration header
+
 // Week8Lab.cpp : This file contains the 'main' function. Program execution begins and ends there.
 // McClain, Elijah
 
 #include <iostream>
 #include <cmath>
+#include "angle.h"
+#include "velocity.h"
 
 using namespace std;
 
 #include <cassert>
-//********McClain's Code********
+
+
 
 
 
@@ -42,8 +47,20 @@ void testcalLienearInterpolationHeight() {
 }
 
 int main() {
-   testcalLienearInterpolationHeight();
-   std::cout << "calLienearInterpolationHeight(0, 1.225, 1000, 1.112, 200): " << calLienearInterpolationHeight(0, 1.225, 1000, 1.112, 200) << std::endl;
 
+   //********McClain's Code********
+
+// initalV = 8.2m/s
+
+//find find inital velocity
+//Dx i need the angle
+   Angle a = 10.0; // inital angel
+	Velocity v = Velocity(8.2, a); // inital velocity
+	Acceleration acc; 
+	acc.set(a, 8.2); // inital acceleration
+
+
+
+   
    return 0;
 }
