@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="acceleration.cpp" />
     <ClCompile Include="angle.cpp" />
+    <ClCompile Include="gravity.cpp" />
     <ClCompile Include="velocity.cpp" />
     <ClCompile Include="Week8Lab.cpp" />
   </ItemGroup>
@@ -136,6 +137,7 @@
     <ClInclude Include="acceleration.h" />
     <ClInclude Include="angle.h" />
     <ClInclude Include="ArtilleryTest.h" />
+    <ClInclude Include="gravity.h" />
     <ClInclude Include="missile.h" />
     <ClInclude Include="velocity.h" />
   </ItemGroup>
