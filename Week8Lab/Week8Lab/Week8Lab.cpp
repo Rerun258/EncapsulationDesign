@@ -11,8 +11,8 @@
 
 using namespace std;
 
-#define MASS 46.7                // kg
-#define INITIAL_VELOCITY 827.0   // m/s
+#define MASS 46.70               // kg
+#define INITIAL_VELOCITY 827.00  // m/s
 #define DIAMETER 0.15489         // m
 #define RADIUS 0.077445          // m
 #define AREA 0.018842            // m^2
@@ -74,7 +74,8 @@ int main()
 
 //find find inital velocity
 //Dx i need the angle
-   Angle a = 10.0; // inital angel
+   Angle a; // inital angel
+   a.setDegrees(10.0);
 	Velocity v = Velocity(8.2, a); // inital velocity
 	Acceleration acc; 
 	acc.set(a, 8.2); // inital acceleration
