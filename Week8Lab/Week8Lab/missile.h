@@ -5,14 +5,14 @@
 
 class Missile
 {
-public:
-   Missile() : altitude(0.0) {}
-   Missile(double altitude, Acceleration& acc, Velocity& v) 
-   {
-      this->altitude = altitude;
-      this->v = v;
-      this->acc = acc;
-   }
+   public:
+      Missile() : altitude(0.0) {}
+      Missile(double altitude, Acceleration& acc, Velocity& v) 
+      {
+         this->altitude = altitude;
+         this->v = v;
+         this->acc = acc;
+      }
 
    private:
       double altitude;
@@ -20,7 +20,6 @@ public:
       Velocity v;
    
    public:
-      
       double getAltitude()
       {
          return altitude;

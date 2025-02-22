@@ -61,7 +61,7 @@ int main()
    double userAngle;
 
    cout << "What is the angle? ";
-   cin >> userAngle;
+   //cin >> userAngle;
 
 
    //********McClain's Code********
@@ -84,7 +84,7 @@ int main()
    for (int i = 0; i <= 20; i++)
    {
       cout << "new x position: " << v.getDX() * (i) + (1 / 2) * acc.getDDX() << endl;
-		cout << "new y position: " << v.getDY() * (i)+(1 / 2) * acc.getDDY() << endl; 
+		cout << "new y position: " << v.getDY() * (i) + (1 / 2) * acc.getDDY() << endl; 
 		v.add(acc, TIME_UNIT);
    }
 
