@@ -4,5 +4,11 @@ using namespace std;
 
 class ArtilleryTest
 {
+   ArtilleryTest()
+   {
 
+   }
+
+public:
+   
 };
