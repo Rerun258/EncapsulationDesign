@@ -53,11 +53,11 @@ int main()
 
 	std::cout << std::fixed << std::setprecision(6); // Set to 6 decimal places, adjust as needed
    
-
+   cout << fixed << setprecision(2);  // Print with 3 decimal places
 
    for (int i = 0; i <= 20; i++)
    {
-		double distance = m.getDistance() + v.getDX() * i + (1/2) * acc.getDDX() * i*i; 
+		double distance = m.getDistance() + v.getDX() * i + (1 / 2) * acc.getDDX() * i * i; 
 		double altitude = m.getAltitude() + v.getDY() * i + (1 / 2) * acc.getDDY() * i * i;
 		cout << "Distance: " << distance << " meters      ";
 		cout << "Altitude: " << altitude << " meters" << endl;
@@ -66,3 +66,4 @@ int main()
 
    return 0;
 }
+ 
