@@ -12,6 +12,7 @@ using namespace std;
 #define DIAMETER = 0.15489       //m
 #define RADIUS = 0.077445        //m
 #define AREA = 0.018842          //m^2
+#define TIME_UNIT = 0.01         //seconds
 
 //********McClain's Code********
 
