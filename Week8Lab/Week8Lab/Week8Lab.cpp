@@ -78,7 +78,7 @@ int main()
    a.setDegrees(10.0);
 	Velocity v = Velocity(8.2, a); // inital velocity
 	Acceleration acc; 
-	acc.set(a, 8.2); // inital acceleration
+	acc.set(a, 8.2); // inital accelerations
 
 	cout << "new position: " << v.getDX() + (1/2) * acc.getDDX() << endl;
 
