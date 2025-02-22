@@ -9,10 +9,10 @@ using namespace std;
 
 #define MASS 46.7                // kg
 #define INITIAL_VELOCITY 827.0   // m/s
-#define DIAMETER 0.15489         //m
-#define RADIUS 0.077445          //m
-#define AREA 0.018842            //m^2
-#define TIME_UNIT 0.01           //seconds
+#define DIAMETER 0.15489         // m
+#define RADIUS 0.077445          // m
+#define AREA 0.018842            // m^2
+#define TIME_UNIT 0.01           // seconds
 
 //********McClain's Code********
 
@@ -47,14 +47,20 @@ void testcalLienearInterpolationHeight() {
    std::cout << "Test passed! Result is approximately " << expected << std::endl;
 }
 
-int main() {
+int main() 
+{
    testcalLienearInterpolationHeight();
    std::cout << "calLienearInterpolationHeight(0, 1.225, 1000, 1.112, 200): " << calLienearInterpolationHeight(0, 1.225, 1000, 1.112, 200) << std::endl;
 
+   double userAngle;
 
-   for (double i; i < 20.0; i += TIME_UNIT)
+   cout << "What is the angle? ";
+   cin >> userAngle;
+
+   for (double i = 0.00; i <= 20.01; i += TIME_UNIT)
    {
-
+      cout << "seconds: " << i << endl;
    }
+
    return 0;
 }
