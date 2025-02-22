@@ -9,6 +9,7 @@
 
 #include "acceleration.h"
 #include "angle.h"
+#include "gravity.h"
 
 #include <cmath>
 

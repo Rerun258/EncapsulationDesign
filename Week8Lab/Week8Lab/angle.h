@@ -55,7 +55,7 @@ public:
    // Converters
    double convertToDegrees(double aRadian) const
    {
-      return round(normalize(aRadian) * (180.0 / M_PI));
+      return normalize(aRadian) * (180.0 / M_PI);
    }
 
    double convertToRadians(double aDegree) const
@@ -63,19 +63,6 @@ public:
       return normalize(aDegree * (M_PI / 180.0));
    }
 
-   void setUp() { radians = 0.0; }
-   void setRight() { radians = M_PI * 0.5; }
-   void setLeft() { radians = M_PI * 1.5; }
-   void setDown() { radians = M_PI; }
-   void reverse() { radians += M_PI; }
-
-   void display(ostream& out) const
-   {
-      out.setf(ios::fixed);
-      out.setf(ios::showpoint);
-      out.precision(1);
-      out << getDegrees() << " degrees";
-   }
 
 private:
    double normalize(double aRadian) const;

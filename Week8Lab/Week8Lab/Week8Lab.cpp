@@ -12,6 +12,7 @@
 #include "MachSpeed.h"
 #include "DragCoefficent.h" // Add this line to include the DragCoefficient header
 #include "missile.h"
+#include <iomanip>
 
 using namespace std;
 
@@ -20,24 +21,7 @@ using namespace std;
 #define DIAMETER 0.15489         // m
 #define RADIUS 0.077445          // m
 #define AREA 0.018842            // m^2
-#define TIME_UNIT 1           // seconds
-
-//********McClain's Code********
-
-
-
-
-
-//******************************
-//********* Elijahs Code********
-
-
-
-//******************************
-
-
-
-
+#define TIME_UNIT 1              // seconds
 
 double calLienearInterpolationDistance(double r1, double r0, double d1, double d0, double r)
 {
@@ -59,50 +43,26 @@ void testcalLienearInterpolationHeight() {
 
 int main() 
 {
+
 	Missile m;
-   testcalLienearInterpolationHeight();
-   std::cout << "calLienearInterpolationHeight(0, 1.225, 1000, 1.112, 200): " << calLienearInterpolationHeight(0, 1.225, 1000, 1.112, 200) << std::endl;
-
-   double userAngle;
-
-   cout << "What is the angle? ";
-   //cin >> userAngle;
-
-
-   //********McClain's Code********
-
-   // initalV = 8.2m/s
-
-   //find find inital velocity
-   //Dx i need the angle
-
    Angle a; // inital angel
    a.setDegrees(75.0);
 	Velocity v = Velocity(INITIAL_VELOCITY, a); // inital velocity
 	Acceleration acc; 
 	acc.set(a, v.getSpeed()); // inital acceleration
 
-	cout << "new position: " << v.getDX() + (1/2) * acc.getDDX() << endl;
-
+	std::cout << std::fixed << std::setprecision(6); // Set to 6 decimal places, adjust as needed
    
+
 
    for (int i = 0; i <= 20; i++)
    {
-      cout << "new x position: " << v.getDX() * (i) + (1 / 2) * acc.getDDX() << endl;
-		cout << "new y position: " << v.getDY() * (i) + (1 / 2) * acc.getDDY() << endl; 
-		v.add(acc, TIME_UNIT);
+		double distance = m.getDistance() + v.getDX() * i + (1/2) * acc.getDDX() * i*i; 
+		double altitude = m.getAltitude() + v.getDY() * i + (1 / 2) * acc.getDDY() * i * i;
+		cout << "Distance: " << distance << " meters      ";
+		cout << "Altitude: " << altitude << " meters" << endl;
+
    }
 
-   cout << "Distance: " << acc.getDDX() << "m  Altitude: " << acc.getDDY() << "m" << endl;
-
-	AirDensity airDensity;
-
-	cout << endl << endl << "air density: " << airDensity.getAirDensity(500) << endl;
-
-	cout << "\n\nSpeed of sound:" << MachSpeed().getMachSpeed(0) << endl;
-	cout << "Mach speed: " << 827 / MachSpeed().getMachSpeed(0)  << endl;
-	cout << "drag coefficient: " << DragCoefficient().getDragCoefficient(827/MachSpeed().getMachSpeed(0)) << endl; 
-
-   cout << "\n\n\n force: " << .5 * DragCoefficient().getDragCoefficient(827 / MachSpeed().getMachSpeed(0)) * AirDensity().getAirDensity(0) * (827 * 827) * m.getArea();
    return 0;
 }
