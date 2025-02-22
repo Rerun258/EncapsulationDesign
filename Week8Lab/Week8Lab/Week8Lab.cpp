@@ -40,28 +40,39 @@ void testcalLienearInterpolationHeight() {
    std::cout << "Test passed! Result is approximately " << expected << std::endl;
 }
 
+void testCases(double degrees)
+{
+   Missile m;
+   Angle a; // inital angel
+   a.setDegrees(degrees);
+   Velocity v = Velocity(INITIAL_VELOCITY, a); // inital velocity
+   Acceleration acc;
+   acc.set(a, v.getSpeed()); // inital acceleration
+
+   std::cout << std::fixed << std::setprecision(6); // Set to 6 decimal places, adjust as needed
+
+   cout << fixed << setprecision(2);  // Print with 3 decimal places
+
+   double distance;
+   double altitude;
+   for (int i = 0; i <= 20; i++)
+   {
+      distance = m.getDistance() + v.getDX() * i + (1 / 2) * acc.getDDX() * i * i;
+      altitude = m.getAltitude() + v.getDY() * i + (1 / 2) * acc.getDDY() * i * i;
+   }
+
+   cout << "Angle: " << degrees << " | ";
+   cout << "Distance: " << distance << " meters      ";
+   cout << "Altitude: " << altitude << " meters" << endl;
+}
+
 int main() 
 {
 
-	Missile m;
-   Angle a; // inital angel
-   a.setDegrees(75.0);
-	Velocity v = Velocity(INITIAL_VELOCITY, a); // inital velocity
-	Acceleration acc; 
-	acc.set(a, v.getSpeed()); // inital acceleration
-
-	std::cout << std::fixed << std::setprecision(6); // Set to 6 decimal places, adjust as needed
-   
-   cout << fixed << setprecision(2);  // Print with 3 decimal places
-
-   for (int i = 0; i <= 20; i++)
-   {
-		double distance = m.getDistance() + v.getDX() * i + (1 / 2) * acc.getDDX() * i * i; 
-		double altitude = m.getAltitude() + v.getDY() * i + (1 / 2) * acc.getDDY() * i * i;
-		cout << "Distance: " << distance << " meters      ";
-		cout << "Altitude: " << altitude << " meters" << endl;
-
-   }
+   testCases(0.0);
+   testCases(30.0);
+   testCases(60.0);
+   testCases(-75.0);
 
    return 0;
 }
