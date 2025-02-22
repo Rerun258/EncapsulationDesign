@@ -1,5 +1,3 @@
-#include "acceleration.h" // Add this line to include the Acceleration header
-
 // Week8Lab.cpp : This file contains the 'main' function. Program execution begins and ends there.
 // McClain, Elijah
 
@@ -10,7 +8,8 @@
 #include "velocity.h"
 #include "AirDensity.h"
 #include "MachSpeed.h"
-#include "DragCoefficent.h" // Add this line to include the DragCoefficient header
+#include "acceleration.h"
+#include "DragCoefficent.h"
 #include "missile.h"
 #include <iomanip>
 
