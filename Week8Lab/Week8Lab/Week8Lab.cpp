@@ -76,6 +76,9 @@ int main()
 	Acceleration acc; 
 	acc.set(a, v.getSpeed()); // inital acceleration
 
+	cout << "new position: " << v.getDX() + (1/2) * acc.getDDX() << endl;
+
+   
 
    for (double i = 0.00; i <= 20.01; i += TIME_UNIT)
    {
