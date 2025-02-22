@@ -10,6 +10,7 @@
 #include "velocity.h"
 #include "AirDensity.h"
 #include "MachSpeed.h"
+#include "DragCoefficient.h" // Add this line to include the DragCoefficient header
 
 using namespace std;
 
@@ -98,7 +99,8 @@ int main()
 
 	cout << "\n\nSpeed of sound:" << MachSpeed().getMachSpeed(0) << endl;
 	cout << "Mach speed: " << 827 / MachSpeed().getMachSpeed(0)  << endl;
-
+	cout << "drag coefficient: " << DragCoefficient().getDragCoefficient(827/MachSpeed().getMachSpeed(0)) << endl; 
+    
 
    return 0;
 }

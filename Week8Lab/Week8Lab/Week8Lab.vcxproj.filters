@@ -27,7 +27,13 @@
     <ClCompile Include="velocity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gravity.cpp">
+    <ClCompile Include="AirDensity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DragCoefficent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MachSpeed.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -48,6 +54,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gravity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AirDensity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MachSpeed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DragCoefficent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
