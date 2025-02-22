@@ -9,6 +9,7 @@
 #include "angle.h"
 #include "velocity.h"
 #include "AirDensity.h"
+#include "MachSpeed.h"
 
 using namespace std;
 
@@ -94,5 +95,10 @@ int main()
 	AirDensity airDensity;
 
 	cout << endl << endl << "air density: " << airDensity.getAirDensity(500) << endl;
+
+	cout << "\n\nSpeed of sound:" << MachSpeed().getMachSpeed(0) << endl;
+	cout << "Mach speed: " << 827 / MachSpeed().getMachSpeed(0)  << endl;
+
+
    return 0;
 }

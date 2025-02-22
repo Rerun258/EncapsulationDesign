@@ -35,6 +35,9 @@ public:
       Velocity v;
       double mass;
 		double diameter;
+
+
+
    
    public:
       double getAltitude()

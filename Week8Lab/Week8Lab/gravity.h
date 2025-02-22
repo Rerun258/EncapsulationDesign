@@ -1,5 +1,7 @@
 #pragma once
-class gravity
+class Gravity
 {
+public:
+    Gravity() {}
 };
 
