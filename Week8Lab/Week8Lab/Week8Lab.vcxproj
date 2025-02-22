@@ -142,6 +142,7 @@
     <ClInclude Include="ArtilleryTest.h" />
     <ClInclude Include="DragCoefficent.h" />
     <ClInclude Include="MachSpeed.h" />
+    <ClInclude Include="gravity.h" />
     <ClInclude Include="missile.h" />
     <ClInclude Include="velocity.h" />
   </ItemGroup>

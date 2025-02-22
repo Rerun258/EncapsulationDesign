@@ -5,6 +5,14 @@
 
 class Missile
 {
+   public:
+      Missile() : altitude(0.0) {}
+      Missile(double altitude, Acceleration& acc, Velocity& v) 
+      {
+         this->altitude = altitude;
+         this->v = v;
+         this->acc = acc;
+      }
 public:
    #define MASS 46.70               // kg
    #define INITIAL_VELOCITY 827.00  // m/s
@@ -29,9 +37,6 @@ public:
 		double diameter;
    
    public:
-
-     
-      
       double getAltitude()
       {
          return altitude;
