@@ -6,6 +6,20 @@
 using namespace std;
 
 #include <cassert>
+//********McClain's Code********
+
+
+
+//******************************
+//********* Elijahs Code********
+
+
+
+
+//******************************
+
+
+
 
 
 double calLienearInterpolationDistance(double r1, double r0, double d1, double d0, double r)
