@@ -8,7 +8,7 @@
  ************************************************************************/
 
 #pragma once
-
+#include "angle.h"
  // for unit tests
 class TestPosition;
 class TestVelocity;

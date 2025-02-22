@@ -58,10 +58,10 @@ int main() {
    std::cout << "calLienearInterpolationHeight(0, 1.225, 1000, 1.112, 200): " << calLienearInterpolationHeight(0, 1.225, 1000, 1.112, 200) << std::endl;
 
 
-   for (double i; i < 20.0; i += TIME_UNIT)
-   {
-
-   }
+   //for (double i; i < 20.0; i += TIME_UNIT)
+   //{
+     
+   //   //}
 
    //********McClain's Code********
 
@@ -69,12 +69,12 @@ int main() {
 
 //find find inital velocity
 //Dx i need the angle
-   Angle a = 10.0; // inital angel
+   Angle a = Angle(10.0); // inital angel
 	Velocity v = Velocity(8.2, a); // inital velocity
 	Acceleration acc; 
 	acc.set(a, 8.2); // inital acceleration
 
-
+	cout << "new position: " << v.getDX() + (1/2) * acc.getDDX() << endl;
 
    
    return 0;

@@ -24,10 +24,6 @@ class TestVelocity;
 class TestAcceleration;
 class TestAngle;
 
-
-/************************************
- * ANGLE
- ************************************/
 class Angle
 {
 public:
@@ -35,31 +31,21 @@ public:
    friend TestVelocity;
    friend TestAngle;
 
-
    // Constructors
    Angle() : radians(0.0) {}
-
    Angle(const Angle& rhs) : radians(rhs.getRadians()) {}
-
-   Angle(double degrees)
-   {
-      setDegrees(degrees);
-   }
+   Angle(double degrees) { setDegrees(degrees); }
 
    Angle& add(double delta)
    {
       radians += delta;
-
-      // Normalize the angle after addition
       radians = normalize(radians);
-
       return *this;
    }
 
    // Getters
    double getDegrees() const { return radians * (180.0 / M_PI); }
    double getRadians() const { return radians; }
-
 
    // Setters
    void setDegrees(double degrees)
@@ -70,62 +56,32 @@ public:
 
    void setRadians(double aRadian) { radians = normalize(aRadian); }
 
-
    // Converters
    double convertToDegrees(double aRadian) const
    {
-      double degrees = round(normalize(aRadian) * (180.0 / M_PI));
-      return degrees;
+      return round(normalize(aRadian) * (180.0 / M_PI));
    }
 
    double convertToRadians(double aDegree) const
    {
-      double radians = aDegree * (M_PI / 180.0);
-      return normalize(radians);
+      return normalize(aDegree * (M_PI / 180.0));
    }
 
-   void setUp()
-   {
-      // 0°
-      radians = 0.0;
-   }
-
-   void setRight()
-   {
-      // 90°
-      radians = M_PI * 0.5;
-   }
-
-   void setLeft()
-   {
-      // 270°
-      radians = M_PI * 1.5;
-   }
-
-   void setDown()
-   {
-      // 180°
-      radians = M_PI;
-   }
-
-   void reverse()
-   {
-      radians += M_PI;
-   }
+   void setUp() { radians = 0.0; }
+   void setRight() { radians = M_PI * 0.5; }
+   void setLeft() { radians = M_PI * 1.5; }
+   void setDown() { radians = M_PI; }
+   void reverse() { radians += M_PI; }
 
    void display(ostream& out) const
    {
-      out.setf(ios::fixed);     // "fixed" means don't use scientific notation.
-      out.setf(ios::showpoint); // "showpoint" means always show the decimal point.
-      out.precision(1);         // Set the precision to 1 decimal place of accuracy.
-      //cout << getDegrees() << endl; test code
-      out << getDegrees() << "degrees";
+      out.setf(ios::fixed);
+      out.setf(ios::showpoint);
+      out.precision(1);
+      out << getDegrees() << " degrees";
    }
-
 
 private:
    double normalize(double aRadian) const;
-
    double radians;
-   // 360 degrees equals 2 PI radians
 };
