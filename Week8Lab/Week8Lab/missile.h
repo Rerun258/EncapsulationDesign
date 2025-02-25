@@ -28,10 +28,13 @@ private:
    double altitude;
    Acceleration acc;
    Velocity v;
+   Angle a;
    double mass;
    double diameter;
    double distance;
    double Altitude;
+   
+
 
 public:
 	double getAltitude()
@@ -55,7 +58,7 @@ public:
 
 
 
-   void displayPos(int time)
+   void displayPos()
    {
       
    }

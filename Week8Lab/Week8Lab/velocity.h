@@ -43,6 +43,7 @@ public:
 	// find inital velocity components
 
 
+
 private:
    double dx;           // horizontal velocity
    double dy;           // vertical velocity

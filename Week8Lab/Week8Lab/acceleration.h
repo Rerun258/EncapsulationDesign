@@ -17,14 +17,6 @@ class TestLander;
 class Angle;
 
 
-#pragma once
-
-class TestAcceleration;
-class TestVelocity;
-class TestPosition;
-class TestLander;
-class Angle;
-
 /*********************************************
  * Acceleration
  * Let's get moving
@@ -43,7 +35,8 @@ public:
 
    // getters
    double getDDX()   const { return ddx; }
-   double getDDY()   const { return ddy; }
+
+   double getDDY()   const { return ddy - 9.8; }
 
    // setters                        
    void setDDX(double ddx) { this->ddx = ddx; }
@@ -53,8 +46,8 @@ public:
    void addDDY(double ddy) { this->ddy += ddy; }
    void add(const Acceleration& rhs);
 
-   // Add gravity to vertical acceleration
-   void applyGravity(double gravity) { this->ddy -= gravity; }
+
+
 
 private:
    double ddx;     // horizontal acceleration

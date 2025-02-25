@@ -21,7 +21,7 @@ using namespace std;
 #define DIAMETER 0.15489         // m
 #define RADIUS 0.077445          // m
 #define AREA 0.018842            // m^2
-#define TIME_UNIT 1              // seconds
+#define TIME_UNIT .1              // seconds
 
 double calLienearInterpolationDistance(double r1, double r0, double d1, double d0, double r)
 {
@@ -49,20 +49,19 @@ int main()
    a.setDegrees(75.0);
 	Velocity v = Velocity(INITIAL_VELOCITY, a); // inital velocity
 	Acceleration acc; 
-	acc.set(a, v.getSpeed()); // inital acceleration
 
-	std::cout << std::fixed << std::setprecision(6); // Set to 6 decimal places, adjust as needed
    
 
 
-   for (int i = 0; i <= 20; i++)
+   for (double i = 0; i <= 20; i += TIME_UNIT)
    {
-		double distance = m.getDistance() + v.getDX() * i + (1/2) * acc.getDDX() * i*i; 
-		double altitude = m.getAltitude() + v.getDY() * i + (1 / 2) * acc.getDDY() * i * i;
-		cout << "Distance: " << distance << " meters      ";
-		cout << "Altitude: " << altitude << " meters" << endl;
 
+      double distance = m.getDistance() + v.getDX() * i + (1 / 2) * acc.getDDX() * i * i;
+      double altitude = m.getAltitude() + v.getDY() * i + (1 / 2) * (acc.getDDY() - 9.8) * i * i;
+      cout << "Distance: " << distance << " meters      ";
+      cout << "Altitude: " << altitude << " meters" << endl;
    }
+
 
    return 0;
 }
