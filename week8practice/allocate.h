@@ -16,24 +16,46 @@
  * 
  **************************************************************/
 
+class TestAllocate;
 
 class Allocate
 {
+   friend TestAllocate;
+
 public:
    /****************************
    * ALLOCATE ONE FLOAT
    ****************************/
-   void allocateOneFloat(float newFloat)
+   float * allocateOneFloat(float newFloat)
    {
+      pFloat = new float(newFloat);
+
+      if (pFloat == nullptr)
+      {
+         std::cout << "ERROR";
+         return nullptr;
+      }
+
+      else
+      {
+         std::cout << "FLOAT ALLOCATED";
+         return pFloat;
+      }
 
    }
 
    /****************************
    * ALLOCATE ARRAY of DOUBLEs
    ****************************/
-   void allocateArrayDouble(int slots)
+   double * allocateArrayDouble(int slots)
    {
+      if (slots <= 0) { return nullptr; }
 
+      else
+      {
+         pSlots = new(nothrow) double pSlots [slots + 1];
+      }
+         
    }
 
    /****************************
@@ -41,15 +63,20 @@ public:
    ****************************/
    void deleteOneFloat(float* pFloat)
    {
-
+      delete pFloat;
+      std::cout << "FLOAT DELETED";
    }
 
    /****************************
    * DELETE ARRAY of DOUBLEs
    ****************************/
-   void deleteArrayDouble()
+   void deleteArrayDouble(double * p)
    {
-
+      delete [] p;
    }
+
+   private:
+      float* pFloat;
+      double* pSlots;
 
 };
