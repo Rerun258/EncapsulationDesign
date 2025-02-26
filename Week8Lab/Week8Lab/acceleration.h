@@ -10,23 +10,22 @@
 
 #pragma once
 
-class TestAcceleration;
-class TestVelocity;
-class TestPosition;
-class TestLander;
 class Angle;
 
 
+<<<<<<< HEAD
+=======
+#pragma once
+
+class Angle;
+
+>>>>>>> 18783a49ab6034aac6208e523b14cdefb53eef64
 /*********************************************
  * Acceleration
  * Let's get moving
  *********************************************/
 class Acceleration
 {
-   friend TestPosition;
-   friend TestVelocity;
-   friend TestAcceleration;
-   friend TestLander;
 
 public:
    // constructors

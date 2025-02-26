@@ -1,5 +1,3 @@
-#include "acceleration.h" // Add this line to include the Acceleration header
-
 // Week8Lab.cpp : This file contains the 'main' function. Program execution begins and ends there.
 // McClain, Elijah
 
@@ -10,7 +8,8 @@
 #include "velocity.h"
 #include "AirDensity.h"
 #include "MachSpeed.h"
-#include "DragCoefficent.h" // Add this line to include the DragCoefficient header
+#include "acceleration.h"
+#include "DragCoefficent.h"
 #include "missile.h"
 #include <iomanip>
 
@@ -41,9 +40,36 @@ void testcalLienearInterpolationHeight() {
    std::cout << "Test passed! Result is approximately " << expected << std::endl;
 }
 
+void testCases(double degrees)
+{
+   Missile m;
+   Angle a; // inital angel
+   a.setDegrees(degrees);
+   Velocity v = Velocity(INITIAL_VELOCITY, a); // inital velocity
+   Acceleration acc;
+   acc.set(a, v.getSpeed()); // inital acceleration
+
+   std::cout << std::fixed << std::setprecision(6); // Set to 6 decimal places, adjust as needed
+
+   cout << fixed << setprecision(2);  // Print with 3 decimal places
+
+   double distance;
+   double altitude;
+   for (int i = 0; i <= 20; i++)
+   {
+      distance = m.getDistance() + v.getDX() * i + (1 / 2) * acc.getDDX() * i * i;
+      altitude = m.getAltitude() + v.getDY() * i + (1 / 2) * acc.getDDY() * i * i;
+   }
+
+   cout << "Angle: " << degrees << " | ";
+   cout << "Distance: " << distance << " meters      ";
+   cout << "Altitude: " << altitude << " meters" << endl;
+}
+
 int main() 
 {
 
+<<<<<<< HEAD
 	Missile m;
    Angle a; // inital angel
    a.setDegrees(75.0);
@@ -61,7 +87,14 @@ int main()
       cout << "Distance: " << distance << " meters      ";
       cout << "Altitude: " << altitude << " meters" << endl;
    }
+=======
+   testCases(0.0);
+   testCases(30.0);
+   testCases(60.0);
+   testCases(-75.0);
+>>>>>>> 18783a49ab6034aac6208e523b14cdefb53eef64
 
 
    return 0;
 }
+ 
