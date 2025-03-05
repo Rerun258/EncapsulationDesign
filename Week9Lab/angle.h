@@ -83,24 +83,14 @@ public:
 
    void setRadians(double aRadian) { radians = normalize(aRadian); } 
 
+   // 0°
+   void setUp(){ radians = 0.0;}
 
-   void setUp()
-   {
-      // 0°
-      radians = 0.0;
-   }
+   // 90°
+   void setRight(){ radians = M_PI * 0.5;}
 
-   void setRight()
-   {
-      // 90°
-      radians = M_PI * 0.5;
-   }
-
-   void setLeft()
-   {
-      // 270°
-      radians = M_PI * 1.5;
-   }
+   // 270°
+   void setLeft(){ radians = M_PI * 1.5;}
 
    // 180°
    void setDown(){ radians = M_PI;}
