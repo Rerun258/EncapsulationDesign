@@ -50,7 +50,7 @@ public:
    void addDX(double dx) { setDX(getDX() + dx); }
    void addDY(double dy) { setDY(getDY() + dy); }
    void add(const Acceleration & acceleration, double time);
-   void add(const Velocity & rhs) : dx(rhs:dx), dy(rhs:dy) { }
+   //void add(const Velocity & rhs) : dx(rhs:dx), dy(rhs:dy) { }
    void reverse() { }
 
    Velocity& operator = (const Velocity& rhs)
