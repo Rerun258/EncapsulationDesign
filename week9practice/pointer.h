@@ -1,6 +1,6 @@
 /*************************************************************
  * 1. Name:
- *      -your name-
+ *      Elijah, McClain
  * 2. Assignment Name:
  *      Practice 09: Pointer Arithmetic
  * 3. Assignment Description:
@@ -15,8 +15,24 @@
 /**************************************
  * COUNT - ARRAY
  **************************************/
-
+int countArray(char* cString, char single)
+{
+   int* pEnd =  + ;
+   for (int* p = array; p < pEnd; p++)
+      cout << *p << endl;
+}
 
 /**************************************
  * COUNT - POINTER
  **************************************/
+int countPointer(char* cString, char single)
+{
+   int count = 0;
+   for (char * p = cString; *p; p++)
+   {
+      if (*p == single)
+         return 0;
+   }
+
+   return 0;
+}
