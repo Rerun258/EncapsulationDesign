@@ -8,6 +8,8 @@
  ************************************************************************/
 
 #pragma once
+#include "acceleration.h"
+#include "angle.h"
 
 // for unit tests
 class TestPosition;
@@ -50,7 +52,7 @@ public:
    void addDX(double dx) { setDX(getDX() + dx); }
    void addDY(double dy) { setDY(getDY() + dy); }
    void add(const Acceleration & acceleration, double time);
-   void add(const Velocity & rhs) : dx(rhs:dx), dy(rhs:dy) { }
+   void add(const Velocity& rhs) { dx += rhs.dx; dy += rhs.dy; } // Fixed!
    void reverse() { }
 
    Velocity& operator = (const Velocity& rhs)
