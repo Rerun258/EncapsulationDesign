@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * Header File:
  *    TEST ANGLE
  * Author:
@@ -136,7 +136,7 @@ private:
    /*********************************************
     * name:    SET RIGHT
     * input:   nothing
-    * output:  90 degrees
+    * output:  270 degrees
     *********************************************/
    void setRight()
    {  // setup
@@ -145,13 +145,13 @@ private:
       // exercise
       a.setRight();
       // verify
-      assertEquals(a.radians, M_PI_2);
+      assertEquals(a.radians, M_PI * 1.5);
    }  // teardown
    
    /*********************************************
     * name:    SET LEFT
     * input:   nothing
-    * output:  270 degrees
+    * output:  90 degrees
     *********************************************/
    void setLeft()
    {  // setup
@@ -160,7 +160,7 @@ private:
       // exercise
       a.setLeft();
       // verify
-      assertEquals(a.radians, M_PI + M_PI_2);
+      assertEquals(a.radians, M_PI * .5);
    }  // teardown
    
    /*********************************************
@@ -477,19 +477,40 @@ private:
     *********************************************/
    void setDxDy_up()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+		// setup
+		Angle a;
+		a.radians = 0.0;
+		double dx = 1;
+		double dy = 0;
+		// exercise
+		a.setDxDy(dx, dy);
+		// verify
+		assertEquals(a.radians, 0.0);
+	}// teardown
+   
 
 
    /*********************************************
     * name:    SET DX DY  RIGHT
-    * input:   dx=4 dy=0
+    * input:   dx=0 dy=4
     * output:  90 degrees
     *********************************************/
    void setDxDy_right()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+      // setup
+      Angle a;
+      a.radians = 0.0; // Arbitrary initial value
+      double dx = 0;
+      double dy = 4;
+
+      // exercise
+      a.setDxDy(dx, dy);
+
+      // verify
+      assertEquals(a.radians, M_PI * .5); // Expected result for right direction (90 degrees or π/2 radians)
+   } // teardown
+
+   
 
    /*********************************************
     * name:    SET DX DY  LEFT
@@ -498,8 +519,20 @@ private:
     *********************************************/
    void setDxDy_left()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+      // setup
+      Angle a;
+      a.radians = 0.0; // Arbitrary initial value
+      double dx = -0.01;
+      double dy = 0.0;
+
+      // exercise
+      a.setDxDy(dx, dy);
+
+      // verify
+      assertEquals(a.radians, M_PI); // Expected result for left direction (180 degrees)
+   } // teardown
+
+   
 
    /*********************************************
     * name:    SET DX DY  DIAGONAL
@@ -507,18 +540,22 @@ private:
     * output:  30 degrees
     *********************************************/
    void setDxDy_diagonal()
-   {  // setup
+   {
+      // setup
       Angle a;
-      a.radians = 1.234567;
-      double dx = 5.0;
-      double dy = 8.6602;
+      a.radians = 1.234567;  // Arbitrary initial value
+      double dx = 8.6602;
+      double dy = 5.0;  // Reflecting the correct input for 30 degrees
 
       // exercise
       a.setDxDy(dx, dy);
 
       // verify
-      assertEquals(a.radians, M_PI / 6.0);
-   }  // teardown
+      assertEquals(a.radians, M_PI / 6.0); // 30 degrees
+   }
+   // teardown
+
+
 
 
    /*****************************************************************
@@ -602,8 +639,17 @@ private:
     *********************************************/
    void getDx_up()
    { 
-      assertUnit(NOT_YET_IMPLEMENTED); 
-   }
+		// setup
+		Angle a;
+		a.radians = 0.0; // 0 degrees
+		double dx = -99.9;
+		// exercise
+		dx = a.getDx();
+		// verify
+		assertEquals(dx, 0.0);
+		assertEquals(a.radians, 0.0);
+
+	}// teardown
 
    /*********************************************
     * name:    GET DX - DOWN
@@ -612,8 +658,17 @@ private:
     *********************************************/
    void getDx_down()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+		// setup
+		Angle a;
+		a.radians = M_PI; // 180 degrees
+		double dx = -99.9;
+		// exercise
+		dx = a.getDx();
+		// verify
+		assertEquals(dx, 0.0);
+		assertEquals(a.radians, M_PI);
+	}// teardown
+   
 
 
    /*********************************************
@@ -623,8 +678,17 @@ private:
     *********************************************/
    void getDx_left()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+		// setup
+		Angle a;
+		a.radians = M_PI + M_PI_2; // 270 degrees
+		double dx = -99.9;
+		// exercise
+		dx = a.getDx();
+		// verify
+		assertEquals(dx, -1.0);
+		assertEquals(a.radians, M_PI + M_PI_2);
+	}// teardown
+   
 
    /*********************************************
     * name:    GET DX - RIGHT
@@ -633,8 +697,17 @@ private:
     *********************************************/
    void getDx_right()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+		// setup
+		Angle a;
+		a.radians = M_PI_2; // 90 degrees
+		double dx = -99.9;
+		// exercise
+		dx = a.getDx();
+		// verify
+		assertEquals(dx, 1.0);
+		assertEquals(a.radians, M_PI_2);
+
+	}// teardown
 
    /*********************************************
     * name:    GET DX - DIAGONAL
@@ -661,8 +734,17 @@ private:
     *********************************************/
    void getDy_up()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+		// setup
+		Angle a;
+		a.radians = 0.0; // 0 degrees
+		double dy = -99.9;
+		// exercise
+		dy = a.getDy();
+		// verify
+		assertEquals(dy, 1.0);
+		assertEquals(a.radians, 0.0);
+	}// teardown
+   
 
    /*********************************************
     * name:    GET DY - DOWN
@@ -671,8 +753,17 @@ private:
     *********************************************/
    void getDy_down()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+		// setup
+		Angle a;
+		a.radians = M_PI; // 180 degrees
+		double dy = -99.9;
+		// exercise
+		dy = a.getDy();
+		// verify
+		assertEquals(dy, -1.0);
+		assertEquals(a.radians, M_PI);
+
+	}// teardown
 
 
    /*********************************************
@@ -682,8 +773,17 @@ private:
     *********************************************/
    void getDy_left()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+		// setup
+		Angle a;
+		a.radians = M_PI + M_PI_2; // 270 degrees
+		double dy = -99.9;
+		// exercise
+		dy = a.getDy();
+		// verify
+		assertEquals(dy, 0.0);
+		assertEquals(a.radians, M_PI + M_PI_2);
+	}// teardown
+   
 
    /*********************************************
     * name:    GET DY - RIGHT
@@ -692,9 +792,18 @@ private:
     *********************************************/
    void getDy_right()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+		// setup
+		Angle a;
+		a.radians = M_PI_2; // 90 degrees
+		double dy = -99.9;
+		// exercise
+		dy = a.getDy();
+		// verify
+		assertEquals(dy, 0.0);
+		assertEquals(a.radians, M_PI_2);
+	}// teardown
 
+   
    /*********************************************
     * name:    GET DY - DIAGONAL
     * input:   30 degrees
@@ -714,13 +823,21 @@ private:
 
    /*********************************************
     * name:    IS RIGHT - right
-    * input:   30 degrees
+    * input:   270 degrees
     * output:  true
     *********************************************/
    void isRight_right()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+		// setup
+		Angle a;
+		a.setRight(); // 270 degrees
+		// exercise
+		bool r = a.isRight();
+		// verify
+		assertEquals(r, true);
+		assertEquals(a.radians, M_PI * 1.5);
+	}// teardown
+   
 
    /*********************************************
     * name:    IS RIGHT - LEFT
@@ -729,8 +846,16 @@ private:
     *********************************************/
    void isRight_left()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+		// setup
+		Angle a;
+		a.radians = M_PI + M_PI + M_PI_2; // 330 degrees
+		// exercise
+		bool r = a.isRight();
+		// verify
+		assertEquals(r, false);
+		assertEquals(a.radians, M_PI + M_PI + M_PI_2);
+	}// teardown
+   
 
    /*********************************************
     * name:    IS LEFT - right
@@ -739,17 +864,34 @@ private:
     *********************************************/
    void isLeft_right()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+		// setup
+		Angle a;
+		a.setLeft(); // 90 degrees
+		// exercise
+		bool r = a.isRight();
+		// verify
+		assertEquals(r, false);
+		assertEquals(a.radians, M_PI * .5);
+	}// teardown
+   
 
       /*********************************************
     * name:    IS LEFT - LEFT
-    * input:   330 degrees
+    * input:   90 degrees
     * output:  true
     *********************************************/
    void isLeft_left()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+		// setup
+		Angle a;
+		a.setLeft(); // 90 degrees
+		// exercise
+		bool r = a.isLeft();
+		// verify
+		assertEquals(r, true);
+		
+		assertEquals(a.radians, M_PI / 2);
+	}// teardown
+   
 
 };

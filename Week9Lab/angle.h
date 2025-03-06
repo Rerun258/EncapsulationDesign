@@ -55,18 +55,18 @@ public:
    //    | /
    // dy = cos a
    // dx = sin a
-   double getDx() const { return cos(radians); }
-   double getDy() const { return sin(radians); }
+   double getDx() const { return sin(radians); }
+   double getDy() const { return cos(radians); }
    bool   isRight() const 
    { 
-      if (radians == .5*M_PI) {
+      if (radians == 1.5*M_PI) {
 			return true;
       }
 			
       return false; 
    }
    bool   isLeft()           const { 
-      if (radians == 1.5 * M_PI) {
+      if (radians == .5 * M_PI) {
          return true;
       }
 
@@ -87,16 +87,20 @@ public:
    void setUp(){ radians = 0.0;}
 
    // 90°
-   void setRight(){ radians = M_PI * 0.5;}
+   void setRight(){ radians = M_PI * 1.5;}
 
    // 270°
-   void setLeft(){ radians = M_PI * 1.5;}
+   void setLeft(){ radians = M_PI * .5;}
 
    // 180°
    void setDown(){ radians = M_PI;}
 
    void reverse(){ radians += M_PI; }
-   Angle& add(double delta)        { return *this; }
+   Angle& add(double delta)        {
+      radians += delta;
+		radians = normalize(radians);
+      return *this;
+   }
 
    // set based on the components
    //         dx
