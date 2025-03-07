@@ -57,6 +57,7 @@ public:
    double addMetersY(double y) { return 9.9; }
    double addPixelsX(double x) { return 9.9; }
    double addPixelsY(double y) { return 9.9; }
+   
    void add(const Acceleration& a, const Velocity& v, double t);
    void reverse() { }
 

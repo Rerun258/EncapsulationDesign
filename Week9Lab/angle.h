@@ -2,7 +2,7 @@
  * Header File:
  *    ANGLE
  * Author:
- *    <your name here>
+ *    McClain, Elijah
  * Summary:
  *    Everything we need to know about a direction
  ************************************************************************/
@@ -59,19 +59,22 @@ public:
    double getDy() const { return cos(radians); }
    bool   isRight() const 
    { 
-      if (radians == 1.5*M_PI) {
+      if (radians == 1.5 * M_PI) {
 			return true;
       }
 			
       return false; 
    }
-   bool   isLeft()           const { 
-      if (radians == .5 * M_PI) {
+   
+   bool   isLeft() const
+   {
+      if (radians == 0.5 * M_PI)
+      {
          return true;
       }
 
       return false; 
-       }
+   }
 
 
    // Setters
@@ -96,7 +99,9 @@ public:
    void setDown(){ radians = M_PI;}
 
    void reverse(){ radians += M_PI; }
-   Angle& add(double delta)        {
+   
+   Angle& add(double delta)
+   {
       radians += delta;
 		radians = normalize(radians);
       return *this;
@@ -115,6 +120,7 @@ public:
    {
 		radians = atan2(dy, dx);
    }
+   
    Angle operator+(double degrees) const { return Angle(); }
 
 private:

@@ -455,7 +455,16 @@ private:
     *********************************************/
    void reverse_stationary()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      Velocity v(0.0, 0.0);
+      Angle a;
+      a.radians = 0.0;
+      double magnitude = 1.0;
+      
+      v.set(a, magnitude);
+      v.reverse(v);
+      
+      assertEquals(v.dx, 0.0);
+      assertEquals(v.dy, 0.0);
    }
 
    /*********************************************
@@ -465,7 +474,16 @@ private:
     *********************************************/
    void reverse_up()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      Velocity v(0.0, 10.0);
+      Angle a;
+      a.radians = 0.0;
+      double magnitude = 1.0;
+      
+      v.set(a, magnitude);
+      v.reverse(v);
+      
+      assertEquals(v.dx, 0.0);
+      assertEquals(v.dy, -10.0);
    }
 
    /*********************************************
