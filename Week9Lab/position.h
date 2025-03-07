@@ -35,19 +35,19 @@ public:
 
    
    // constructors
-   Position()            : x(9.9), y(9.9)  {}
+   Position()            : x(0.0), y(0.0)  {}
    Position(double x, double y);
-   Position(const Position & pt) : x(9.9), y(9.9) {}
+   Position(const Position & pt) : x(pt.x), y(pt.y) {}
    Position& operator = (const Position& pt);
 
    // getters
-   double getMetersX()       const { return 9.9; }
-   double getMetersY()       const { return 9.9; }
-   double getPixelsX()       const { return 9.9; }
-   double getPixelsY()       const { return 9.9; }
+   double getMetersX()       const { return x * (metersFromPixels * 2.0); }
+   double getMetersY()       const { return y * (metersFromPixels * 2.0); }
+   double getPixelsX()       const { return x * (metersFromPixels / 2.0); }
+   double getPixelsY()       const { return y * (metersFromPixels / 2.0); }
 
    // setters
-   void setZoom(double z) {}
+   void setZoom(double z) { metersFromPixels = z; }
    void setMeters(double xMeters, double yMeters) { }
    void setMetersX(double xMeters)       {  }
    void setMetersY(double yMeters)       {  }
