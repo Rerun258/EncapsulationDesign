@@ -600,13 +600,15 @@ private:
    {
       // Setup
       Position pos;
+      pos.metersFromPixels = 99.9;
 
       // Exercize
+      pos.setZoom(123.4);
 
       // Verify
+      assertEquals(pos.metersFromPixels, 123.4);
 
       // Teardown
-      assertUnit(NOT_YET_IMPLEMENTED);
    }
 
    /*********************************************
