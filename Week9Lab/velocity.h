@@ -59,10 +59,10 @@ public:
       this->dy += rhs.getDY();
    }
 
-   void reverse() //(const Velocity& rhs)
+   void reverse()
    {
-      dx = -dx;// -rhs.dx;
-      dy = -dy; // -rhs.dy;
+      dx = -dx;
+      dy = -dy;
    }
 
    Velocity& operator = (const Velocity& rhs)
