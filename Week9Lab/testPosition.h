@@ -410,11 +410,11 @@ private:
 
       // Exercize
       pos.metersFromPixels = 1.0;
-      pos.x = 123.4;
+      pos.setPixelsX(123.4);
 
       // Verify
-      assertEquals(pos.x, 123.4);
-      assertEquals(pos.y, 888.8);
+      assertEquals(pos.getMetersX(), 123.4);
+      assertEquals(pos.getMetersY(), 888.8);
 
       // Teardown
    }
@@ -432,11 +432,11 @@ private:
 
       // Exercize
       pos.metersFromPixels = 100.0;
-      pos.x = 123.4;
+      pos.setPixelsX(123.4);
 
       // Verify
-      assertEquals(pos.x, 12340.0);
-      assertEquals(pos.y, 888.8);
+      assertEquals(pos.getMetersX(), 12340.0);
+      assertEquals(pos.getMetersY(), 888.8);
    }
    
    /*********************************************
@@ -451,11 +451,11 @@ private:
 
       // Exercize
       pos.metersFromPixels = 1.0;
-      pos.y = 123.4;
+      pos.setPixelsY(123.4);
 
       // Verify
-      assertEquals(pos.x, 999.9);
-      assertEquals(pos.y, 123.4);
+      assertEquals(pos.getMetersX(), 999.9);
+      assertEquals(pos.getMetersY(), 123.4);
    }
 
    /*********************************************
@@ -470,11 +470,11 @@ private:
 
       // Exercize
       pos.metersFromPixels = 100.00;
-      pos.y = 123.4;
+      pos.setPixelsY(123.4);
 
       // Verify
-      assertEquals(pos.x, 999.9);
-      assertEquals(pos.y, 12340.0);
+      assertEquals(pos.getMetersX(), 999.9);
+      assertEquals(pos.getMetersY(), 12340.0);
    }
 
    /*********************************************
