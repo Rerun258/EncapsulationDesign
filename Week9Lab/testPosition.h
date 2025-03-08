@@ -649,11 +649,11 @@ private:
       Position pos(11.1, 22.2);
 
       Acceleration acc;
-      acc.setDDX(0);
-      acc.setDDY(0);
+      acc.setDDX(0.0);
+      acc.setDDY(0.0);
 
       Velocity vel;
-      vel.setDXDY(0, 0);
+      vel.setDXDY(0.0, 0.0);
 
       double t = 1.0;
 
@@ -674,14 +674,23 @@ private:
    void add_moving()
    {
       // Setup
-      Position pos;
+      Position pos(11.1, 22.2);
+
+      Acceleration acc;
+      acc.setDDX(0.0);
+      acc.setDDY(0.0);
+
+      Velocity vel;
+      vel.setDXDY(0.5, 0.4);
+
+      double t = 1.0;
 
       // Exercize
 
-      // Verify
 
-      // Teardown
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Verify
+      assertEquals(pos.x, 11.6);
+      assertEquals(pos.x, 22.6);
    }
 
    /*********************************************
@@ -693,14 +702,24 @@ private:
    void add_movingLonger()
    {
       // Setup
-      Position pos;
+      Position pos(11.1, 22.2);
+
+      Acceleration acc;
+      acc.setDDX(0.0);
+      acc.setDDY(0.0);
+
+      Velocity vel;
+      vel.setDXDY(0.5, 0.4);
+
+      double t = 2.0;
+      
 
       // Exercize
 
-      // Verify
 
-      // Teardown
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Verify
+      assertEquals(pos.x, 12.1);
+      assertEquals(pos.x, 23.0);
    }
 
    /*********************************************
@@ -712,14 +731,23 @@ private:
    void add_fromStop()
    {
       // Setup
-      Position pos;
+      Position pos(11.1, 22.2);
+
+      Acceleration acc;
+      acc.setDDX(0.2);
+      acc.setDDY(0.3);
+
+      Velocity vel;
+      vel.setDXDY(0.0, 0.0);
+
+      double t = 1.0;
 
       // Exercize
 
-      // Verify
 
-      // Teardown
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Verify
+      assertEquals(pos.x, 11.20);
+      assertEquals(pos.x, 22.35);
    }
 
    /*********************************************
@@ -731,14 +759,23 @@ private:
    void add_fromStopLonger()
    {
       // Setup
-      Position pos;
+      Position pos(11.1, 22.2);
+
+      Acceleration acc;
+      acc.setDDX(0.2);
+      acc.setDDY(0.3);
+
+      Velocity vel;
+      vel.setDXDY(0.0, 0.0);
+
+      double t = 2.0;
 
       // Exercize
 
-      // Verify
 
-      // Teardown
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Verify
+      assertEquals(pos.x, 11.5);
+      assertEquals(pos.x, 22.8);
    }
    
    /*********************************************
