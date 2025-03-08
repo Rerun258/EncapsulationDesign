@@ -287,7 +287,7 @@ private:
       pos.metersFromPixels = 1.0;
 
       // Verify
-      assertEquals(pos.x, 123.4);
+      assertEquals(pos.getPixelsX(), 123.4);
 
       // Teardown
    }
@@ -307,7 +307,8 @@ private:
       pos.metersFromPixels = 100.0;
 
       // Verify
-      assertEquals(pos.x, 1.234);
+      assertEquals(pos.getPixelsX(), 1.234);
+
       // Teardown
    }
 
@@ -325,7 +326,7 @@ private:
       pos.metersFromPixels = 1.0;
 
       // Verify
-      assertEquals(pos.y, 567.8);
+      assertEquals(pos.getPixelsY(), 567.8);
    }
 
    /*********************************************
@@ -342,7 +343,7 @@ private:
       pos.metersFromPixels = 100.0;
 
       // Verify
-      assertEquals(pos.y, 567.8);
+      assertEquals(pos.getPixelsY(), 5.678);
    }
 
    /*****************************************************************
