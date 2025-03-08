@@ -4,7 +4,7 @@
 #include <cassert>
 
 // Initialize the static member
-double Position::metersFromPixels = 1.0; // Default value
+//double Position::metersFromPixels = 1.0; // Default value
 
 // Constructor implementation
 Position::Position(double x, double y) : x(x), y(y) {}
