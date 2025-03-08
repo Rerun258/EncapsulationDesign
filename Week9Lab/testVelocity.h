@@ -455,14 +455,13 @@ private:
     *********************************************/
    void reverse_stationary()
    {
+      // Setup
       Velocity v(0.0, 0.0);
-      Angle a;
-      a.radians = 0.0;
-      double magnitude = 1.0;
+
+      // Exercize
+      v.reverse();
       
-      v.set(a, magnitude);
-      v.reverse(v);
-      
+      // Verify
       assertEquals(v.dx, 0.0);
       assertEquals(v.dy, 0.0);
    }
@@ -474,14 +473,13 @@ private:
     *********************************************/
    void reverse_up()
    {
+      // Setup
       Velocity v(0.0, 10.0);
-      Angle a;
-      a.radians = 0.0;
-      double magnitude = 1.0;
+
+      // Exersize
+      v.reverse();
       
-      v.set(a, magnitude);
-      v.reverse(v);
-      
+      // Verify
       assertEquals(v.dx, 0.0);
       assertEquals(v.dy, -10.0);
    }
@@ -493,7 +491,15 @@ private:
     *********************************************/
    void reverse_down()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Velocity v(0.0, -12.34);
+
+      // Exercize
+      v.reverse();
+
+      // Verify
+      assertEquals(v.dx, 0.0);
+      assertEquals(v.dy, 12.34);
    }
 
    /*********************************************
@@ -503,7 +509,15 @@ private:
     *********************************************/
    void reverse_left()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Velocity v(-300.0, 0.0);
+
+      // Exercize
+      v.reverse();
+
+      // Verify
+      assertEquals(v.dx, 300.0);
+      assertEquals(v.dy, 0.0);
    }
 
    /*********************************************
@@ -513,7 +527,15 @@ private:
     *********************************************/
    void reverse_right()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Velocity v(0.0123, 0.0);
+
+      // Exercize
+      v.reverse();
+
+      // Verify
+      assertEquals(v.dx, -0.0123);
+      assertEquals(v.dy, 0.0);
    }
 
    /*********************************************
@@ -523,7 +545,15 @@ private:
     *********************************************/
    void reverse_diagonal()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Velocity v(123.456, -7.89);
+
+      // Exercize
+      v.reverse();
+
+      // Verify
+      assertEquals(v.dx, -123.456);
+      assertEquals(v.dy, 7.89);
    }
 
    /*****************************************************************
