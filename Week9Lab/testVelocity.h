@@ -2,7 +2,7 @@
  * Header File:
  *    TEST VELOCITY
  * Author:
- *    <your name here>
+ *    McClain, Elijah
  * Summary:
  *    Unit tests for the Velocity class.
  ************************************************************************/
@@ -727,7 +727,15 @@ private:
     *********************************************/
    void addV_stationary()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Velocity vLHS(0.0, 0.0);
+      Velocity vRHS(2.3, 4.5);
+
+      vLHS.addV(vRHS);
+
+
+      assertEquals(vLHS.dx, 2.3);
+      assertEquals(vLHS.dy, 4.5);
    }
 
    /*********************************************
@@ -737,7 +745,14 @@ private:
     *********************************************/
    void addV_nothing()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Velocity vLHS(2.3, 4.5);
+      Velocity vRHS(0.0, 0.0);
+
+      vLHS.addV(vRHS);
+
+      assertEquals(vLHS.dx, 2.3);
+      assertEquals(vLHS.dy, 4.5);
    }
 
    /*********************************************
@@ -747,7 +762,16 @@ private:
     *********************************************/
    void addV_moving()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Velocity vLHS(2.3, 4.5);
+      Velocity vRHS(100.0, 200.0);
+
+      vLHS.addV(vRHS);
+
+
+      assertEquals(vLHS.dx, 102.3);
+      assertEquals(vLHS.dy, 204.5);
+
    }
 
 };

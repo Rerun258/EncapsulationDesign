@@ -2,7 +2,7 @@
  * Source File:
  *    VELOCITY
  * Author:
- *    <your name here>
+ *    McClain, Elijah
  * Summary:
  *    Everything we need to know about speed
  ************************************************************************/ 

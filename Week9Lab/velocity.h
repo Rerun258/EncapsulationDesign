@@ -52,7 +52,13 @@ public:
    void addDX(double dx) { setDX(getDX() + dx); }
    void addDY(double dy) { setDY(getDY() + dy); }
    void add(const Acceleration & acceleration, double time);
-   
+
+   void addV(const Velocity& rhs)
+   {
+      this->dx += rhs.getDX();
+      this->dy += rhs.getDY();
+   }
+
    void reverse(const Velocity& rhs)
    {
       dx = -rhs.dx;
