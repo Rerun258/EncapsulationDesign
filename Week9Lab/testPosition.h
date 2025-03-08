@@ -659,11 +659,12 @@ private:
       double t = 1.0;
 
       // Exercize
+		pos.add(acc, vel, t);
      
 
       // Verify
       assertEquals(pos.x, 11.1);
-      assertEquals(pos.x, 22.2);
+      assertEquals(pos.y, 22.2);
    }
 
    /*********************************************
@@ -687,11 +688,11 @@ private:
       double t = 1.0;
 
       // Exercize
-
+      pos.add(acc, vel, t);
 
       // Verify
       assertEquals(pos.x, 11.6);
-      assertEquals(pos.x, 22.6);
+      assertEquals(pos.y, 22.6);
    }
 
    /*********************************************
@@ -715,12 +716,13 @@ private:
       double t = 2.0;
       
 
-      // Exercize
-
+      
+      // Exercise
+      pos.add(acc, vel, t); 
 
       // Verify
       assertEquals(pos.x, 12.1);
-      assertEquals(pos.x, 23.0);
+      assertEquals(pos.y, 23.0);
    }
 
    /*********************************************
