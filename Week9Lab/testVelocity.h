@@ -731,9 +731,10 @@ private:
       Velocity vLHS(0.0, 0.0);
       Velocity vRHS(2.3, 4.5);
 
+      // Exersize
       vLHS.addV(vRHS);
 
-
+      // Verify
       assertEquals(vLHS.dx, 2.3);
       assertEquals(vLHS.dy, 4.5);
    }
@@ -749,8 +750,10 @@ private:
       Velocity vLHS(2.3, 4.5);
       Velocity vRHS(0.0, 0.0);
 
+      // Exersize
       vLHS.addV(vRHS);
 
+      // Verify
       assertEquals(vLHS.dx, 2.3);
       assertEquals(vLHS.dy, 4.5);
    }
@@ -766,9 +769,10 @@ private:
       Velocity vLHS(2.3, 4.5);
       Velocity vRHS(100.0, 200.0);
 
+      // Exersize
       vLHS.addV(vRHS);
 
-
+      // Verify
       assertEquals(vLHS.dx, 102.3);
       assertEquals(vLHS.dy, 204.5);
 
