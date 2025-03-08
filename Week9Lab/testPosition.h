@@ -623,14 +623,19 @@ private:
    void setZoom_anotherVariable()
    {
       // Setup
-      Position pos;
+      Position pos1;
+      Position pos2;
 
       // Exercize
+      pos1.metersFromPixels = 99.9;
+      pos2.metersFromPixels = 88.9;
+      pos2.setZoom(123.4);
 
       // Verify
+      assertEquals(pos1.metersFromPixels, 123.4);
+      assertEquals(pos2.metersFromPixels, 123.4);
+      assertEquals(Position::metersFromPixels, 123.4);
 
-      // Teardown
-      assertUnit(NOT_YET_IMPLEMENTED);
    }
 
    /*********************************************
@@ -641,14 +646,23 @@ private:
    void add_stationary()
    {
       // Setup
-      Position pos;
+      Position pos(11.1, 22.2);
+
+      Acceleration acc;
+      acc.setDDX(0);
+      acc.setDDY(0);
+
+      Velocity vel;
+      vel.setDXDY(0, 0);
+
+      double t = 1.0;
 
       // Exercize
+     
 
       // Verify
-
-      // Teardown
-      assertUnit(NOT_YET_IMPLEMENTED);
+      assertEquals(pos.x, 11.1);
+      assertEquals(pos.x, 22.2);
    }
 
    /*********************************************
