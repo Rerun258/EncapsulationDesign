@@ -526,7 +526,7 @@ private:
 
       // Exercize
       pos.metersFromPixels = 1.0;
-      pos.addMetersX(3.0);
+      pos.addPixelsX(3.0);
 
       // Verify
       assertEquals(pos.x, 4503.0);
@@ -545,7 +545,7 @@ private:
 
       // Exercize
       pos.metersFromPixels = 50.0;
-      pos.addMetersX(3.0);
+      pos.addPixelsX(3.0);
 
       // Verify
       assertEquals(pos.x, 4650.0);
@@ -564,7 +564,7 @@ private:
 
       // Exercize
       pos.metersFromPixels = 1.0;
-      pos.addMetersY(3.0);
+      pos.addPixelsY(3.0);
 
       // Verify
       assertEquals(pos.x, 4500.0);
@@ -583,7 +583,7 @@ private:
 
       // Exercize
       pos.metersFromPixels = 50.0;
-      pos.addMetersY(3.0);
+      pos.addPixelsY(3.0);
 
       // Verify
       assertEquals(pos.x, 4500.0);
