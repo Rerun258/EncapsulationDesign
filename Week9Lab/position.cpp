@@ -1,33 +1,23 @@
-/***********************************************************************
- * Source File:
- *    POSITION
- * Author:
- *    <your name here>
- * Summary:
- *    Everything we need to know about a location on the screen.
- ************************************************************************/
-
 #include "position.h"
 #include "velocity.h"
 #include "acceleration.h"
 #include <cassert>
 
+// Initialize the static member
+double Position::metersFromPixels = 1.0; // Default value
 
-Position::Position(double x, double y) : x(9.9), y(9.9)
-{
- 
-}
+// Constructor implementation
+Position::Position(double x, double y) : x(x), y(y) {}
 
-/******************************************
- * POINT : ASSIGNMENT
- * Assign a point. Please look ahead to
- * Week 12 C++ reading for an idea of how this works.
- * Basically, we are copying the data from posRHS
- * into this.
- *****************************************/
-Position& Position::operator = (const Position& posRHS)
+// Assignment operator implementation
+Position& Position::operator=(const Position& posRHS)
 {
-   return *this;
+    if (this != &posRHS)
+    {
+        x = posRHS.x;
+        y = posRHS.y;
+    }
+    return *this;
 }
 
 /************************************************************************
@@ -49,31 +39,84 @@ Position& Position::operator = (const Position& posRHS)
  *************************************************************************/
 void Position::add(const Acceleration& a, const Velocity& v, double t)
 {
+    x += v.getDX() * t + 0.5 * a.getDDX() * t * t;
+    y += v.getDY() * t + 0.5 * a.getDDY() * t * t;
 }
-
 
 /******************************************
  * POSITION insertion
  *       Display coordinates on the screen
  *****************************************/
-std::ostream& operator << (std::ostream& out, const Position& pt)
+std::ostream& operator<<(std::ostream& out, const Position& pt)
 {
-   out << "(" << pt.getMetersX() << "m , " << pt.getMetersY() << "m)";
-   return out;
+    out << "(" << pt.getMetersX() << "m, " << pt.getMetersY() << "m)";
+    return out;
 }
-   
+
 /*******************************************
 * POSITION extraction
 *       Prompt for coordinates
 ******************************************/
-std::istream& operator >> (std::istream& in, Position& pt)
+std::istream& operator>>(std::istream& in, Position& pt)
 {
-   double x;
-   double y;
-   in >> x >> y;
+    double x;
+    double y;
+    in >> x >> y;
 
-   pt.setMetersX(x);
-   pt.setMetersY(y);
+    pt.setMetersX(x);
+    pt.setMetersY(y);
 
-   return in;
+    return in;
+}
+
+// Setter methods implementation
+void Position::setMeters(double xMeters, double yMeters)
+{
+    x = xMeters;
+    y = yMeters;
+}
+
+void Position::setMetersX(double xMeters)
+{
+    x = xMeters;
+}
+
+void Position::setMetersY(double yMeters)
+{
+    y = yMeters;
+}
+
+void Position::setPixelsX(double xPixels)
+{
+    x = xPixels * metersFromPixels;
+}
+
+void Position::setPixelsY(double yPixels)
+{
+    y = yPixels * metersFromPixels;
+}
+
+// Add methods implementation
+double Position::addMetersX(double x)
+{
+    this->x += x;
+    return this->x;
+}
+
+double Position::addMetersY(double y)
+{
+    this->y += y;
+    return this->y;
+}
+
+double Position::addPixelsX(double x)
+{
+    this->x += x * metersFromPixels;
+    return this->x;
+}
+
+double Position::addPixelsY(double y)
+{
+    this->y += y * metersFromPixels;
+    return this->y;
 }

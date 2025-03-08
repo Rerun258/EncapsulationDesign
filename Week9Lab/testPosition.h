@@ -2,7 +2,7 @@
  * Header File:
  *    TEST POSITION
  * Author:
- *    <your name here>
+ *    McClain, Elijah
  * Summary:
  *    Unit tests for the Position class.
  ************************************************************************/
@@ -188,7 +188,17 @@ private:
     *********************************************/
    void getZoom_member()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Position pos;
+
+      // Exercize
+      pos.setZoom(123.4);
+
+      // Verify
+      assertEquals(pos.metersFromPixels, 123.4);
+
+      // Teardown
+
    }
    
    /*********************************************
@@ -201,7 +211,17 @@ private:
     *********************************************/
    void getZoom_anotherVariable()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Position pos1;
+      pos1.setZoom(99.9);
+
+      // Exercize
+      pos1.setZoom(123.4);
+
+      // Verify
+      assertEquals(pos1.metersFromPixels, 123.4);
+
+      // Teardown
    }
 
 
@@ -260,7 +280,16 @@ private:
     *********************************************/
    void getPixelsX_noZoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Position pos(123.4, 567.8);
+
+      // Exercize
+      pos.metersFromPixels = 1.0;
+
+      // Verify
+      assertEquals(pos.x, 123.4);
+
+      // Teardown
    }
    
    /*********************************************
@@ -271,7 +300,15 @@ private:
     *********************************************/
    void getPixelsX_zoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Position pos(123.4, 567.8);
+
+      // Exercize
+      pos.metersFromPixels = 100.0;
+
+      // Verify
+      assertEquals(pos.x, 1.234);
+      // Teardown
    }
 
    /*********************************************
@@ -281,7 +318,14 @@ private:
     *********************************************/
    void getPixelsY_noZoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Position pos(123.4, 567.8);
+
+      // Exercize
+      pos.metersFromPixels = 1.0;
+
+      // Verify
+      assertEquals(pos.y, 567.8);
    }
 
    /*********************************************
@@ -291,7 +335,14 @@ private:
     *********************************************/
    void getPixelsY_zoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Position pos(123.4, 567.8);
+
+      // Exercize
+      pos.metersFromPixels = 100.0;
+
+      // Verify
+      assertEquals(pos.y, 567.8);
    }
 
    /*****************************************************************
@@ -353,7 +404,18 @@ private:
     *********************************************/
    void setPixelsX_noZoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Position pos(999.9, 888.8);
+
+      // Exercize
+      pos.metersFromPixels = 1.0;
+      pos.x = 123.4;
+
+      // Verify
+      assertEquals(pos.x, 123.4);
+      assertEquals(pos.y, 888.8);
+
+      // Teardown
    }
 
    /*********************************************
@@ -364,7 +426,16 @@ private:
     *********************************************/
    void setPixelsX_zoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Position pos(999.9, 888.8);
+
+      // Exercize
+      pos.metersFromPixels = 100.0;
+      pos.x = 123.4;
+
+      // Verify
+      assertEquals(pos.x, 12340.0);
+      assertEquals(pos.y, 888.8);
    }
    
    /*********************************************
@@ -374,7 +445,16 @@ private:
     *********************************************/
    void setPixelsY_noZoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Position pos(999.9, 888.8);
+
+      // Exercize
+      pos.metersFromPixels = 1.0;
+      pos.y = 123.4;
+
+      // Verify
+      assertEquals(pos.x, 999.9);
+      assertEquals(pos.y, 123.4);
    }
 
    /*********************************************
@@ -384,7 +464,16 @@ private:
     *********************************************/
    void setPixelsY_zoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Position pos(999.9, 888.8);
+
+      // Exercize
+      pos.metersFromPixels = 100.00;
+      pos.y = 123.4;
+
+      // Verify
+      assertEquals(pos.x, 999.9);
+      assertEquals(pos.y, 12340.0);
    }
 
    /*********************************************
@@ -394,7 +483,17 @@ private:
     *********************************************/
    void addMetersX()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Position pos(4500.0, 2500.0);
+
+      // Exercize
+      pos.addMetersX(123.4);
+
+      // Verify
+      assertEquals(pos.x, 4623.4);
+      assertEquals(pos.y, 2500.0);
+
+      // Teardown
    }
 
    /*********************************************
@@ -404,7 +503,15 @@ private:
     *********************************************/
    void addMetersY()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Position pos(4500.0, 2500.0);
+
+      // Exercize
+      pos.addMetersY(123.4);
+
+      // Verify
+      assertEquals(pos.x, 4500.0);
+      assertEquals(pos.y, 2623.4);
    }
 
    /*********************************************
@@ -414,7 +521,16 @@ private:
     *********************************************/
    void addPixelsX_noZoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Position pos(4500.0, 2500.0);
+
+      // Exercize
+      pos.metersFromPixels = 1.0;
+      pos.addMetersX(3.0);
+
+      // Verify
+      assertEquals(pos.x, 4503.0);
+      assertEquals(pos.y, 2500.0);
    }
 
    /*********************************************
@@ -424,7 +540,16 @@ private:
     *********************************************/
    void addPixelsX_zoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Position pos(4500.0, 2500.0);
+
+      // Exercize
+      pos.metersFromPixels = 50.0;
+      pos.addMetersX(3.0);
+
+      // Verify
+      assertEquals(pos.x, 4650.0);
+      assertEquals(pos.y, 2500.0);
    }
 
    /*********************************************
@@ -434,7 +559,16 @@ private:
     *********************************************/
    void addPixelsY_noZoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Position pos(4500.0, 2500.0);
+
+      // Exercize
+      pos.metersFromPixels = 1.0;
+      pos.addMetersY(3.0);
+
+      // Verify
+      assertEquals(pos.x, 4500.0);
+      assertEquals(pos.y, 2503.0);
    }
 
    /*********************************************
@@ -444,7 +578,16 @@ private:
     *********************************************/
    void addPixelsY_zoom()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Position pos(4500.0, 2500.0);
+
+      // Exercize
+      pos.metersFromPixels = 50.0;
+      pos.addMetersY(3.0);
+
+      // Verify
+      assertEquals(pos.x, 4500.0);
+      assertEquals(pos.y, 2650.0);
    }
 
    /*********************************************
@@ -455,6 +598,14 @@ private:
     *********************************************/
    void setZoom_member()
    {
+      // Setup
+      Position pos;
+
+      // Exercize
+
+      // Verify
+
+      // Teardown
       assertUnit(NOT_YET_IMPLEMENTED);
    }
 
@@ -469,6 +620,14 @@ private:
     *********************************************/
    void setZoom_anotherVariable()
    {
+      // Setup
+      Position pos;
+
+      // Exercize
+
+      // Verify
+
+      // Teardown
       assertUnit(NOT_YET_IMPLEMENTED);
    }
 
@@ -479,6 +638,14 @@ private:
     *********************************************/
    void add_stationary()
    {
+      // Setup
+      Position pos;
+
+      // Exercize
+
+      // Verify
+
+      // Teardown
       assertUnit(NOT_YET_IMPLEMENTED);
    }
 
@@ -490,6 +657,14 @@ private:
     *********************************************/
    void add_moving()
    {
+      // Setup
+      Position pos;
+
+      // Exercize
+
+      // Verify
+
+      // Teardown
       assertUnit(NOT_YET_IMPLEMENTED);
    }
 
@@ -501,6 +676,14 @@ private:
     *********************************************/
    void add_movingLonger()
    {
+      // Setup
+      Position pos;
+
+      // Exercize
+
+      // Verify
+
+      // Teardown
       assertUnit(NOT_YET_IMPLEMENTED);
    }
 
@@ -512,6 +695,14 @@ private:
     *********************************************/
    void add_fromStop()
    {
+      // Setup
+      Position pos;
+
+      // Exercize
+
+      // Verify
+
+      // Teardown
       assertUnit(NOT_YET_IMPLEMENTED);
    }
 
@@ -523,6 +714,14 @@ private:
     *********************************************/
    void add_fromStopLonger()
    {
+      // Setup
+      Position pos;
+
+      // Exercize
+
+      // Verify
+
+      // Teardown
       assertUnit(NOT_YET_IMPLEMENTED);
    }
    

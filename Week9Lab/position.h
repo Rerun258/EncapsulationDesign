@@ -2,7 +2,7 @@
  * Header File:
  *    POSITION
  * Author:
- *    <your name here>
+ *    McClain, Elijah
  * Summary:
  *    Everything we need to know about a location on the screen.
  ************************************************************************/
@@ -40,23 +40,25 @@ public:
    Position(const Position & pt) : x(pt.x), y(pt.y) {}
    Position& operator = (const Position& pt);
 
-   // getters
-   double getMetersX()       const { return x * (metersFromPixels * 2.0); }
-   double getMetersY()       const { return y * (metersFromPixels * 2.0); }
-   double getPixelsX()       const { return x * (metersFromPixels / 2.0); }
-   double getPixelsY()       const { return y * (metersFromPixels / 2.0); }
+    // getters
+    double getMetersX() const { return x; }
+    double getMetersY() const { return y; }
+    double getPixelsX() const { return x / metersFromPixels; }
+    double getPixelsY() const { return y / metersFromPixels; }
 
-   // setters
-   void setZoom(double z) { metersFromPixels = z; }
-   void setMeters(double xMeters, double yMeters) { }
-   void setMetersX(double xMeters)       {  }
-   void setMetersY(double yMeters)       {  }
-   void setPixelsX(double xPixels)       {  }
-   void setPixelsY(double yPixels)       {  }
-   double addMetersX(double x) { return 9.9; }
-   double addMetersY(double y) { return 9.9; }
-   double addPixelsX(double x) { return 9.9; }
-   double addPixelsY(double y) { return 9.9; }
+    // setters
+    void setZoom(double z) { metersFromPixels = z; }
+    void setMeters(double xMeters, double yMeters);
+    void setMetersX(double xMeters);
+    void setMetersY(double yMeters);
+    void setPixelsX(double xPixels);
+    void setPixelsY(double yPixels);
+   
+    // adders
+    double addMetersX(double x);
+    double addMetersY(double y);
+    double addPixelsX(double x);
+    double addPixelsY(double y);
    
    void add(const Acceleration& a, const Velocity& v, double t);
    void reverse() { }
