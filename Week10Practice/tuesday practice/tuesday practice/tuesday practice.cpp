@@ -6,9 +6,9 @@
  * 3. Assignment Description:
  *      Throwing and catching exceptions
  * 4. What was the hardest part? Be as specific as possible.
- *      -a paragraph or two about how the assignment went for you-
+ *      Writing the catches. 
  * 5. How long did it take for you to complete the assignment?
- *      -total time in hours: reading the assignment, submitting, etc.
+ *      1 hour
  **************************************************************/
 
 #include <iostream>
