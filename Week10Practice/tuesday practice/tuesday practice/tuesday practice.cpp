@@ -1,6 +1,6 @@
 /*************************************************************
  * 1. Name:
- *      -your name-
+ *      McClain, Elijah
  * 2. Assignment Name:
  *      Practice 10: Exceptions
  * 3. Assignment Description:
@@ -45,14 +45,17 @@ int getPosition(const char* position)
 					throw runtime_error("ERROR: More than one column specifier");
                return -1;
             }
+
             else if (isupper(*p))
             {
 					throw runtime_error("ERROR: Columns must be lowercase");
              
                return -1;
             }
+
             else if ('a' <= *p && *p <= 'h')
                col = *p - 'a';
+
             else
             {
 					throw runtime_error("ERROR: Columns must be between a and h");
@@ -68,8 +71,10 @@ int getPosition(const char* position)
                
                return -1;
             }
+
             else if ('1' <= *p && *p <= '8')
                row = *p - '1';
+               
             else
             {
 					throw runtime_error("ERROR: Rows must be between 1 and 8");
@@ -87,12 +92,15 @@ int getPosition(const char* position)
 
       if (row == -1)
       {
-         cout << "\tERROR: You must specify a row\n";
+         throw runtime_error("ERROR: You must specify a row");
+
          return -1;
       }
+
       else if (col == -1)
       {
-         cout << "\tERROR: You must specify a column\n";
+         throw runtime_error("ERROR: You must specify a column");
+
          return -1;
       }
    }
@@ -122,20 +130,38 @@ int getPosition(const char* position)
  **************************************/
 void test_getPosition()
 {
+   // Correct output
+   cout << "test 1: ";
    assert(27 == getPosition("d4"));
+   cout << "\ntest 2: ";
    assert(27 == getPosition("4d"));
+   cout << "\ntest 3: ";
    assert(0  == getPosition("a1"));
+   cout << "\ntest 4: ";
    assert(63 == getPosition("h8"));
+   cout << "\ntest 5: ";
    assert(7  == getPosition("h1"));
+   cout << "\ntest 6: ";
    assert(56 == getPosition("a8"));
+
+   // Should return a runtime error
+   cout << "\ntest 7: ";
    assert(-1 == getPosition(nullptr));
+   cout << "\ntest 8: ";
    assert(-1 == getPosition("D4"));
+   cout << "\ntest 9: ";
    assert(-1 == getPosition("dd4"));
+   cout << "\ntest 10: ";
    assert(-1 == getPosition("d44"));
+   cout << "\ntest 11: ";
    assert(-1 == getPosition("d"));
+   cout << "\ntest 12: ";
    assert(-1 == getPosition("4"));
+   cout << "\ntest 13: ";
    assert(-1 == getPosition("i8"));
+   cout << "\ntest 14: ";
    assert(-1 == getPosition("h9"));
+   cout << "\ntest 15: ";
    assert(-1 == getPosition("d4^"));
 }
 
