@@ -131,37 +131,22 @@ int getPosition(const char* position)
 void test_getPosition()
 {
    // Correct output
-   cout << "test 1: ";
    assert(27 == getPosition("d4"));
-   cout << "\ntest 2: ";
    assert(27 == getPosition("4d"));
-   cout << "\ntest 3: ";
    assert(0  == getPosition("a1"));
-   cout << "\ntest 4: ";
    assert(63 == getPosition("h8"));
-   cout << "\ntest 5: ";
    assert(7  == getPosition("h1"));
-   cout << "\ntest 6: ";
    assert(56 == getPosition("a8"));
 
    // Should return a runtime error
-   cout << "\ntest 7: ";
    assert(-1 == getPosition(nullptr));
-   cout << "\ntest 8: ";
    assert(-1 == getPosition("D4"));
-   cout << "\ntest 9: ";
    assert(-1 == getPosition("dd4"));
-   cout << "\ntest 10: ";
    assert(-1 == getPosition("d44"));
-   cout << "\ntest 11: ";
    assert(-1 == getPosition("d"));
-   cout << "\ntest 12: ";
    assert(-1 == getPosition("4"));
-   cout << "\ntest 13: ";
    assert(-1 == getPosition("i8"));
-   cout << "\ntest 14: ";
    assert(-1 == getPosition("h9"));
-   cout << "\ntest 15: ";
    assert(-1 == getPosition("d4^"));
 }
 
