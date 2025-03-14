@@ -477,7 +477,16 @@ private:
     *********************************************/
    void setDxDy_up()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Angle a;
+
+      // exercise
+      a.setDxDy(0.0, 1.0);
+
+      // verify
+      assertEquals(a.radians, 0.0);
+
+      // teardown
    }
 
 
@@ -488,7 +497,14 @@ private:
     *********************************************/
    void setDxDy_right()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+      Angle a;
+
+      // exercise
+      a.setDxDy(4.0, 1.0);
+
+      // verify
+      assertEquals(a.radians, 0.0);
    }
 
    /*********************************************
