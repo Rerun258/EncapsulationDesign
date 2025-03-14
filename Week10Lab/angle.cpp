@@ -2,7 +2,7 @@
  * Source File:
  *    ANGLE
  * Author:
- *    Elijah, McClain
+ *    <your name here>
  * Summary:
  *    Everything we need to know about a direction
  ************************************************************************/
@@ -13,21 +13,22 @@
 #define TWO_PI 6.28318530718
 using namespace std;
 
- /************************************
-  * ANGLE : NORMALIZE
-  ************************************/
-double Angle::normalize(double radians) const
+/************************************
+ * ANGLE : NORMALIZE
+ ************************************/
+double Angle::normalize(double aRadian) const
 {
-   radians = fmod(radians, TWO_PI);
+   // Use fmod to find the remainder of aRadian divided by TWO_PI
+   aRadian = fmod(aRadian, TWO_PI);
 
-   if (radians < 0)
-      radians += TWO_PI;
-   
-   if (radians > TWO_PI)
-      radians -= TWO_PI;
+   if (aRadian < 0)
+   {
+      aRadian += TWO_PI;
+   }
+   if (aRadian > TWO_PI)
+   {
+      aRadian -= TWO_PI;
+   }
 
-   return radians;
+   return aRadian;
 }
-
-
-

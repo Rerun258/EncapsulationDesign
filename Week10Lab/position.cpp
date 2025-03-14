@@ -13,10 +13,8 @@
 #include <cassert>
 
 
-Position::Position(double x, double y) : x(9.9), y(9.9)
-{
- 
-}
+// Constructor implementation
+Position::Position(double x, double y) : x(x), y(y) {}
 
 /******************************************
  * POINT : ASSIGNMENT
@@ -25,8 +23,13 @@ Position::Position(double x, double y) : x(9.9), y(9.9)
  * Basically, we are copying the data from posRHS
  * into this.
  *****************************************/
-Position& Position::operator = (const Position& posRHS)
+Position& Position::operator=(const Position& posRHS)
 {
+   if (this != &posRHS)
+   {
+      x = posRHS.x;
+      y = posRHS.y;
+   }
    return *this;
 }
 
@@ -49,6 +52,8 @@ Position& Position::operator = (const Position& posRHS)
  *************************************************************************/
 void Position::add(const Acceleration& a, const Velocity& v, double t)
 {
+   x += v.getDX() * t + 0.5 * a.getDDX() * t * t;
+   y += v.getDY() * t + 0.5 * a.getDDY() * t * t;
 }
 
 
@@ -76,4 +81,57 @@ std::istream& operator >> (std::istream& in, Position& pt)
    pt.setMetersY(y);
 
    return in;
+}
+
+
+// Setter methods implementation
+void Position::setMeters(double xMeters, double yMeters)
+{
+   x = xMeters;
+   y = yMeters;
+}
+
+void Position::setMetersX(double xMeters)
+{
+   x = xMeters;
+}
+
+void Position::setMetersY(double yMeters)
+{
+   y = yMeters;
+}
+
+void Position::setPixelsX(double xPixels)
+{
+   x = xPixels * metersFromPixels;
+}
+
+void Position::setPixelsY(double yPixels)
+{
+   y = yPixels * metersFromPixels;
+}
+
+// Add methods implementation
+double Position::addMetersX(double x)
+{
+   this->x += x;
+   return this->x;
+}
+
+double Position::addMetersY(double y)
+{
+   this->y += y;
+   return this->y;
+}
+
+double Position::addPixelsX(double x)
+{
+   this->x += x * metersFromPixels;
+   return this->x;
+}
+
+double Position::addPixelsY(double y)
+{
+   this->y += y * metersFromPixels;
+   return this->y;
 }

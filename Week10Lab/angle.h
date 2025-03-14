@@ -2,7 +2,7 @@
  * Header File:
  *    ANGLE
  * Author:
- *    Elijah, McClain
+ *    <your name here>
  * Summary:
  *    Everything we need to know about a direction
  ************************************************************************/
@@ -34,8 +34,8 @@ public:
    friend TestProjectile;
 
    // Constructors
-   Angle()                  : radians(0.0)         {}
-   Angle(const Angle& rhs)  : radians(rhs.getRadians())         {}
+   Angle() : radians(0) {}
+   Angle(const Angle& rhs) : radians(rhs.getRadians()) {}
    Angle(double degrees)
    {
       setDegrees(degrees);
@@ -57,42 +57,52 @@ public:
    // dx = sin a
    double getDx() const { return sin(radians); }
    double getDy() const { return cos(radians); }
-   bool   isRight() const 
-   { 
-      if (radians == 1.5 * M_PI)
-         return true; 
-
-      return false;
-   }
-   bool   isLeft() const 
-   { 
-      if (radians == 0.5 * M_PI)
+   bool   isRight() const
+   {
+      if (radians == 1.5 * M_PI) {
          return true;
+      }
+
+      return false;
+   }
+
+   bool   isLeft() const
+   {
+      if (radians == 0.5 * M_PI)
+      {
+         return true;
+      }
 
       return false;
    }
 
 
-   // Setters
-   void setDegrees(double degrees) 
-   { 
+   void setDegrees(double degrees)
+   {
       degrees = (degrees * (2.0 * M_PI)) / 360.0;
       radians = normalize(degrees);
    }
 
-   void setRadians(double radians) { radians = normalize(radians); }
+   void setRadians(double aRadian) { radians = normalize(aRadian); }
 
+   // 0°
    void setUp() { radians = 0.0; }
-   void setDown() { radians = M_PI * 1.5; }
-   void setRight() { radians = M_PI * 0.5; }
-   void setLeft() { radians = M_PI; }
-   void reverse() { radians += M_PI; }
 
-   Angle& add(double delta)        
-   { 
+   // 90°
+   void setRight() { radians = M_PI * 1.5; }
+
+   // 270°
+   void setLeft() { radians = M_PI * .5; }
+
+   // 180°
+   void setDown() { radians = M_PI; }
+
+   void reverse() { radians += M_PI; }
+   Angle& add(double delta)
+   {
       radians += delta;
       radians = normalize(radians);
-      return *this; 
+      return *this;
    }
 
    // set based on the components
@@ -104,9 +114,13 @@ public:
    //     | a /
    //     |  /
    //     | /
-   void setDxDy(double dx, double dy) { radians = atan2(dy, dx); }
+   void setDxDy(double dx, double dy)
+   {
+      radians = atan2(dy, dx);
+   }
 
    Angle operator+(double degrees) const { return Angle(); }
+
 
 private:
 
