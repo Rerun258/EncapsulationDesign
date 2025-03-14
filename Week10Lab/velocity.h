@@ -33,24 +33,44 @@ class Velocity
    
 public:
    // constructors
-   Velocity()                     : dx(9.9), dy(9.9) { }
-   Velocity(double dx, double dy) : dx(9.9), dy(9.9) { }
+   Velocity() : dx(0.0), dy(0.0) {}
+   Velocity(double dx, double dy) : dx(dx), dy(dy) {}
 
    // getters
-   double getDX()       const { return 9.9; }
-   double getDY()       const { return 9.9; }
+   double getDX()       const { return dx; }
+   double getDY()       const { return dy; }
    double getSpeed()    const;
    Angle  getAngle()    const;
    
    // setters
-   void set(const Angle & angle, double magnitude);
-   void setDX(double dx) {  }
-   void setDY(double dy) {  }
-   void addDX(double dx) {  }
-   void addDY(double dy) {  }
+   void set(const Angle& angle, double magnitude);
+   void setDX(double dx) { this->dx = dx; }
+   void setDY(double dy) { this->dy = dy; }
+   void setDXDY(double dx, double dy) { this->dx = dx; this->dy = dy; }
+   void addDX(double dx) { setDX(getDX() + dx); }
+   void addDY(double dy) { setDY(getDY() + dy); }
    void add(const Acceleration & acceleration, double time);
    void add(const Velocity & rhs) { }
-   void reverse() { }
+
+   void addV(Velocity& rhs)
+   {
+      dx += rhs.getDX();
+      dy += rhs.getDY();
+   }
+
+   void reverse()
+   {
+      dx = -dx;
+      dy = -dy;
+   }
+
+   Velocity& operator = (const Velocity& rhs)
+   {
+      dx = rhs.dx;
+      dy = rhs.dy;
+      return *this;
+   }
+
 
 private:
    double dx;           // horizontal velocity
