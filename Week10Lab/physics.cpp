@@ -2,7 +2,7 @@
  * Source File:
  *    PHYSICS
  * Author:
- *    <your name here>
+ *    Elijah, McClain
  * Summary:
  *    Laws of motion, effects of gravity, wind resistence, etc.
  ************************************************************************/

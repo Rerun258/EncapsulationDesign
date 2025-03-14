@@ -2,7 +2,7 @@
  * Header File:
  *    PHYSICS
  * Author:
- *    <your name here>
+ *    McClain, Elijah
  * Summary:
  *    Laws of motion, effects of gravity, wind resistence, etc.
  ************************************************************************/
@@ -52,7 +52,8 @@ inline double forceFromDrag(double density, double drag,
  ************************************************************/
 inline double accelerationFromForce(double force, double mass)
 {
-   return -99.9;
+   double acceleration = force / mass;
+   return acceleration;
 }
 
 /***********************************************************
@@ -66,7 +67,8 @@ inline double accelerationFromForce(double force, double mass)
  ************************************************************/
 inline double velocityFromAcceleration(double acceleration, double time)
 {
-   return -99.9;
+   double velocity = acceleration * time;
+   return velocity;
 }
 
 /*********************************************************
@@ -90,7 +92,9 @@ inline double linearInterpolation(double d0, double r0,
                                   double d1, double r1,
                                   double d)
 {
-   return -99.9;
+   double r = r0 + (r1 - r0) * (d - d0) / (d1 - d0);
+   return r;
+
 }
 
 /*********************************************************
