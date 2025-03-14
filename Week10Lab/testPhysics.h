@@ -2,7 +2,7 @@
  * Header File:
  *    TEST PHYSICS
  * Author:
- *    <your name here>
+ *    McClain, Elijah
  * Summary:
  *    All the automation for the physics functions
  ************************************************************************/
