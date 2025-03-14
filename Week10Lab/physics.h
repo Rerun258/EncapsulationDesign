@@ -20,7 +20,8 @@
   ********************************************************/
 inline double areaFromRadius(double radius)
 {
-   return -99.9;
+	double area = M_PI * radius * radius;
+   return area;
 }
 
 /**********************************************************
@@ -36,7 +37,8 @@ inline double areaFromRadius(double radius)
 inline double forceFromDrag(double density, double drag, 
                             double radius, double velocity)
 {
-   return -99.9;
+	double force = 0.5 * density * drag * areaFromRadius(radius) * velocity * velocity;
+   return force;
 }
 
 /**********************************************************
