@@ -37,9 +37,9 @@ class Angle
       setDegrees(degrees);
    }
 
-   Angle& operator +(double delta)
+   Angle& operator +=(const Angle& rhs)
    {
-      radians += delta;
+      radians += rhs.radians;
 
       // Normalize the angle after addition
       radians = normalize(radians);
@@ -129,6 +129,18 @@ private:
    // 360 degrees equals 2 PI radians
 };
 
+ostream& operator<<(ostream& out, const Angle& rhs)
+{
+   out << "TBD" << endl;
+   return out;
+}
+
+istream& operator>>(istream& in, Angle& rhs)
+{
+   double TBD;
+   in >> TBD;
+   return in;
+}
 
 double Angle::normalize(double aRadian) const
 {
