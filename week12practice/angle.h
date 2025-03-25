@@ -37,7 +37,7 @@ class Angle
       setDegrees(degrees);
    }
 
-   Angle& add(double delta)
+   Angle& operator +(double delta)
    {
       radians += delta;
 
@@ -46,6 +46,14 @@ class Angle
 
       return *this;
    }
+
+   Angle& operator =(const Angle& rhs) 
+   {
+      radians = rhs.radians;
+      return *this;
+   }
+
+   bool operator ==(const Angle& rhs) { return radians == rhs.radians; }
 
    // Getters
    double getDegrees() const { return radians * (180.0 / M_PI); }
