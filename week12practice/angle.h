@@ -37,6 +37,8 @@ class Angle
       setDegrees(degrees);
    }
 
+   Angle operator +(const Angle& rhs) const { return Angle(radians + rhs.radians); }
+
    Angle& operator +=(const Angle& rhs)
    {
       radians += rhs.radians;
