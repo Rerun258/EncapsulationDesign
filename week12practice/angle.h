@@ -26,6 +26,10 @@ class TestAngle;
 class Angle
 {
    friend TestAngle;
+   friend ostream& operator<<(ostream& out, const Angle& rhs);
+   friend istream& operator>>(istream& in, const Angle& rhs);
+   friend Angle& operator++(Angle& rhs);
+   friend Angle& operator--(Angle& rhs);
 
    // Constructors
    Angle() : radians(0.0) {}
@@ -49,13 +53,25 @@ class Angle
       return *this;
    }
 
+   Angle& operator -=(const Angle& rhs)
+   {
+      radians -= rhs.radians;
+
+      // Normalize the angle after addition
+      radians = normalize(radians);
+
+      return *this;
+   }
+
    Angle& operator =(const Angle& rhs) 
    {
       radians = rhs.radians;
       return *this;
    }
 
-   bool operator ==(const Angle& rhs) { return radians == rhs.radians; }
+   // Why not just ==? Oh well, 2 less errors.
+   bool operator ==(const Angle& rhs) const { return radians == rhs.radians; }
+   bool operator !=(const Angle& rhs) const { return radians != rhs.radians; }
 
    // Getters
    double getDegrees() const { return radians * (180.0 / M_PI); }
@@ -123,25 +139,35 @@ class Angle
       out << getDegrees() << "degrees";
    }
 
-
 private:
    double normalize(double aRadian) const;
 
-   double radians;
    // 360 degrees equals 2 PI radians
+   double radians;
 };
 
 ostream& operator<<(ostream& out, const Angle& rhs)
 {
-   out << "TBD" << endl;
+   out << rhs.radians;
    return out;
 }
 
-istream& operator>>(istream& in, Angle& rhs)
+istream& operator>>(istream& in, const Angle& rhs)
 {
-   double TBD;
-   in >> TBD;
+   in >> rhs.radians;
    return in;
+}
+
+Angle& operator++(Angle& rhs)
+{
+   rhs.radians += 1.0;
+   return rhs;
+}
+
+Angle& operator--(Angle& rhs)
+{
+   rhs.radians -= 1.0;
+   return rhs;
 }
 
 double Angle::normalize(double aRadian) const
