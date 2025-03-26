@@ -42,6 +42,7 @@ class Angle
    }
 
    Angle operator +(const Angle& rhs) const { return Angle(radians + rhs.radians); }
+   Angle operator -(const Angle& rhs) const { return Angle(radians - rhs.radians); }
 
    Angle& operator +=(const Angle& rhs)
    {
@@ -155,18 +156,21 @@ ostream& operator<<(ostream& out, const Angle& rhs)
 istream& operator>>(istream& in, const Angle& rhs)
 {
    in >> rhs.radians;
+   rhs.normalize(rhs.radians);
    return in;
 }
 
 Angle& operator++(Angle& rhs)
 {
    rhs.radians += 1.0;
+   rhs.normalize(rhs.radians);
    return rhs;
 }
 
 Angle& operator--(Angle& rhs)
 {
    rhs.radians -= 1.0;
+   rhs.normalize(rhs.radians);
    return rhs;
 }
 
