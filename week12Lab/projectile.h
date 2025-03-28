@@ -2,7 +2,7 @@
  * Header File:
  *    PROJECTILE
  * Author:
- *    <your name here>
+ *    Elijah, McClain
  * Summary:
  *    Everything we need to know about a projectile
  ************************************************************************/
@@ -18,7 +18,7 @@
 #define DEFAULT_PROJECTILE_WEIGHT 46.7       // kg
 #define DEFAULT_PROJECTILE_RADIUS 0.077545   // m
 
-// forward declaration for the unit test class
+// Forward declaration for the unit test class.
 class TestProjectile; 
 
  /**********************************************************************
@@ -29,22 +29,36 @@ class Projectile
 {
 public:
    // Friend the unit test class
-   friend ::TestProjectile;
+   friend::TestProjectile;
 
-   // create a new projectile with the default settings
-   Projectile() : mass(-99.9), radius(-99.9) {}
+   // Create a new projectile with the default settings.
+   Projectile() : mass(DEFAULT_PROJECTILE_WEIGHT), radius(DEFAULT_PROJECTILE_RADIUS) {}
 
+   Projectile(double mass, double radius) { this->mass = mass; this->radius = radius; }
 
+   // Advance the round forward until the next unit of time.
+   void advance(double simulationTime) 
+   {
+      if (flightPath.empty())
+         flightPath.push_back(PositionVelocityTime());
 
-   // advance the round forward until the next unit of time
-   void advance(double simulationTime) {}
+      PositionVelocityTime lastState = flightPath.back();
+   }
+
+   void reset() 
+   {
+       mass = DEFAULT_PROJECTILE_WEIGHT;
+       radius = DEFAULT_PROJECTILE_RADIUS;
+       flightPath = {};
+       
+   }
 
 
 
 
 private:
 
-   // keep track of one moment in the path of the projectile
+   // Keep track of one moment in the path of the projectile.
    struct PositionVelocityTime
    {
       PositionVelocityTime() : pos(), v(), t(0.0) {}

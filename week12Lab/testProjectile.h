@@ -61,7 +61,11 @@ private:
     *********************************************/
    void defaultConstructor()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      Projectile p;
+      
+      assertEquals(p.mass, 46.7);
+      assertEquals(p.radius, 0.077545);
+      // assertEquals(p.flightPath, {});
    }
 
    /*********************************************
@@ -71,7 +75,11 @@ private:
     *********************************************/
    void reset_empty()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      Projectile p(-99, -99);
+      p.reset();
+
+      assertEquals(p.mass, 46.7);
+      assertEquals(p.radius, 0.077545);
    }
 
    /*********************************************
@@ -81,7 +89,11 @@ private:
     *********************************************/
    void reset_full()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+       Projectile p(-99, -99);
+       p.reset();
+
+       assertEquals(p.mass, 46.7);
+       assertEquals(p.radius, 0.077545);
    }
 
 

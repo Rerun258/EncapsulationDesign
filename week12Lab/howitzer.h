@@ -2,7 +2,7 @@
  * Header File:
  *    HOWITZER
  * Author:
- *    <your name here>
+ *    McClain, Elijah
  * Summary:
  *    Everything we need to know about a howitzer (aka the gun)
  ************************************************************************/
@@ -31,13 +31,13 @@ class TestHowitzer;
 class Howitzer
 {
    public:
-      // for unit tests
-      friend ::TestHowitzer;
+      // For unit tests
+      friend::TestHowitzer;
 
-      // default constructor
+      // Constructor
       Howitzer() : muzzleVelocity(DEFAULT_MUZZLE_VELOCITY), elevation(45.0) {}
 
-      // draw
+      // Draw
       void draw(ogstream& gout, double flightTime) const
       {
          gout.drawHowitzer(position,
@@ -45,10 +45,10 @@ class Howitzer
             flightTime);
       }
 
-      // where is the howitzer at right now?
+      // Where is the howitzer at right now?
       Position & getPosition() { return position; }
 
-      // generate a new position for the howitzer
+      // Generate a new position for the howitzer.
       void generatePosition(const Position& posUpperRight)
       {
          double xPixels = random(posUpperRight.getPixelsX() * 0.1,
@@ -57,19 +57,19 @@ class Howitzer
          position.setPixelsY(0);
       }
 
-      // get the muzzle velocity
+      // Get the muzzle velocity.
       double getMuzzleVelocity() const { return muzzleVelocity; }
 
-      // move the angle of the howitzer
+      // Move the angle of the howitzer.
       void rotate(double radian) { elevation.add(radian); }
 
-      // raise (or lower) the howitzer
+      // Raise (or lower) the howitzer.
       void raise(double radian)
       {
          elevation.add(elevation.isRight() ? -radian : radian);
       }
 
-      // get the elevation
+      // Get the elevation.
       const Angle & getElevation() const { return elevation; }
 
    private:

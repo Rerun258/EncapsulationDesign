@@ -2,7 +2,7 @@
  * Source File:
  *    PROJECTILE
  * Author:
- *    <your name here>
+ *    Elijah, McClain
  * Summary:
  *    Everything we need to know about a projectile
  ************************************************************************/
