@@ -90,6 +90,9 @@ private:
    void reset_full()
    {
        Projectile p(-99, -99);
+       p.advance(1.0);
+       p.advance(1.0);
+       p.advance(1.0);
        p.reset();
 
        assertEquals(p.mass, 46.7);
