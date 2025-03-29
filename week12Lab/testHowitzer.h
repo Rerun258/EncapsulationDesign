@@ -281,14 +281,15 @@ private:
     *********************************************/
    void raise_rightDown()
    {
-      //setup
-		Howitzer h;
-		h.elevation.setRadians(0.5);
-		// exercise
-		h.raise(-0.1);
-		// verify
-		assertEquals(h.getElevation().getRadians(), 0.6);
-		// teardown
+       //setup
+       Howitzer h;
+       h.elevation.setRadians(0.5);
+       // exercise
+       h.raise(-0.1);
+       
+      // verify
+      assertEquals(h.getElevation().getRadians(), 0.6);
+       // teardown
    }
 
    /*********************************************

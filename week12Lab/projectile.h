@@ -43,6 +43,16 @@ public:
          flightPath.push_back(PositionVelocityTime());
 
       PositionVelocityTime lastState = flightPath.back();
+
+      Acceleration a;
+
+      PositionVelocityTime newState;
+      newState.t = lastState.t + simulationTime;
+      newState.v = lastState.v;
+      newState.pos.add(a, newState.v, newState.t);
+
+      flightPath.push_back(newState);
+      
    }
 
    void fire()
@@ -54,8 +64,7 @@ public:
    {
        mass = DEFAULT_PROJECTILE_WEIGHT;
        radius = DEFAULT_PROJECTILE_RADIUS;
-       flightPath = {};
-       
+       flightPath.clear();
    }
 
 
