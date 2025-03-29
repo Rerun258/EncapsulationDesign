@@ -40,7 +40,7 @@ public:
       if (flightPath.empty())
          flightPath.push_back(PositionVelocityTime());
 
-     /* for (double t = 0.0; t <= simulationTime; t += 1.0)
+     for (double t = 0.0; t <= simulationTime; t += 1.0)
       {
          PositionVelocityTime lastState = flightPath.back();
 
@@ -53,22 +53,8 @@ public:
          newState.pos.addMetersY(lastState.pos.getMetersY());
 
          flightPath.push_back(newState);
-      }*/
-
-      PositionVelocityTime lastState = flightPath.back(); // Get the last recorded state
-
-      Acceleration a;
-      a.setDDX(0.0);    // No horizontal acceleration
-      a.setDDY(-9.81);  // Gravity (Earth) in m/s²
-
-      for (double t = 0.0; t <= simulationTime; t += 1.0)
-      {
-         // Compute new state
-         PositionVelocityTime newState;
-         newState.t = lastState.t + simulationTime; // Advance time
-
-        
       }
+
       
    }
 
