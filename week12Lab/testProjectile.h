@@ -2,7 +2,7 @@
  * Header File:
  *    TEST PROJECTILE
  * Author:
- *    <your name here>
+ *    Elijah, McClain
  * Summary:
  *    All the unit tests for Projectile
  ************************************************************************/
@@ -90,10 +90,14 @@ private:
    void reset_full()
    {
        Projectile p(-99, -99);
+       Projectile::PositionVelocityTime pvt; // ???
+
        p.reset();
 
        assertEquals(p.mass, 46.7);
        assertEquals(p.radius, 0.077545);
+       assertEquals(p.flightPath.size(), 0);
+       // assertUnit(NOT_YET_IMPLEMENTED);
    }
 
 
@@ -110,6 +114,8 @@ private:
     *********************************************/
    void fire_right()
    {
+      Projectile p;
+      
       assertUnit(NOT_YET_IMPLEMENTED);
    }
 
@@ -160,7 +166,36 @@ private:
     *********************************************/
    void advance_fall()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+       // setup
+       setupStandardFixture();
+       Position pos;
+       Projectile p;
+       Projectile::PositionVelocityTime pvt;
+       p.flightPath.push_back(pvt);
+       p.flightPath.push_back(pvt);
+       pvt.pos.x = 100.0;
+       pvt.pos.y = 200.0;
+       pvt.v.dx = 0.0;
+       pvt.v.dy = 0.0;
+       pvt.t = 100.0;
+       p.flightPath.push_back(pvt);
+       // exercise
+       p.advance(101.0);
+       // verify
+       assertUnit(p.flightPath.size() == 4);
+       assertEquals(p.mass, 46.7);
+       assertEquals(p.radius, 0.077545);
+       assertUnit(!p.flightPath.empty());
+       if (!p.flightPath.empty())
+       {
+           assertEquals(p.flightPath.back().pos.x, 100.0);    // pos.x=100      = 100 + 0*1
+           assertEquals(p.flightPath.back().pos.y, 195.0968); // pos.y=195.0968 = 200 + 0*1 + .5(-9.806)*1*1
+           assertEquals(p.flightPath.back().v.dx, 0.0);       // v.dx =0        = 0 + 0*1
+           assertEquals(p.flightPath.back().v.dy, -9.8);      // v.dy =-9.8     = 0 + (-9.8064)*1
+           assertEquals(p.flightPath.back().t, 101.0);        
+       }
+       // teardown
+       teardownStandardFixture();
    }
 
    /*********************************************
@@ -174,7 +209,36 @@ private:
     *********************************************/
    void advance_horizontal()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+       // setup
+       setupStandardFixture();
+       Position pos;
+       Projectile p;
+       Projectile::PositionVelocityTime pvt;
+       p.flightPath.push_back(pvt);
+       p.flightPath.push_back(pvt);
+       pvt.pos.x = 100.0;
+       pvt.pos.y = 200.0;
+       pvt.v.dx = 50.0;
+       pvt.v.dy = 0.0;
+       pvt.t = 100.0;
+       p.flightPath.push_back(pvt);
+       // exercise
+       p.advance(101.0);
+       // verify
+       assertUnit(p.flightPath.size() == 4);
+       assertEquals(p.mass, 46.7);
+       assertEquals(p.radius, 0.077545);
+       assertUnit(!p.flightPath.empty());
+       if (!p.flightPath.empty())
+       {
+           assertEquals(p.flightPath.back().pos.x, 149.9601); //pos.x=149.9756 = 100 + 50*1 + .5(-0.0487)*1*1
+           assertEquals(p.flightPath.back().pos.y, 195.0968); //pos.y=195.0968 = 200 + 0*1  + .5(-9.8064)*1*1
+           assertEquals(p.flightPath.back().v.dx, 49.9201);   //v.dx =49.9513  = 50 + (-0.0487)*1
+           assertEquals(p.flightPath.back().v.dy, -9.8064);   //v.dy =-9.8064  = 0  + (-9.8064)*1
+           assertEquals(p.flightPath.back().t, 101.0);
+       }
+       // teardown
+       teardownStandardFixture();
    }
 
    /*********************************************
@@ -188,7 +252,36 @@ private:
     *********************************************/
    void advance_up()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+       // setup
+       setupStandardFixture();
+       Position pos;
+       Projectile p;
+       Projectile::PositionVelocityTime pvt;
+       p.flightPath.push_back(pvt);
+       p.flightPath.push_back(pvt);
+       pvt.pos.x = 100.0;
+       pvt.pos.y = 200.0;
+       pvt.v.dx = 0.0;
+       pvt.v.dy = 100.0;
+       pvt.t = 100.0;
+       p.flightPath.push_back(pvt);
+       // exercise
+       p.advance(101.0);
+       // verify
+       assertUnit(p.flightPath.size() == 4);
+       assertEquals(p.mass, 46.7);
+       assertEquals(p.radius, 0.077545);
+       assertUnit(!p.flightPath.empty());
+       if (!p.flightPath.empty())
+       {
+           assertEquals(p.flightPath.back().pos.x, 100.0);    //pos.x=100      = 0   + 0*1   + .5(0)*1*1
+           assertEquals(p.flightPath.back().pos.y, 294.9021); //pos.y=294.9021 = 200 + 100*1 + .5(-9.8064-.3893)*1*1
+           assertEquals(p.flightPath.back().v.dx, 0.0);       //v.dx =0        = 0   + 0*1
+           assertEquals(p.flightPath.back().v.dy, 89.8042);   //v.dy =89.8042  = 100 + (-9.8064-.3893)
+           assertEquals(p.flightPath.back().t, 101.0);
+       }
+       // teardown
+       teardownStandardFixture();
    }
 
    /*********************************************
@@ -202,7 +295,36 @@ private:
     *********************************************/
    void advance_diagonalUp()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+       // setup
+       setupStandardFixture();
+       Position pos;
+       Projectile p;
+       Projectile::PositionVelocityTime pvt;
+       p.flightPath.push_back(pvt);
+       p.flightPath.push_back(pvt);
+       pvt.pos.x = 100.0;
+       pvt.pos.y = 200.0;
+       pvt.v.dx = 50.0;
+       pvt.v.dy = 40.0;
+       pvt.t = 100.0;
+       p.flightPath.push_back(pvt);
+       // exercise
+       p.advance(101.0);
+       // verify
+       assertUnit(p.flightPath.size() == 4);
+       assertEquals(p.mass, 46.7);
+       assertEquals(p.radius, 0.077545);
+       assertUnit(!p.flightPath.empty());
+       if (!p.flightPath.empty())
+       {
+           assertEquals(p.flightPath.back().pos.x, 149.9601); // pos.x=149.9600 = 100 + 50*1 + .5(-0.0799)*1*1
+           assertEquals(p.flightPath.back().pos.y, 235.0648); // pos.y=235.0648 = 200 + 40*1 + .5(-9.8064-0.0638)*1*1
+           assertEquals(p.flightPath.back().v.dx, 49.9201);   // v.dx =49.9201  = 50 + (-.0799)*1
+           assertEquals(p.flightPath.back().v.dy, 30.1297);   // v.dy =30.1297  = 40 + (-9.8064-0.0638)*1
+           assertEquals(p.flightPath.back().t, 101.0);
+       }
+       // teardown
+       teardownStandardFixture();
    }
 
    /*********************************************

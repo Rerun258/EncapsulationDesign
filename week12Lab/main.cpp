@@ -2,7 +2,7 @@
  * Source File:
  *    Lab 12: M777 Howitzer
  * Author:
- *    <your name here>
+ *    Elijah, McClain
  * Summary:
  *    Simulate firing the M777 howitzer 15mm artillery piece
  ************************************************************************/
@@ -29,10 +29,7 @@ void callBack(const Interface* pUI, void* p)
    // is the first step of every single callback function in OpenGL. 
    Simulator* pSim = (Simulator*)p;
 
-   ogstream gout;
-   Position pos(10,10);
-   gout = pos;
-   gout << "Hello world";
+   pSim->display();
 }
 
 double Position::metersFromPixels = 40.0;

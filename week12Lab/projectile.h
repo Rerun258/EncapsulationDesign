@@ -45,6 +45,11 @@ public:
       PositionVelocityTime lastState = flightPath.back();
    }
 
+   void fire()
+   {
+
+   }
+
    void reset() 
    {
        mass = DEFAULT_PROJECTILE_WEIGHT;

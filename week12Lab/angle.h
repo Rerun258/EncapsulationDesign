@@ -57,23 +57,22 @@ public:
    // dx = sin a
    double getDx() const { return sin(radians); }
    double getDy() const { return cos(radians); }
-   bool   isRight() const
-   {
-      if (radians == 1.5 * M_PI) {
-         return true;
-      }
+   bool isRight() const {
+		if (radians > 0.0 && radians < M_PI)
+		{
+			return true;
+		}
 
-      return false;
+		return false;
    }
 
    bool   isLeft() const
    {
-      if (radians == 0.5 * M_PI)
-      {
-         return true;
-      }
-
-      return false;
+		if (radians > M_PI && radians < (2 * M_PI))
+		{
+			return true;
+		}
+		return false;
    }
 
 
@@ -90,10 +89,10 @@ public:
    void setUp() { radians = 0.0; }
 
    // 90°
-   void setRight() { radians = M_PI * 1.5; }
+   void setRight() { radians = M_PI * .5; }
 
    // 270°
-   void setLeft() { radians = M_PI * .5; }
+   void setLeft() { radians = M_PI * 1.5; }
 
    // 180°
    void setDown() { radians = M_PI; }

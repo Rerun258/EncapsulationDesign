@@ -2,7 +2,7 @@
  * Header File:
  *    TEST HOWITZER
  * Author:
- *    <your name here>
+ *    McClain, Elijah
  * Summary:
  *    All the unit tests for Howitzer
  ************************************************************************/
@@ -16,7 +16,11 @@
 #include "angle.h"
 #include "velocity.h"
 #include "physics.h"
-#include <cassert>
+#include <math.h>   // for M_PI which is 3.14159
+#include <cassert>;
+
+
+using namespace std;
 
 /*******************************
  * TEST HOWITZER
@@ -294,7 +298,15 @@ private:
     *********************************************/
    void raise_rightUp()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      //setup
+		Howitzer h;
+		h.elevation.setRadians(0.5);
+		// exercise
+		h.raise(0.1);
+		// verify
+		assertEquals(h.getElevation().getRadians(), 0.4);
+		// teardown
+
    }
 
    /*********************************************
@@ -302,9 +314,15 @@ private:
     * input:   h.elevation=-0.5radians  raise(-0.1)
     * output:  h.elevation=-0.6radians
     *********************************************/
-   void raise_leftDown()
-   {
-      assertUnit(NOT_YET_IMPLEMENTED);
+   void raise_leftDown() {
+		//setup
+		Howitzer h;
+		h.elevation.setRadians(-0.5);
+		// exercise
+		h.raise(-0.1);
+		// verify
+		assertEquals(h.getElevation().getRadians(), (2*M_PI) - 0.6);
+
    }
 
    /*********************************************
@@ -314,7 +332,14 @@ private:
     *********************************************/
    void raise_leftUp()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+		//setup
+		Howitzer h;
+		h.elevation.setRadians(-0.5);
+		// exercise
+		h.raise(0.1);
+		// verify
+		assertEquals(h.getElevation().getRadians(), (2 * M_PI) - 0.4);
+		
    }
 
    /*********************************************
@@ -324,7 +349,19 @@ private:
     *********************************************/
    void rotate_clock()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      //setup
+		Howitzer h;
+		h.elevation.setRadians(1.23);
+		// exercise
+		h.rotate(0.3);
+		// verify
+      if (h.getElevation().getRadians() != 1.53) {
+			cout << "h.elevation: " << h.getElevation().getRadians() << endl;
+			cout << "Expected: 1.53" << endl;
+      }
+      else{ assertEquals(h.getElevation().getRadians(), 1.53); }
+		
+		// teardown
    }
 
    /*********************************************
@@ -334,7 +371,14 @@ private:
     *********************************************/
    void rotate_counterClock()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+		//setup
+		Howitzer h;
+		h.elevation.setRadians(1.23);
+		// exercise
+      h.rotate(-0.3);
+		// verify
+		assertEquals(h.getElevation().getRadians(), 0.93);
+		// teardown
    }
 
    /*********************************************
@@ -344,7 +388,15 @@ private:
     *********************************************/
    void rotate_wrapClock()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+		//setup
+		Howitzer h;
+		h.elevation.setRadians(2 * M_PI - .1);
+		// exercise
+		h.rotate(0.2);
+		// verify
+		assertEquals(h.getElevation().getRadians(), .1 );
+		// teardown
+
    }
 
    /*********************************************
@@ -354,7 +406,14 @@ private:
     *********************************************/
    void rotate_wrapCounterClock()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+		//setup
+		Howitzer h;
+		h.elevation.setRadians(0.1);
+		// exercise
+		h.rotate(-0.2);
+		// verify
+		assertEquals(h.getElevation().getRadians(), 2*M_PI - .1);
+		// teardown
    }
 
    /*****************************************************************

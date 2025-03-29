@@ -145,7 +145,7 @@ private:
       // exercise
       a.setRight();
       // verify
-      assertEquals(a.radians, M_PI * 1.5);
+      assertEquals(a.radians, M_PI * .5);
    }  // teardown
 
    /*********************************************
@@ -160,7 +160,7 @@ private:
       // exercise
       a.setLeft();
       // verify
-      assertEquals(a.radians, M_PI * .5);
+      assertEquals(a.radians, M_PI * 1.5);
    }  // teardown
 
    /*********************************************
@@ -835,7 +835,7 @@ private:
       bool r = a.isRight();
       // verify
       assertEquals(r, true);
-      assertEquals(a.radians, M_PI * 1.5);
+      assertEquals(a.radians, M_PI * .5);
    }// teardown
 
 
@@ -866,12 +866,12 @@ private:
    {
       // setup
       Angle a;
-      a.setLeft(); // 90 degrees
+      a.setLeft(); // 270 degrees
       // exercise
       bool r = a.isRight();
       // verify
       assertEquals(r, false);
-      assertEquals(a.radians, M_PI * .5);
+      assertEquals(a.radians, M_PI * 1.5);
    }// teardown
 
 
@@ -890,7 +890,7 @@ private:
       // verify
       assertEquals(r, true);
 
-      assertEquals(a.radians, M_PI / 2);
+      assertEquals(a.radians, M_PI*1.5);
    }// teardown
 
 

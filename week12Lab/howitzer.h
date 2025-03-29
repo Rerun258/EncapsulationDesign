@@ -64,10 +64,21 @@ class Howitzer
       void rotate(double radian) { elevation.add(radian); }
 
       // Raise (or lower) the howitzer.
-      void raise(double radian)
-      {
-         elevation.add(elevation.isRight() ? -radian : radian);
-      }
+		void raise(double radian)
+		{
+			// If the howitzer is facing right, add the radian to the elevation.
+			// If the howitzer is facing left, subtract the radian from the elevation.
+			// This is a little bit of a hack, but it works.
+			if (elevation.isRight())
+			{
+				elevation.add(-radian);
+			}
+			else
+			{
+				elevation.add(radian);
+			}
+		}
+      
 
       // Get the elevation.
       const Angle & getElevation() const { return elevation; }
