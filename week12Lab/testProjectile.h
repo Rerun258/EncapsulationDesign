@@ -75,11 +75,15 @@ private:
     *********************************************/
    void reset_empty()
    {
-      Projectile p(-99, -99);
+      Projectile p;
+      p.mass = -99.0;
+      p.radius = -99.0;
+      p.flightPath = {};
       p.reset();
 
       assertEquals(p.mass, 46.7);
       assertEquals(p.radius, 0.077545);
+      assertEquals(p.flightPath.size(), 0);
    }
 
    /*********************************************
@@ -89,15 +93,18 @@ private:
     *********************************************/
    void reset_full()
    {
-       Projectile p(-99, -99);
-       Projectile::PositionVelocityTime pvt; // ???
-
+       Projectile p;
+       Projectile::PositionVelocityTime pvt; 
+       p.mass = -99.0;
+       p.radius = -99.0;
+       p.flightPath.push_back(pvt);
+       p.flightPath.push_back(pvt);
+       p.flightPath.push_back(pvt);
        p.reset();
 
        assertEquals(p.mass, 46.7);
        assertEquals(p.radius, 0.077545);
        assertEquals(p.flightPath.size(), 0);
-       // assertUnit(NOT_YET_IMPLEMENTED);
    }
 
 
@@ -114,9 +121,33 @@ private:
     *********************************************/
    void fire_right()
    {
+      // Setup
       Projectile p;
+      Angle a;
+      Position pos;
+      Velocity mV;
+      Projectile::PositionVelocityTime pvt;
+
+      // Exercise
+      a.setRight();
+      pos.x = 111.0;
+      pos.y = 222.0;
+      mV.set(a, 100.0);
+
+      p.fire(pos, 1.0, mV);
       
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Verify
+      if (!p.flightPath.empty())
+      {
+         assertEquals(p.flightPath.back().pos.x, 111.0);    
+         assertEquals(p.flightPath.back().pos.y, 222.0); 
+         assertEquals(p.flightPath.back().v.dx, 100.0);
+         assertEquals(p.flightPath.back().v.dy, 0.0);
+         assertEquals(p.flightPath.back().t, 1.0);
+      }
+      
+      // Teardown
+
    }
 
    /*********************************************
@@ -126,7 +157,32 @@ private:
     *********************************************/
    void fire_left()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Projectile p;
+      Angle a;
+      Position pos;
+      Velocity mV;
+      Projectile::PositionVelocityTime pvt;
+
+      // Exercise
+      a.setLeft();
+      pos.x = 111.0;
+      pos.y = 222.0;
+      mV.set(a, 100.0);
+
+      p.fire(pos, 1.0, mV);
+
+      // Verify
+      if (!p.flightPath.empty())
+      {
+         assertEquals(p.flightPath.back().pos.x, 111.0);
+         assertEquals(p.flightPath.back().pos.y, 222.0);
+         assertEquals(p.flightPath.back().v.dx, -100.0);
+         assertEquals(p.flightPath.back().v.dy, 0.0);
+         assertEquals(p.flightPath.back().t, 1.0);
+      }
+
+      // Teardown
    }
 
    /*********************************************
@@ -136,7 +192,32 @@ private:
     *********************************************/
    void fire_up()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // Setup
+      Projectile p;
+      Angle a;
+      Position pos;
+      Velocity mV;
+      Projectile::PositionVelocityTime pvt;
+
+      // Exercise
+      a.setUp();
+      pos.x = 111.0;
+      pos.y = 222.0;
+      mV.set(a, 100.0);
+
+      p.fire(pos, 1.0, mV);
+
+      // Verify
+      if (!p.flightPath.empty())
+      {
+         assertEquals(p.flightPath.back().pos.x, 111.0);
+         assertEquals(p.flightPath.back().pos.y, 222.0);
+         assertEquals(p.flightPath.back().v.dx, 0.0);
+         assertEquals(p.flightPath.back().v.dy, 100.0);
+         assertEquals(p.flightPath.back().t, 1.0);
+      }
+
+      // Teardown
    }
 
    /*****************************************************************
@@ -179,8 +260,10 @@ private:
        pvt.v.dy = 0.0;
        pvt.t = 100.0;
        p.flightPath.push_back(pvt);
+
        // exercise
        p.advance(101.0);
+
        // verify
        assertUnit(p.flightPath.size() == 4);
        assertEquals(p.mass, 46.7);
@@ -192,8 +275,9 @@ private:
            assertEquals(p.flightPath.back().pos.y, 195.0968); // pos.y=195.0968 = 200 + 0*1 + .5(-9.806)*1*1
            assertEquals(p.flightPath.back().v.dx, 0.0);       // v.dx =0        = 0 + 0*1
            assertEquals(p.flightPath.back().v.dy, -9.8);      // v.dy =-9.8     = 0 + (-9.8064)*1
-           assertEquals(p.flightPath.back().t, 101.0);        
+           assertEquals(p.flightPath.back().t, 101.0);      
        }
+
        // teardown
        teardownStandardFixture();
    }
@@ -364,6 +448,12 @@ private:
          assertEquals(p.flightPath.back().v.dx, 49.9201);   // 50 + (-0.0799)*1
          assertEquals(p.flightPath.back().v.dy, -49.7425);  //-40 + (-9.8064+0.0638)*1*1
          assertEquals(p.flightPath.back().t, 101.0);
+         cout << " advance_diagonalDown: " << endl;
+         cout << "   pos.x: " << p.flightPath.back().pos.x << " (should be: 149.9601)" << endl;
+         cout << "   pos.y: " << p.flightPath.back().pos.y << " (should be: 155.1287)" << endl;
+         cout << "   v.dx: " << p.flightPath.back().v.dx << " (should be: 49.9201)" << endl;
+         cout << "   v.dy: " << p.flightPath.back().v.dy << " (should be: -49.7425)" << endl;
+         cout << "   t: " << p.flightPath.back().t << " (should be: 101.0)" << endl;
       }
       // teardown
       teardownStandardFixture();

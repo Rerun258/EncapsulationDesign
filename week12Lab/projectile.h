@@ -34,30 +34,54 @@ public:
    // Create a new projectile with the default settings.
    Projectile() : mass(DEFAULT_PROJECTILE_WEIGHT), radius(DEFAULT_PROJECTILE_RADIUS) {}
 
-   Projectile(double mass, double radius) { this->mass = mass; this->radius = radius; }
-
    // Advance the round forward until the next unit of time.
    void advance(double simulationTime) 
    {
       if (flightPath.empty())
          flightPath.push_back(PositionVelocityTime());
 
-      PositionVelocityTime lastState = flightPath.back();
+     /* for (double t = 0.0; t <= simulationTime; t += 1.0)
+      {
+         PositionVelocityTime lastState = flightPath.back();
+
+         PositionVelocityTime newState;
+
+         newState.t = t;
+         newState.v.addDX(lastState.v.getDX());
+         newState.v.addDY(lastState.v.getDY());
+         newState.pos.addMetersX(lastState.pos.getMetersX());
+         newState.pos.addMetersY(lastState.pos.getMetersY());
+
+         flightPath.push_back(newState);
+      }*/
+
+      PositionVelocityTime lastState = flightPath.back(); // Get the last recorded state
 
       Acceleration a;
+      a.setDDX(0.0);    // No horizontal acceleration
+      a.setDDY(-9.81);  // Gravity (Earth) in m/s²
 
-      PositionVelocityTime newState;
-      newState.t = lastState.t + simulationTime;
-      newState.v = lastState.v;
-      newState.pos.add(a, newState.v, newState.t);
+      for (double t = 0.0; t <= simulationTime; t += 1.0)
+      {
+         // Compute new state
+         PositionVelocityTime newState;
+         newState.t = lastState.t + simulationTime; // Advance time
 
-      flightPath.push_back(newState);
+        
+      }
       
    }
 
-   void fire()
+   void fire(Position pos, double simulationTime, Velocity muzzleVelocity)
    {
+      flightPath.clear();
 
+      PositionVelocityTime pvt;
+      pvt.t = simulationTime;
+      pvt.v = muzzleVelocity;
+      pvt.pos = pos;
+      std::cout << "pvt.t: " << pvt.t << std::endl;
+      flightPath.push_back(pvt);
    }
 
    void reset() 
@@ -66,9 +90,6 @@ public:
        radius = DEFAULT_PROJECTILE_RADIUS;
        flightPath.clear();
    }
-
-
-
 
 private:
 
