@@ -2,7 +2,7 @@
  * Header File:
  *    TEST PHYSICS
  * Author:
- *    McClain, Elijah
+ *    <your name here>
  * Summary:
  *    All the automation for the physics functions
  ************************************************************************/
@@ -677,20 +677,7 @@ private:
     *********************************************************/
    void linearInterpolation_coordinatesZero()
    {
-		// Setup
-      double d0 = 0.0;
-      double r0 = 0.0;
-      double d1 = 8.0;
-		double r1 = 8.0;
-		double d = 0.0; // (d,r) is (d0,r0)
-		double r = 999.99;  // output
-
-      // Exercise 
-      r = linearInterpolation(d0, r0, d1, r1, d0);
-
-      // Verify
-      assertEquals(r, 0);
-      // Teardown
+      assertUnit(NOT_YET_IMPLEMENTED);
    }
 
    /*********************************************************
@@ -706,20 +693,7 @@ private:
     *********************************************************/
    void linearInterpolation_coordinatesOne()
    {
-      // setup
-		double d0 = 0.0;
-		double r0 = 0.0;
-		double d1 = 8.0;
-		double r1 = 8.0;
-      double d = 8.0;
-		double r = -999.99;  // output
-		// exercise
-		r = linearInterpolation(d0, r0, d1, r1, d);
-		// verify
-		assertEquals(d, 8.0);
-		assertEquals(r, 8.0);
-		// teardown
-
+      assertUnit(NOT_YET_IMPLEMENTED);
    }
 
    /*********************************************************
@@ -735,19 +709,7 @@ private:
     *********************************************************/
    void linearInterpolation_coordinatesMiddle()
    {
-		double d0 = 0.0;
-		double r0 = 0.0;
-		double d1 = 8.0;
-		double r1 = 8.0;
-		double d = 4.0;
-		double r = -999.99;  // output
-		// exercise
-		r = linearInterpolation(d0, r0, d1, r1, d);
-		// verify
-		assertEquals(d, 4.0);
-		assertEquals(r, 4.0);
-		// teardown
-
+      assertUnit(NOT_YET_IMPLEMENTED);
    }
 
    /*********************************************************
@@ -763,19 +725,7 @@ private:
     *********************************************************/
    void linearInterpolation_coordinatesTop()
    {
-		//setup
-		double d0 = 0.0;
-		double r0 = 0.0;
-		double d1 = 8.0;
-		double r1 = 8.0;
-		double d = 6.0;
-		double r = -999.99;  // output
-		// exercise
-		r = linearInterpolation(d0, r0, d1, r1, d);
-		// verify
-		assertEquals(d, 6.0);
-		assertEquals(r, 6.0);
-		// teardown
+      assertUnit(NOT_YET_IMPLEMENTED);
    }
 
    /*********************************************************
@@ -792,19 +742,7 @@ private:
     *********************************************************/
    void linearInterpolation_coordinatesBackwards()
    {
-		// setup
-		double d0 = 1.0;
-		double r0 = 9.0;
-		double d1 = 7.0;
-		double r1 = -3.0;
-		double d = 3.0;
-		double r = -999.99;  // output
-		// exercise
-		r = linearInterpolation(d0, r0, d1, r1, d);
-		// verify
-		assertEquals(d, 3.0);
-		assertEquals(r, 5.0);
-		// teardown
+      assertUnit(NOT_YET_IMPLEMENTED);
    }
 
 
@@ -879,7 +817,7 @@ private:
 			{7.0, 5.0},   // mapping[2]
 			{8.0, 6.5}    // mapping[3]
 		};
-		double d = 3.0;
+		double d = 1.0;
 		double r = -999.999;  // output
 		// exercise
 		r = linearInterpolation(mapping, 4 /*numMapping*/, d);
@@ -905,22 +843,8 @@ private:
     *********************************************************/
    void linearInterpolation_mappingMid01()
    {
-      //setup
-      const Mapping mapping[] =
-      { // d    r
-          {1.0, 2.0},   // mapping[0]
-          {3.0, 3.0},   // mapping[1]
-          {7.0, 5.0},   // mapping[2]
-          {8.0, 6.5}    // mapping[3]
-      };
-      double d = 2.5; // midway between [0] and [1]
-      double r = -999.999;  // output
-      // exercise
-      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
-      // verify
-      assertEquals(r, 2.75);  // r = 2.75 based on linear interpolation
+      assertUnit(NOT_YET_IMPLEMENTED);
    }
-
 
 
    /*********************************************************
@@ -939,20 +863,7 @@ private:
     *********************************************************/
    void linearInterpolation_mappingTop01()
    {
-      //setup
-      const Mapping mapping[] =
-      { // d    r
-          {1.0, 2.0},   // mapping[0]
-          {3.0, 3.0},   // mapping[1]
-          {7.0, 5.0},   // mapping[2]
-          {8.0, 6.5}    // mapping[3]
-      };
-      double d = 2.8; // closer to [1] than [0]
-      double r = -999.999;  // output
-      // exercise
-      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
-      // verify
-      assertEquals(r, 2.9);  // r = 2.9 based on linear interpolation
+      assertUnit(NOT_YET_IMPLEMENTED);
    }
 
 
@@ -972,20 +883,7 @@ private:
     *********************************************************/
    void linearInterpolation_mappinglower23()
    {
-      //setup
-      const Mapping mapping[] =
-      { // d    r
-          {1.0, 2.0},   // mapping[0]
-          {3.0, 3.0},   // mapping[1]
-          {7.0, 5.0},   // mapping[2]
-          {8.0, 6.5}    // mapping[3]
-      };
-      double d = 7.33333333; // closer to [2] than [3]
-      double r = -999.999;  // output
-      // exercise
-      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
-      // verify
-      assertEquals(r, 5.5);  // r = 5.5 based on linear interpolation
+      assertUnit(NOT_YET_IMPLEMENTED);
    }
 
 
@@ -1006,20 +904,7 @@ private:
     *********************************************************/
    void linearInterpolation_mappingSmall()
    {
-      //setup
-      const Mapping mapping[] =
-      { // d    r
-          {1.0, 2.0},   // mapping[0]
-          {3.0, 3.0},   // mapping[1]
-          {7.0, 5.0},   // mapping[2]
-          {8.0, 6.5}    // mapping[3]
-      };
-      double d = 0.0; // too small - off the end on the low side
-      double r = -999.999;  // output
-      // exercise
-      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
-      // verify
-      assertEquals(r, -99.9);  // r = -99.9 indicating out of range
+      assertUnit(NOT_YET_IMPLEMENTED);
    }
 
 
@@ -1040,20 +925,7 @@ private:
     *********************************************************/
    void linearInterpolation_mappingLarge()
    {
-      //setup
-      const Mapping mapping[] =
-      { // d    r
-          {1.0, 2.0},   // mapping[0]
-          {3.0, 3.0},   // mapping[1]
-          {7.0, 5.0},   // mapping[2]
-          {8.0, 6.5}    // mapping[3]
-      };
-      double d = 50.0; // too large - off the end on the high side
-      double r = -999.999;  // output
-      // exercise
-      r = linearInterpolation(mapping, 4 /*numMapping*/, d);
-      // verify
-      assertEquals(r, -99.9);  // r = -99.9 indicating out of range
+      assertUnit(NOT_YET_IMPLEMENTED);
    }
 
 
@@ -1343,8 +1215,16 @@ private:
      ********************************************************/
    void speedSoundFromAltitude_0()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+      //setup
+		double altitude = 0.0;
+		double speed = -99.99;  // output
+		// exercise
+		speed = speedSoundFromAltitude(altitude);
+		// verify
+		assertEquals(altitude, 0.0);
+		assertEquals(speed, 340.0);  // speed of sound at sea level
+	}  // teardown
+	
 
     /*******************************************************
      * SPEED OF SOUND FROM ALTITUDE : 10,000m
@@ -1353,7 +1233,14 @@ private:
      ********************************************************/
    void speedSoundFromAltitude_10000()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+		// setup
+		double altitude = 10000.0;
+		double speed = -99.99;  // output
+		// exercise
+		speed = speedSoundFromAltitude(altitude);
+		// verify
+		assertEquals(altitude, 10000.0);
+		assertEquals(speed, 299.0);  // speed of sound at 10,000m
    }
 
     /*******************************************************
@@ -1363,7 +1250,17 @@ private:
      ********************************************************/
    void speedSoundFromAltitude_80000()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+		// setup
+		double altitude = 80000.0;
+		double speed = -99.99;  // output
+		// exercise
+		speed = speedSoundFromAltitude(altitude);
+		// verify
+		assertEquals(altitude, 80000.0);
+		assertEquals(speed, 269.0);  // speed of sound at 80,000m
+		// teardown
+
+
    }
 
     /*******************************************************
@@ -1373,7 +1270,15 @@ private:
      ********************************************************/
    void speedSoundFromAltitude_5500()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setip
+		double altitude = 5500.0;
+		double speed = -99.99;  // output
+		// exercise
+		speed = speedSoundFromAltitude(altitude);
+		// verify
+		assertEquals(altitude, 5500.0);
+		assertEquals(speed, 318.0);  // speed of sound at 5,500m
+		// teardown
    }
 
     /*******************************************************
@@ -1383,7 +1288,15 @@ private:
      ********************************************************/
    void speedSoundFromAltitude_43333()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+		// setup
+		double altitude = 43333.0;
+		double speed = -99.99;  // output
+		// exercise
+		speed = speedSoundFromAltitude(altitude);
+		// verify
+		assertEquals(altitude, 43333.0);
+		assertEquals(speed, 328.3329);  // speed of sound at 43,333m
+		// teardown
    }
 
     /*******************************************************
@@ -1393,7 +1306,15 @@ private:
      ********************************************************/
    void speedSoundFromAltitude_3666()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+		// setup
+		double altitude = 3666.0;
+		double speed = -99.99;  // output
+		// exercise
+		speed = speedSoundFromAltitude(altitude);
+		// verify
+		assertEquals(altitude, 3666.0);
+		assertEquals(speed, 325.336);  // speed of sound at 3,666m
+		// teardown
    }
 
     /*******************************************************
@@ -1427,8 +1348,17 @@ private:
      ********************************************************/
    void dragFromMach_000()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+      //set up
+		double speedMach = 0.0;
+		double drag = -99.99;  // output
+		// exercise
+		drag = dragFromMach(speedMach);
+		// verify
+		assertEquals(speedMach, 0.0);
+		
+		assertEquals(drag, 0.0);  // drag at rest
+	}  // teardown
+
 
     /*******************************************************
      * DRAG FROM MACH : top speed
@@ -1437,7 +1367,15 @@ private:
      ********************************************************/
    void dragFromMach_500()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+		double speedMach = 5.00;
+		double drag = -99.99;  // output
+		// exercise
+		drag = dragFromMach(speedMach);
+		// verify
+		assertEquals(speedMach, 5.00);
+      assertEquals(drag, 0.2656); // drag at top speed
+		// teardown
    }
 
     /*******************************************************
@@ -1447,8 +1385,17 @@ private:
      ********************************************************/
    void dragFromMach_100()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
-   }
+      // setup
+		double speedMach = 1.00;
+		double drag = -99.99;  // output
+		// exercise
+		drag = dragFromMach(speedMach);
+		// verify
+		assertEquals(speedMach, 1.00);
+		assertEquals(drag, 0.4258); // drag at speed of sound
+		// teardown
+	}
+
 
     /*******************************************************
      * DRAG FROM MACH : halfway between 0.5 and 0.7
@@ -1457,7 +1404,16 @@ private:
      ********************************************************/
    void dragFromMach_060()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+      // setup
+		double speedMach = 0.6;
+		double drag = -99.99;  // output
+		// exercise
+		drag = dragFromMach(speedMach);
+		// verify
+		assertEquals(speedMach, 0.6);
+		assertEquals(drag, 0.1845); // drag halfway between 0.5 and 0.7
+		// teardown
+
    }
 
     /*******************************************************
@@ -1467,7 +1423,15 @@ private:
      ********************************************************/
    void dragFromMach_010()
    {
-      assertUnit(NOT_YET_IMPLEMENTED);
+		// setup
+		double speedMach = 0.1;
+		double drag = -99.99;  // output
+		// exercise
+		drag = dragFromMach(speedMach);
+		// verify
+		assertEquals(speedMach, 0.1);
+		assertEquals(drag, 0.0543); // drag one third between 0 and .3
+		// teardown
    }
 
     /*******************************************************
