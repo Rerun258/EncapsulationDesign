@@ -46,6 +46,7 @@ public:
 
          PositionVelocityTime newState;
 
+         // this is wrong. what equations does one even use here?
          newState.t = t;
          newState.v.addDX(lastState.v.getDX());
          newState.v.addDY(lastState.v.getDY());
@@ -66,7 +67,7 @@ public:
       pvt.t = simulationTime;
       pvt.v = muzzleVelocity;
       pvt.pos = pos;
-      std::cout << "pvt.t: " << pvt.t << std::endl;
+
       flightPath.push_back(pvt);
    }
 
