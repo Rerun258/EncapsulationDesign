@@ -1,6 +1,6 @@
 /*************************************************************
  * 1. Name:
- *      -your name-
+ *      Elijah, McClain
  * 2. Module
  *      ANGLE
  * 3. Assignment Description:
@@ -124,6 +124,26 @@ class Angle
       double radians;   // 360 degrees equals 2 PI radians
 
 };
+
+/************************************
+ * ANGLE : NORMALIZE
+ ************************************/
+double Angle::normalize(double aRadian) const
+{
+   // Use fmod to find the remainder of aRadian divided by TWO_PI
+   aRadian = fmod(aRadian, TWO_PI);
+
+   if (aRadian < 0)
+   {
+      aRadian += TWO_PI;
+   }
+   if (aRadian > TWO_PI)
+   {
+      aRadian -= TWO_PI;
+   }
+
+   return aRadian;
+}
 
 
 /************************************
