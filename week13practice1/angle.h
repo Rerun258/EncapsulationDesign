@@ -117,33 +117,32 @@ class Angle
 
       Angle operator+(double degrees) const { return Angle(); }
 
-   private:
+      virtual Angle& operator++() { radians = normalize(radians + (M_PI / 180.0)); return *this; }
+      virtual Angle& operator--() { radians = normalize(radians - (M_PI / 180.0)); return *this; }
 
-      double normalize(double radians) const;
+      virtual void display() {}
+
+   protected:
+      double normalize(double aRadian) const
+      {
+         // Use fmod to find the remainder of aRadian divided by TWO_PI
+         aRadian = fmod(aRadian, TWO_PI);
+
+         if (aRadian < 0)
+         {
+            aRadian += TWO_PI;
+         }
+         if (aRadian > TWO_PI)
+         {
+            aRadian -= TWO_PI;
+         }
+
+         return aRadian;
+      }
 
       double radians;   // 360 degrees equals 2 PI radians
 
 };
-
-/************************************
- * ANGLE : NORMALIZE
- ************************************/
-double Angle::normalize(double aRadian) const
-{
-   // Use fmod to find the remainder of aRadian divided by TWO_PI
-   aRadian = fmod(aRadian, TWO_PI);
-
-   if (aRadian < 0)
-   {
-      aRadian += TWO_PI;
-   }
-   if (aRadian > TWO_PI)
-   {
-      aRadian -= TWO_PI;
-   }
-
-   return aRadian;
-}
 
 
 /************************************
@@ -152,6 +151,14 @@ double Angle::normalize(double aRadian) const
 class AngleRadians : public Angle
 {
    friend TestAngle;
+
+   public:
+      AngleRadians() : Angle() {}
+      AngleRadians(double radians) { setRadians(radians); }
+
+      Angle& operator++() override { radians = normalize(radians + PI_EIGHT); return *this; }
+      Angle& operator--() override { radians = normalize(radians - PI_EIGHT); return *this; }
+      virtual void display() {}
 };
 
 #include <iostream>
