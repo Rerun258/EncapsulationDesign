@@ -15,6 +15,8 @@
 #define PI_EIGHT (3.1415926 / 8.0)
 #define _USE_MATH_DEFINES
 #include <math.h>   // for M_PI which is 3.14159
+#include <cmath>
+using namespace std;
 
 class TestAngle;
 class TestAngleRadian;
@@ -27,48 +29,58 @@ class Angle
    public:
       // for the unit tests
       friend TestAngle;
+      friend TestAngleRadian;
+      friend ostream& operator<<(ostream& out, const Angle& rhs);
+      friend istream& operator>>(istream& in, const Angle& rhs);
+      friend Angle& operator++(Angle& rhs);
+      friend Angle& operator--(Angle& rhs);
 
       // Constructors
-      Angle() : radians(0) {}
+      Angle() : radians(0.0) {}
+
       Angle(const Angle& rhs) : radians(rhs.getRadians()) {}
+
       Angle(double degrees)
       {
          setDegrees(degrees);
       }
 
+      Angle operator +(const Angle& rhs) const { return Angle(radians + rhs.radians); }
+      Angle operator -(const Angle& rhs) const { return Angle(radians - rhs.radians); }
+
+      Angle& operator +=(const Angle& rhs)
+      {
+         radians += rhs.radians;
+
+         // Normalize the angle after addition
+         radians = normalize(radians);
+
+         return *this;
+      }
+
+      Angle& operator -=(const Angle& rhs)
+      {
+         radians -= rhs.radians;
+
+         // Normalize the angle after addition
+         radians = normalize(radians);
+
+         return *this;
+      }
+
+      Angle& operator =(const Angle& rhs)
+      {
+         radians = rhs.radians;
+         return *this;
+      }
+
+      // Why not just ==? Oh well, 2 less errors.
+      bool operator ==(const Angle& rhs) const { return radians == rhs.radians; }
+      bool operator !=(const Angle& rhs) const { return radians != rhs.radians; }
+
       // Getters
       double getDegrees() const { return radians * (180.0 / M_PI); }
       double getRadians() const { return radians; }
-
-      //         dx
-      //    +-------/
-      //    |      /
-      // dy |     /
-      //    |    / 1.0
-      //    | a /
-      //    |  /
-      //    | /
-      // dy = cos a
-      // dx = sin a
-      double getDx() const { return sin(radians); }
-      double getDy() const { return cos(radians); }
-      bool isRight() const {
-         if (radians > 0.0 && radians < M_PI)
-         {
-            return true;
-         }
-
-         return false;
-      }
-
-      bool   isLeft() const
-      {
-         if (radians > M_PI && radians < (2 * M_PI))
-         {
-            return true;
-         }
-         return false;
-      }
 
 
       // Setters
@@ -80,69 +92,106 @@ class Angle
 
       void setRadians(double aRadian) { radians = normalize(aRadian); }
 
-      // 0∞
-      void setUp() { radians = 0.0; }
 
-      // 90∞
-      void setRight() { radians = M_PI * .5; }
-
-      // 270∞
-      void setLeft() { radians = M_PI * 1.5; }
-
-      // 180∞
-      void setDown() { radians = M_PI; }
-
-      void reverse() { radians += M_PI; }
-
-      Angle& add(double delta)
+      // Converters
+      double convertToDegrees(double aRadian) const
       {
-         radians += delta;
-         radians = normalize(radians);
-         return *this;
+         double degrees = round(normalize(aRadian) * (180.0 / M_PI));
+         return degrees;
       }
 
-      // set based on the components
-      //         dx
-      //     +-------/
-      //     |      /
-      //  dy |     /
-      //     |    /
-      //     | a /
-      //     |  /
-      //     | /
-      void setDxDy(double dx, double dy)
+      double convertToRadians(double aDegree) const
       {
-         radians = atan2(dy, dx);
+         double radians = aDegree * (M_PI / 180.0);
+         return normalize(radians);
       }
 
-      Angle operator+(double degrees) const { return Angle(); }
-
-      virtual Angle& operator++() { radians = normalize(radians + (M_PI / 180.0)); return *this; }
-      virtual Angle& operator--() { radians = normalize(radians - (M_PI / 180.0)); return *this; }
-
-      virtual void display(ostringstream out) {}
-
-   protected:
-      double normalize(double aRadian) const
+      void setUp()
       {
-         // Use fmod to find the remainder of aRadian divided by TWO_PI
-         aRadian = fmod(aRadian, TWO_PI);
-
-         if (aRadian < 0)
-         {
-            aRadian += TWO_PI;
-         }
-         if (aRadian > TWO_PI)
-         {
-            aRadian -= TWO_PI;
-         }
-
-         return aRadian;
+         // 0°
+         radians = 0.0;
       }
 
-      double radians;   // 360 degrees equals 2 PI radians
+      void setRight()
+      {
+         // 90°
+         radians = M_PI * 0.5;
+      }
 
+      void setLeft()
+      {
+         // 270°
+         radians = M_PI * 1.5;
+      }
+
+      void setDown()
+      {
+         // 180°
+         radians = M_PI;
+      }
+
+      void reverse()
+      {
+         radians += M_PI;
+      }
+
+      void display(ostream& out) const
+      {
+         out.setf(ios::fixed);     // "fixed" means don't use scientific notation.
+         out.setf(ios::showpoint); // "showpoint" means always show the decimal point.
+         out.precision(1);         // Set the precision to 1 decimal place of accuracy.
+         //cout << getDegrees() << endl; test code
+         out << getDegrees() << "degrees";
+      }
+
+private:
+   double normalize(double aRadian) const
+   {
+      // Use fmod to find the remainder of aRadian divided by TWO_PI
+      aRadian = fmod(aRadian, TWO_PI);
+
+      if (aRadian < 0)
+      {
+         aRadian += TWO_PI;
+      }
+      if (aRadian > TWO_PI)
+      {
+         aRadian -= TWO_PI;
+      }
+
+      return aRadian;
+   }
+
+   // 360 degrees equals 2 PI radians
+   double radians;
 };
+
+ostream& operator<<(ostream& out, const Angle& rhs)
+{
+   out << rhs.radians;
+   return out;
+}
+
+istream& operator>>(istream& in, const Angle& rhs)
+{
+   in >> rhs.radians;
+   rhs.normalize(rhs.radians);
+   return in;
+}
+
+Angle& operator++(Angle& rhs)
+{
+   rhs.radians += 1.0;
+   rhs.normalize(rhs.radians);
+   return rhs;
+}
+
+Angle& operator--(Angle& rhs)
+{
+   rhs.radians -= 1.0;
+   rhs.normalize(rhs.radians);
+   return rhs;
+}
 
 
 /************************************
@@ -155,10 +204,6 @@ class AngleRadians : public Angle
    public:
       AngleRadians() : Angle() {}
       AngleRadians(double radians) { setRadians(radians); }
-
-      Angle& operator++() override { radians = normalize(radians + PI_EIGHT); return *this; }
-      Angle& operator--() override { radians = normalize(radians - PI_EIGHT); return *this; }
-      virtual void display(ostringstream out) {}
 };
 
 #include <iostream>
