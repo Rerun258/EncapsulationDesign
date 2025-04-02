@@ -120,7 +120,7 @@ class Angle
       virtual Angle& operator++() { radians = normalize(radians + (M_PI / 180.0)); return *this; }
       virtual Angle& operator--() { radians = normalize(radians - (M_PI / 180.0)); return *this; }
 
-      virtual void display() {}
+      virtual void display(ostringstream out) {}
 
    protected:
       double normalize(double aRadian) const
@@ -158,7 +158,7 @@ class AngleRadians : public Angle
 
       Angle& operator++() override { radians = normalize(radians + PI_EIGHT); return *this; }
       Angle& operator--() override { radians = normalize(radians - PI_EIGHT); return *this; }
-      virtual void display() {}
+      virtual void display(ostringstream out) {}
 };
 
 #include <iostream>
