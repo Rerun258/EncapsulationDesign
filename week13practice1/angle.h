@@ -32,8 +32,6 @@ class Angle
       friend TestAngleRadian;
       friend ostream& operator<<(ostream& out, const Angle& rhs);
       friend istream& operator>>(istream& in, const Angle& rhs);
-      friend Angle& operator++(Angle& rhs);
-      friend Angle& operator--(Angle& rhs);
 
       // Constructors
       Angle() : radians(0.0) {}
@@ -45,26 +43,21 @@ class Angle
          setDegrees(degrees);
       }
 
+      // Operators
       Angle operator +(const Angle& rhs) const { return Angle(radians + rhs.radians); }
       Angle operator -(const Angle& rhs) const { return Angle(radians - rhs.radians); }
 
       Angle& operator +=(const Angle& rhs)
       {
          radians += rhs.radians;
-
-         // Normalize the angle after addition
          radians = normalize(radians);
-
          return *this;
       }
 
       Angle& operator -=(const Angle& rhs)
       {
          radians -= rhs.radians;
-
-         // Normalize the angle after addition
          radians = normalize(radians);
-
          return *this;
       }
 
@@ -74,7 +67,6 @@ class Angle
          return *this;
       }
 
-      // Why not just ==? Oh well, 2 less errors.
       bool operator ==(const Angle& rhs) const { return radians == rhs.radians; }
       bool operator !=(const Angle& rhs) const { return radians != rhs.radians; }
 
@@ -135,7 +127,21 @@ class Angle
          radians += M_PI;
       }
 
-      void display(ostream& out) const
+      virtual Angle& operator++()
+      {
+         radians += (M_PI / 180.0); // Increase by 1 degree in radians
+         radians = normalize(radians);
+         return *this;
+      }
+
+      virtual Angle& operator--()
+      {
+         radians -= (M_PI / 180.0); // Decrease by 1 degree in radians
+         radians = normalize(radians);
+         return *this;
+      }
+
+      virtual void display(ostream& out) const
       {
          out.setf(ios::fixed);     // "fixed" means don't use scientific notation.
          out.setf(ios::showpoint); // "showpoint" means always show the decimal point.
@@ -144,7 +150,7 @@ class Angle
          out << getDegrees() << "degrees";
       }
 
-private:
+protected:
    double normalize(double aRadian) const
    {
       // Use fmod to find the remainder of aRadian divided by TWO_PI
@@ -172,25 +178,12 @@ ostream& operator<<(ostream& out, const Angle& rhs)
    return out;
 }
 
+#include <iostream>
 istream& operator>>(istream& in, const Angle& rhs)
 {
    in >> rhs.radians;
    rhs.normalize(rhs.radians);
    return in;
-}
-
-Angle& operator++(Angle& rhs)
-{
-   rhs.radians += 1.0;
-   rhs.normalize(rhs.radians);
-   return rhs;
-}
-
-Angle& operator--(Angle& rhs)
-{
-   rhs.radians -= 1.0;
-   rhs.normalize(rhs.radians);
-   return rhs;
 }
 
 
@@ -199,21 +192,33 @@ Angle& operator--(Angle& rhs)
  ************************************/
 class AngleRadians : public Angle
 {
-   friend TestAngle;
+friend TestAngle;
 
-   public:
-      AngleRadians() : Angle() {}
-      AngleRadians(double radians) { setRadians(radians); }
+public:
+   AngleRadians() : Angle() {}
+   AngleRadians(double radians) { setRadians(radians); }
+
+   // Override display to show radians with 2 decimal places
+   virtual void display(ostream& out) const override
+   {
+      out.setf(ios::fixed);
+      out.setf(ios::showpoint);
+      out.precision(2);
+      out << getRadians() << " radians";
+   }
+
+   // Override increment and decrement operators
+   virtual Angle& operator++() override
+   {
+      radians += PI_EIGHT; // Increment by π/8
+      radians = normalize(radians);
+      return *this;
+   }
+
+   virtual Angle& operator--() override
+   {
+      radians -= PI_EIGHT; // Decrement by π/8
+      radians = normalize(radians);
+      return *this;
+   }
 };
-
-#include <iostream>
-
-/*******************************************************
- * OUTPUT ANGLE
- * place output on the screen in degrees
- *******************************************************/
-inline std::ostream& operator << (std::ostream& out, const Angle& rhs)
-{
-   out << rhs.getDegrees() << "degree";
-   return out;
-}
