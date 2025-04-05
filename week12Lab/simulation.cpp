@@ -51,7 +51,7 @@ void Simulator::displayStatus()
    gout << "Altitude: " << projectile.getAltitude() << endl;
    gout << "Target: " << ground.getTarget().getMetersX() << ", " << ground.getTarget().getMetersY() << endl;
    gout << "Projectile (POS): " << projectile.getPosition().getMetersX() << ", " << projectile.getPosition().getMetersY() << endl;
-	gout << "Projectile (SPEED): " << projectile.getSpeed() << endl;
+   gout << "Projectile (SPEED): " << projectile.getSpeed() << endl;
 }
 
 void Simulator::gamePlay()
