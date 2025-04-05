@@ -69,7 +69,6 @@ public:
       pvt.t = simulationTime;
 
       flightPath.push_back(pvt);
-
    }
 
    void fire(const Position& pos, double simulationTime, const Angle& elevation, double muzzleVelocity)

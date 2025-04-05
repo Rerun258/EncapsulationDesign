@@ -42,8 +42,15 @@ void Simulator::displayStatus()
 {
    ogstream gout;
 
+   Position goutPos;
+   goutPos.setPixelsX(200.0);
+   goutPos.setPixelsY(370.0);
+   gout.setPosition(goutPos);
+
    gout.precision(2);
-   gout << "Altitude: " << projectile.getAltitude();
+   gout << "Altitude: " << projectile.getAltitude() << endl;
+   gout << "Target: " << ground.getTarget().getPixelsX() << ", " << ground.getTarget().getPixelsY() << endl;
+   gout << "Projectile : " << projectile.getPosition().getMetersX() << ", " << projectile.getPosition().getMetersY() << endl;
 
 }
 
@@ -55,6 +62,12 @@ void Simulator::gamePlay()
       double timeIncrement = 0.1; // or whatever delta you want
       simTime += timeIncrement;
 
+      if ((projectile.getPosition().getPixelsX() == ground.getTarget().getPixelsX()) && 
+            (projectile.getPosition().getPixelsY() == ground.getTarget().getPixelsY()))
+      { 
+         reset(); 
+      }
+      
       projectile.advance(simTime);
    }
 
