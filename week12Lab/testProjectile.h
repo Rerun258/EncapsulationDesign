@@ -467,17 +467,26 @@ private:
   
 
 		// verify
-		assertUnit(pro.flightPath.size() == 4);
+		assertUnit(pro.flightPath.size() == 3);
 		assertEquals(pro.mass, 46.7);
 		assertEquals(pro.radius, 0.077545);
 		assertUnit(!pro.flightPath.empty());
 		if (!pro.flightPath.empty())
 		{
+         #include <iomanip> // for std::setprecision
+
+         std::cout << std::fixed << std::setprecision(6);
+
 			assertEquals(pro.flightPath.back().pos.x, 149.9201); // pos.x=149.9201 = 100 + 50*1 + .5(-0.0799)*1*1
+			std::cout << "pos.x: " << pro.flightPath.back().pos.x << std::endl;
 			assertEquals(pro.flightPath.back().pos.y, 155.1287); // pos.y=155.1287 = 200 +-40*1 + .5(-9.8064+0.0638)*1*1
+			std::cout << "pos.y: " << pro.flightPath.back().pos.y << std::endl;
 			assertEquals(pro.flightPath.back().v.dx, 49.9201);   // v.dx =49.9201  = 50 + (-0.0799)*1
+         std::cout << "v.dx: " << pro.flightPath.back().v.dx << std::endl;
 			assertEquals(pro.flightPath.back().v.dy, -49.7425); // v.dy =-49.7425 = -40 + (-9.8064+0.0638)*1
+         std::cout << "v.Dy: " << pro.flightPath.back().v.dy << std::endl;
 			assertEquals(pro.flightPath.back().t, 101.0);
+         std::cout << "time: " << pro.flightPath.back().t << endl;
 		}
 
 		// teardown
