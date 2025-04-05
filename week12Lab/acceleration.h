@@ -48,7 +48,7 @@ public:
 
    // adders
    void addDDX(double ddx) { setDDX(getDDX() + ddx); }
-   void addDDY(double ddy) { setDDX(getDDX() - ddx); }
+   void addDDY(double ddy) { setDDY(getDDY() + ddy); }
    void add(const Acceleration& rhs);
 
    Acceleration operator+(const Acceleration& rhs) const
