@@ -14,6 +14,7 @@
 #include "velocity.h"
 #include "physics.h"
 #include "uiDraw.h"
+using namespace std;
 
 #define DEFAULT_PROJECTILE_WEIGHT 46.7       // kg
 #define DEFAULT_PROJECTILE_RADIUS 0.077545   // m
@@ -35,31 +36,60 @@ public:
    Projectile() : mass(DEFAULT_PROJECTILE_WEIGHT), radius(DEFAULT_PROJECTILE_RADIUS) {}
 
    // Advance the round forward until the next unit of time.
-   void advance(double simulationTime) 
+   void advance(double simulationTime)
    {
+      // Ensure flightPath has at least one initial state
       if (flightPath.empty())
          flightPath.push_back(PositionVelocityTime());
 
-     for (double t = 0.0; t <= simulationTime; t += 1.0)
-      {
-         PositionVelocityTime lastState = flightPath.back();
+      PositionVelocityTime lastState = flightPath.back();
+      double t = lastState.t; // Start from the last recorded time
+      const double timeStep = 1.0; // Define time step for clarity
 
+      // Iterate through each time step up to simulationTime
+      for (; t < simulationTime ; t += timeStep)
+      {
+         // Initialize new state for the next time step
          PositionVelocityTime newState;
 
-         // this is wrong. what equations does one even use here?
-         newState.t = t;
-         newState.v.addDX(lastState.v.getDX());
-         newState.v.addDY(lastState.v.getDY());
-         newState.pos.addMetersX(lastState.pos.getMetersX());
-         newState.pos.addMetersY(lastState.pos.getMetersY());
+         // Calculate density based on the current altitude
+         double density = densityFromAltitude(lastState.pos.getMetersY());
 
+         // Compute drag forces in x and y directions
+         double dragForceX = forceFromDrag(density, 0.047, radius, lastState.v.getDX());
+         double dragForceY = forceFromDrag(density, 0.047, radius, lastState.v.getDY());
+
+         // Compute accelerations from drag forces
+         double accelerationX = accelerationFromForce(dragForceX, mass);
+         double accelerationY = accelerationFromForce(dragForceY, mass);
+
+         // Update position
+         double newX = lastState.pos.getMetersX() + lastState.v.getDX() * timeStep + 0.5 * accelerationX * timeStep * timeStep;
+         double newY = lastState.pos.getMetersY() + lastState.v.getDY() * timeStep + 0.5 * accelerationY * timeStep * timeStep;
+
+         // Update velocity
+         double newDX = lastState.v.getDX() + accelerationX * timeStep;
+         double newDY = lastState.v.getDY() + accelerationY * timeStep;
+
+         // Assign updated values to newState
+         newState.pos.setMetersX(newX);
+         newState.pos.setMetersY(newY);
+         newState.v.setDX(newDX);
+         newState.v.setDY(newDY);
+         newState.t = lastState.t + timeStep;
+         // Add the new state to the flight path
          flightPath.push_back(newState);
-      }
 
+
+         
+
+         // Update lastState for the next iteration
+         lastState = flightPath.back();
+      }
       
    }
 
-   void fire(Position pos, double simulationTime, Velocity muzzleVelocity)
+   void fire(const Position& pos, double simulationTime, const Angle& elevation, double muzzleVelocity)
    {
       flightPath.clear();
 

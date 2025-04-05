@@ -250,7 +250,8 @@ private:
          assertEquals(p.flightPath.back().pos.x, 0.0);  
          assertEquals(p.flightPath.back().pos.y, 0.0);
          assertEquals(p.flightPath.back().v.dx, 0.0);   
-         assertEquals(p.flightPath.back().v.dy, 0.0);   
+         assertEquals(p.flightPath.back().v.dy, 0.0); 
+         cout << "time: " << p.flightPath.back().t << endl;
          assertEquals(p.flightPath.back().t, 101.0);
       }
 
@@ -443,38 +444,44 @@ private:
     *                            t=101}
     *********************************************/
    void advance_diagonalDown()
-   {  // setup
-      setupStandardFixture();
-      Position pos;
-      Projectile p;
-      Projectile::PositionVelocityTime pvt;
-      p.flightPath.push_back(pvt);
-      p.flightPath.push_back(pvt);
-      pvt.pos.x = 100.0;
-      pvt.pos.y = 200.0;
-      pvt.v.dx = 50.0;
-      pvt.v.dy = -40.0;
-      pvt.t = 100.0;
-      p.flightPath.push_back(pvt);
+   { 
+      // setup
+		setupStandardFixture();
+		
+		Projectile pro;
+		Projectile::PositionVelocityTime pvt;
+		pro.flightPath.push_back(pvt);
+		
+		pvt.pos.x = 100.0;
+		pvt.pos.y = 200.0;
+		pvt.v.dx = 50.0;
+		pvt.v.dy = -40.0; // negative to simulate downward motion
+		pvt.t = 100.0;
+		pro.flightPath.push_back(pvt);
 
-      // exercise
-      p.advance(101.0);
+		// exercise
 
-      // verify
-      assertUnit(p.flightPath.size() == 4);
-      assertEquals(p.mass, 46.7);
-      assertEquals(p.radius, 0.077545);
-      assertUnit(!p.flightPath.empty());
-      if (!p.flightPath.empty())
-      {
-         assertEquals(p.flightPath.back().pos.x, 149.9601); // 100 + 50*1 + .5(-0.0799)*1*1
-         assertEquals(p.flightPath.back().pos.y, 155.1287); // 200 +-40*1 + .5(-9.8064+0.0638)*1*1
-         assertEquals(p.flightPath.back().v.dx, 49.9201);   // 50 + (-0.0799)*1
-         assertEquals(p.flightPath.back().v.dy, -49.7425);  //-40 + (-9.8064+0.0638)*1*1
-         assertEquals(p.flightPath.back().t, 101.0);
-      }
-      // teardown
-      teardownStandardFixture();
+
+		pro.advance(101.0);
+
+  
+
+		// verify
+		assertUnit(pro.flightPath.size() == 4);
+		assertEquals(pro.mass, 46.7);
+		assertEquals(pro.radius, 0.077545);
+		assertUnit(!pro.flightPath.empty());
+		if (!pro.flightPath.empty())
+		{
+			assertEquals(pro.flightPath.back().pos.x, 149.9201); // pos.x=149.9201 = 100 + 50*1 + .5(-0.0799)*1*1
+			assertEquals(pro.flightPath.back().pos.y, 155.1287); // pos.y=155.1287 = 200 +-40*1 + .5(-9.8064+0.0638)*1*1
+			assertEquals(pro.flightPath.back().v.dx, 49.9201);   // v.dx =49.9201  = 50 + (-0.0799)*1
+			assertEquals(pro.flightPath.back().v.dy, -49.7425); // v.dy =-49.7425 = -40 + (-9.8064+0.0638)*1
+			assertEquals(pro.flightPath.back().t, 101.0);
+		}
+
+		// teardown
+
    }
 
    /*****************************************************************
