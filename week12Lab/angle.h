@@ -34,15 +34,15 @@ public:
    friend TestProjectile;
 
    // Constructors
-   Angle() : radians(0) {}
+   Angle()                 : radians(0.0) {}
    Angle(const Angle& rhs) : radians(rhs.getRadians()) {}
-   Angle(double degrees)
+   Angle(double degrees)   : radians(0.0)
    {
       setDegrees(degrees);
    }
 
    // Getters
-   double getDegrees() const { return radians * (180.0 / M_PI); }
+   double getDegrees() const { return convertToDegrees(radians); }
    double getRadians() const { return radians; }
 
    //         dx
@@ -57,23 +57,8 @@ public:
    // dx = sin a
    double getDx() const { return sin(radians); }
    double getDy() const { return cos(radians); }
-   bool isRight() const {
-		if (radians > 0.0 && radians < M_PI)
-		{
-			return true;
-		}
-
-		return false;
-   }
-
-   bool   isLeft() const
-   {
-		if (radians > M_PI && radians < (2 * M_PI))
-		{
-			return true;
-		}
-		return false;
-   }
+   bool isRight() const { return radians < M_PI; }
+   bool isLeft() const { return radians > M_PI; }
 
 
    // Setters
@@ -89,7 +74,7 @@ public:
    void setUp() { radians = 0.0; }
 
    // 90°
-   void setRight() { radians = M_PI * .5; }
+   void setRight() { radians = M_PI * 0.5; }
 
    // 270°
    void setLeft() { radians = M_PI * 1.5; }
@@ -97,12 +82,11 @@ public:
    // 180°
    void setDown() { radians = M_PI; }
 
-   void reverse() { radians += M_PI; }
+   void reverse() { radians = normalize(radians + M_PI); }
 
    Angle& add(double delta)
    {
-      radians += delta;
-      radians = normalize(radians);
+      radians = normalize(radians + delta);
       return *this;
    }
 
@@ -117,14 +101,24 @@ public:
    //     | /
    void setDxDy(double dx, double dy)
    {
-      radians = atan2(dy, dx);
+      radians = normalize(atan2(dx, dy));
    }
 
-   Angle operator+(double degrees) const { return Angle(); }
+   Angle operator+(double degrees) const { return Angle(getDegrees() + degrees); }
 
 private:
 
    double normalize(double radians) const;
+
+   double convertToDegrees(double radians) const
+   {
+      return radians / (M_PI * 2.0) * 360.0;
+   }
+
+   double convertToRadians(double degrees) const
+   {
+      return degrees / 360.0 * (M_PI * 2.0);
+   }
 
    double radians;   // 360 degrees equals 2 PI radians
 };

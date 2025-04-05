@@ -134,7 +134,7 @@ private:
       pos.y = 222.0;
       mV.set(a, 100.0);
 
-      p.fire(pos, 1.0, mV);
+      p.fire(pos, 1.0, a, 0.0);
       
       // Verify
       if (!p.flightPath.empty())
@@ -170,7 +170,7 @@ private:
       pos.y = 222.0;
       mV.set(a, 100.0);
 
-      p.fire(pos, 1.0, mV);
+      p.fire(pos, 1.0, a, 0.0);
 
       // Verify
       if (!p.flightPath.empty())
@@ -205,7 +205,7 @@ private:
       pos.y = 222.0;
       mV.set(a, 100.0);
 
-      p.fire(pos, 1.0, mV);
+      p.fire(pos, 1.0, a, 0.0);
 
       // Verify
       if (!p.flightPath.empty())
