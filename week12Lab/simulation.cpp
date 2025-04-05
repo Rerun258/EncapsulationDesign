@@ -83,12 +83,13 @@ void Simulator::input(const Interface* pUI)
          howitzer.getMuzzleVelocity());
    }
 
-   if (pUI->isRight())
-      howitzer.rotate(+0.05); // tweak value
+   if (pUI->isRight() || pUI->isUp())
+      howitzer.rotate(+0.05);
 
-   if (pUI->isLeft())
+   if (pUI->isLeft() || pUI->isDown())
       howitzer.rotate(-0.05);
 
    if (pUI->isQ())
       exit(0);
+      
 }

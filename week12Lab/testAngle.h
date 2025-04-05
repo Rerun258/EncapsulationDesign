@@ -555,11 +555,11 @@ private:
 
       
       
-      std::cout << std::fixed << std::setprecision(6);
+      // std::cout << std::fixed << std::setprecision(6);
       // verify
       assertEquals(a.radians, M_PI / 6.0); // 30 degrees
-      std::cout << "radians: " << a.radians << std::endl;
-      std::cout << "should be: " << M_PI / 6.0 << std::endl;
+      // std::cout << "radians: " << a.radians << std::endl;
+      // std::cout << "should be: " << M_PI / 6.0 << std::endl;
    }
    // teardown
 
