@@ -679,11 +679,12 @@ private:
       Position pos(11.1, 22.2);
 
       Acceleration acc;
-      acc.setDDX(0.0);
-      acc.setDDY(0.0);
+      acc.ddx = (0.0);
+      acc.ddy = (0.0);
 
       Velocity vel;
-      vel.setDXDY(0.5, 0.4);
+      vel.dx = 0.5;
+      vel.dy = 0.4;
 
       double t = 1.0;
 

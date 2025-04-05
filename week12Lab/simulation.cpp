@@ -43,15 +43,15 @@ void Simulator::displayStatus()
    ogstream gout;
 
    Position goutPos;
-   goutPos.setPixelsX(200.0);
-   goutPos.setPixelsY(370.0);
+	goutPos.setPixelsX(450.0);
+	goutPos.setPixelsY(500.0);
    gout.setPosition(goutPos);
 
-   gout.precision(2);
+   //gout.precision(2);
    gout << "Altitude: " << projectile.getAltitude() << endl;
-   gout << "Target: " << ground.getTarget().getPixelsX() << ", " << ground.getTarget().getPixelsY() << endl;
-   gout << "Projectile : " << projectile.getPosition().getPixelsX() << ", " << projectile.getPosition().getPixelsY() << endl;
-
+   gout << "Target: " << ground.getTarget().getMetersX() << ", " << ground.getTarget().getMetersY() << endl;
+   gout << "Projectile (POS): " << projectile.getPosition().getMetersX() << ", " << projectile.getPosition().getMetersY() << endl;
+	gout << "Projectile (SPEED): " << projectile.getSpeed() << endl;
 }
 
 void Simulator::gamePlay()
@@ -59,11 +59,11 @@ void Simulator::gamePlay()
    if (projectile.flying())
    { 
       static double simTime = 0.0;
-      double timeIncrement = 0.1; // or whatever delta you want
+      double timeIncrement = 0.1;
       simTime += timeIncrement;
 
-      if ((projectile.getPosition().getPixelsX() == ground.getTarget().getPixelsX()) && 
-            (projectile.getPosition().getPixelsY() == ground.getTarget().getPixelsY()))
+      if ((projectile.getPosition().getMetersX() == ground.getTarget().getMetersX()) && 
+            (projectile.getPosition().getMetersY() == ground.getTarget().getMetersY()))
       { 
          reset(); 
       }

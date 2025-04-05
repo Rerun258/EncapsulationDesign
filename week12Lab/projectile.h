@@ -76,10 +76,9 @@ public:
       reset();
 
       PositionVelocityTime pvt;
+      pvt.pos = pos;
       pvt.t = simulationTime;
       pvt.v.set(elevation, muzzleVelocity);
-      pvt.pos = pos;
-
       flightPath.push_back(pvt);
    }
 
@@ -98,7 +97,7 @@ public:
 
    bool flying() const { return !flightPath.empty(); }
 
-   double getAltitude() const { return flying() ? flightPath.back().pos.getMetersY() : 0; }
+   double getAltitude() const { return flying() ? flightPath.back().pos.getMetersY() : 0.0; }
 
    Position getPosition() const { return flying() ? flightPath.back().pos : Position(); }
 
