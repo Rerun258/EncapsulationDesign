@@ -30,6 +30,8 @@ void callBack(const Interface* pUI, void* p)
    Simulator* pSim = (Simulator*)p;
 
    pSim->display();
+   pSim->input(pUI);
+   pSim->gamePlay();
 }
 
 double Position::metersFromPixels = 40.0;

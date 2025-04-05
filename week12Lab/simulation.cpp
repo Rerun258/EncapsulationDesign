@@ -2,7 +2,7 @@
  * Suurce File:
  *    SIMULATION
  * Author:
- *    <your name here>
+ *    McClain, Elijah
  * Summary:
  *    Execute one simulation of a projectile being fired.
  ************************************************************************/
@@ -43,17 +43,39 @@ void Simulator::displayStatus()
    ogstream gout;
 
    gout.precision(2);
-   
+   gout << "Altitude: " << projectile.getAltitude();
 
 }
 
 void Simulator::gamePlay()
 {
+   if (projectile.flying())
+   { 
+      static double simTime = 0.0;
+      double timeIncrement = 0.1; // or whatever delta you want
+      simTime += timeIncrement;
 
+      projectile.advance(simTime);
+   }
 
 }
 
 void Simulator::input(const Interface* pUI)
 {
+   if (pUI->isSpace() && !projectile.flying())
+   {
+      projectile.fire(howitzer.getPosition(),
+         0.0,
+         howitzer.getElevation(),
+         howitzer.getMuzzleVelocity());
+   }
 
+   if (pUI->isRight())
+      howitzer.rotate(+0.05); // tweak value
+
+   if (pUI->isLeft())
+      howitzer.rotate(-0.05);
+
+   if (pUI->isQ())
+      exit(0);
 }
