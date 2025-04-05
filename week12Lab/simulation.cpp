@@ -34,14 +34,26 @@ void Simulator::display()
    ground.draw(gout);
    howitzer.draw(gout, 50.0);
    projectile.draw(gout);
+
+   displayStatus();
 }
 
 void Simulator::displayStatus()
 {
+   ogstream gout;
+
+   gout.precision(2);
+   
 
 }
 
 void Simulator::gamePlay()
+{
+
+
+}
+
+void Simulator::input(const Interface* pUI)
 {
 
 }

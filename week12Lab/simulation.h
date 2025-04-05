@@ -41,6 +41,8 @@ public:
    void displayStatus();
 
    void gamePlay();
+
+   void input(const Interface* pUI);
    
 
 private:
