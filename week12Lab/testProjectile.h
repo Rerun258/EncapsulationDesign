@@ -287,8 +287,7 @@ private:
        // exercise
        p.advance(101.0);
 
-		 cout << "dx: " << p.flightPath.back().v.dx << endl;
-		 cout << "dy: " << p.flightPath.back().v.dy << endl; 
+		 
        // verify
        assertUnit(p.flightPath.size() == 4);
        assertEquals(p.mass, 46.7);
@@ -461,6 +460,12 @@ private:
       p.flightPath.push_back(pvt);
       // exercise
       p.advance(101.0);
+
+      cout << "pos.x: " << p.flightPath.back().pos.x << endl;
+      cout << "pos.y: " << p.flightPath.back().pos.y << endl;
+		cout << "dx: " << p.flightPath.back().v.dx  << endl;
+		cout << "dy: " << p.flightPath.back().v.dy << endl;
+
       // verify
       assertUnit(p.flightPath.size() == 4);
       assertEquals(p.mass, 46.7);

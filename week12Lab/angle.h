@@ -84,6 +84,12 @@ public:
 
    void reverse() { radians = normalize(radians + M_PI); }
 
+   Angle operator-() const {
+		Angle aReturn(*this);
+		aReturn.reverse();
+		return aReturn;
+   }
+
    Angle& add(double delta)
    {
       radians = normalize(radians + delta);

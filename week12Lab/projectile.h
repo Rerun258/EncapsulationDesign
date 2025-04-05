@@ -16,6 +16,8 @@
 #include "uiDraw.h"
 #include "angle.h"
 #include "acceleration.h"
+#include "cassert"
+#include "unitTest.h"
 using namespace std;
 
 #define DEFAULT_PROJECTILE_WEIGHT 46.7       // kg
@@ -55,18 +57,40 @@ public:
       double dragCoefficient = dragFromMach(mach);
       double windResistence = forceFromDrag(density, dragCoefficient, radius, speed);
       double magnitudeWind = accelerationFromForce(windResistence, mass);
-      Acceleration aWind(pvt.v.getAngle(), magnitudeWind);
+      //pvt.v.reverse();
+      
+      Acceleration aWind(-pvt.v.getAngle(), magnitudeWind);
 
       double magnitudeGravity = gravityFromAltitude(altititude);
       Angle angleGravity;
       angleGravity.setDown();
       Acceleration aGravity(angleGravity, magnitudeGravity);
-
+      
       Acceleration aTotal = aGravity + aWind;
+      std::cout << std::fixed << std::setprecision(7);
+      
+      //cout << "\n\nBefore";
+      //cout << "aTotal.ddx: " << aTotal.getDDX() << endl;
+      //cout << "aTotal.ddy: " << aTotal.getDDY() << endl;
+      //cout << "aGravity: " << aGravity.getDDX() << endl;
+      //cout << "aGravity: " << aGravity.getDDY() << endl;
+      //cout << "aWind: " << aWind.getDDX() << endl;
+      //cout << "aWind: " << aWind.getDDX() << endl;
+      //cout << "\n\n";
 
       pvt.pos.add(aTotal, pvt.v, interval);
       pvt.v.add(aTotal, interval);
       pvt.t = simulationTime;
+
+
+      //cout << "\n\nAfter";
+      //cout << "aTotal.ddx: " << aTotal.getDDX() << endl;
+      //cout << "aTotal.ddy: " << aTotal.getDDY() << endl;
+      //cout << "aGravityX: " << aGravity.getDDX() << endl;
+      //cout << "aGravityY: " << aGravity.getDDY() << endl;
+      //cout << "aWindX: " << aWind.getDDX() << endl;
+      //cout << "aWindY: " << aWind.getDDY() << endl;
+      //cout << "\n\n";
 
       flightPath.push_back(pvt);
    }
