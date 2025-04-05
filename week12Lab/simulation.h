@@ -28,23 +28,25 @@
 class Simulator
 {
 public:
-   Simulator(const Position & posUpperRight) : ground(posUpperRight), howitzer()
+   Simulator(const Position & posUpperRight) : ground(posUpperRight), howitzer(), projectile()
    {
        howitzer.generatePosition(posUpperRight);
        ground.reset(howitzer.getPosition());
-       
+       this->posUpperRight = posUpperRight;
    }
 
-   void display()
-   {
-      ogstream gout;
+   void reset();
 
-      ground.draw(gout);
-      howitzer.draw(gout, 50.0);
-   }
+   void display();
+   void displayStatus();
+
+   void gamePlay();
+   
 
 private:
     Howitzer howitzer;
     Ground ground;
+    Projectile projectile;
+    Position posUpperRight;
 
 };
