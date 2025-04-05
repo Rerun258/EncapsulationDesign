@@ -524,12 +524,13 @@ private:
       a.radians = 0.0; // Arbitrary initial value
       double dx = -0.01;
       double dy = 0.0;
-
+      std::cout << std::fixed << std::setprecision(6); 
       // exercise
       a.setDxDy(dx, dy);
 
       // verify
       assertEquals(a.radians, M_PI); // Expected result for left direction (180 degrees)
+      //std::cout << "radians: " << a.radians << std::endl;
    } // teardown
 
 
@@ -552,9 +553,9 @@ private:
 
 #include <iomanip> // Required for std::setprecision
 
+      
+      
       std::cout << std::fixed << std::setprecision(6);
-
-
       // verify
       assertEquals(a.radians, M_PI / 6.0); // 30 degrees
       std::cout << "radians: " << a.radians << std::endl;

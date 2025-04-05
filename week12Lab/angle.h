@@ -101,7 +101,7 @@ public:
    //     | /
    void setDxDy(double dx, double dy)
    {
-      radians = atan(dx / dy);
+      radians = atan2(dy, dx);
    }
 
    Angle operator+(double degrees) const { return Angle(getDegrees() + degrees); }
