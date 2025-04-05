@@ -37,6 +37,13 @@ public:
    // constructors
    Velocity() : dx(0.0), dy(0.0) {}
    Velocity(double dx, double dy) : dx(dx), dy(dy) {}
+   Velocity(const Velocity& rhs) : dx(rhs.dx), dy(rhs.dy) {}
+   Velocity& operator = (const Velocity& rhs)
+   {
+      dx = rhs.dx;
+      dy = rhs.dy;
+      return *this;
+   }
 
    // getters
    double getDX()       const { return dx; }
@@ -52,26 +59,23 @@ public:
    void addDX(double dx) { setDX(getDX() + dx); }
    void addDY(double dy) { setDY(getDY() + dy); }
    void add(const Acceleration& acceleration, double time);
-
-   void addV(Velocity& rhs)
+   void addV(const Velocity& rhs)
    {
       this->dx += rhs.getDX();
       this->dy += rhs.getDY();
    }
 
-   void reverse()
+   Velocity& operator +=(const Velocity& rhs)
    {
-      dx = -dx;
-      dy = -dy;
-   }
-
-   Velocity& operator = (const Velocity& rhs)
-   {
-      dx = rhs.dx;
-      dy = rhs.dy;
+      addV(rhs);
       return *this;
    }
 
+   void reverse()
+   {
+      dx *= -1.0;
+      dy *= -1.0;
+   }
 
 private:
    double dx;           // horizontal velocity

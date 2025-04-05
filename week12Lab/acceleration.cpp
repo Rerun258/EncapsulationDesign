@@ -18,10 +18,10 @@
  * ACCELERATION : ADD
  *  a += a
  *********************************************/
-void Acceleration::add(const Acceleration& acceleration)
+void Acceleration::add(const Acceleration& a)
 {
-   ddx += acceleration.getDDX();
-   ddy += acceleration.getDDY();
+   ddx += a.getDDX();
+   ddy += a.getDDY();
 }
 
 
@@ -29,12 +29,9 @@ void Acceleration::add(const Acceleration& acceleration)
  * ACCELERATION : SET
  *  set from angle and direction
  *********************************************/
-void Acceleration::set(const Angle& angle, double magnitude)
+void Acceleration::set(const Angle& a, double magnitude)
 {
-   // Convert angle to radians if it's not already in radians
-   double radians = angle.getRadians();
-
    // Calculate the components of the acceleration
-   ddx = magnitude * sin(radians);
-   ddy = magnitude * cos(radians);
+   ddx = magnitude * sin(a.getRadians());
+   ddy = magnitude * cos(a.getRadians());
 }

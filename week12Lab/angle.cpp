@@ -21,10 +21,11 @@ double Angle::normalize(double aRadian) const
    // Use fmod to find the remainder of aRadian divided by TWO_PI
    aRadian = fmod(aRadian, TWO_PI);
 
-   if (aRadian < 0)
+   if (aRadian < 0.0)
    {
       aRadian += TWO_PI;
    }
+
    if (aRadian > TWO_PI)
    {
       aRadian -= TWO_PI;

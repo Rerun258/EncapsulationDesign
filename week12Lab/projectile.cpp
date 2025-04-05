@@ -10,6 +10,9 @@
 
  #include "projectile.h"
  #include "angle.h"
+ #include "acceleration.h"
  using namespace std;
+
+ 
 
 
