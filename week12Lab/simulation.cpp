@@ -25,6 +25,8 @@ void Simulator::reset()
 {
    howitzer.generatePosition(posUpperRight);
    ground.reset(howitzer.getPosition());
+   projectile.reset();
+   simTime = 0.0;
 }
 
 void Simulator::display()
@@ -47,19 +49,22 @@ void Simulator::displayStatus()
 	goutPos.setPixelsY(500.0);
    gout.setPosition(goutPos);
 
-   //gout.precision(2);
+   projectileXKM = projectile.getPosition().getMetersX() / 1000.0;
+   projectileYKM = projectile.getPosition().getMetersY() / 1000.0;
+
+   targetXKM = ground.getTarget().getMetersX() / 1000.0;
+   targetYKM = ground.getTarget().getMetersY() / 1000.0;
+
    gout << "Altitude: " << projectile.getAltitude() << endl;
-   gout << "Target: " << ground.getTarget().getMetersX() << ", " << ground.getTarget().getMetersY() << endl;
-   gout << "Projectile (POS): " << projectile.getPosition().getMetersX() << ", " << projectile.getPosition().getMetersY() << endl;
-   gout << "Projectile (SPEED): " << projectile.getSpeed() << endl;
+   gout << "Target: " << targetXKM << ", " << targetYKM << " (KM)" << endl;
+   gout << "Projectile (POS): " << projectileXKM << ", " << projectileYKM << " (KM)" << endl;
+   gout << "Projectile (SPEED): " << projectile.getSpeed() << " (M/S)" << endl;
 }
 
 void Simulator::gamePlay()
 {
    if (projectile.flying())
-   { 
-      static double simTime = 0.0;
-      double timeIncrement = 0.1;
+   {  
       simTime += timeIncrement;
 
       if ((projectile.getPosition().getMetersX() == ground.getTarget().getMetersX()) && 
@@ -67,7 +72,14 @@ void Simulator::gamePlay()
       { 
          reset(); 
       }
-      
+
+      if (projectile.getPosition().getMetersX() > 30000.00
+            || projectile.getPosition().getMetersX() < 0.0
+            || projectile.getPosition().getMetersY() < 0.0)
+      {
+         reset();
+      }
+
       projectile.advance(simTime);
    }
 
@@ -78,7 +90,7 @@ void Simulator::input(const Interface* pUI)
    if (pUI->isSpace() && !projectile.flying())
    {
       projectile.fire(howitzer.getPosition(),
-         0.0,
+         simTime,
          howitzer.getElevation(),
          howitzer.getMuzzleVelocity());
    }

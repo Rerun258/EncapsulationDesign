@@ -125,16 +125,14 @@ private:
       Projectile p;
       Angle a;
       Position pos;
-      Velocity mV;
       Projectile::PositionVelocityTime pvt;
 
       // Exercise
       a.setRight();
       pos.x = 111.0;
       pos.y = 222.0;
-      mV.set(a, 100.0);
 
-      p.fire(pos, 1.0, a, 0.0);
+      p.fire(pos, 1.0, a, 100.0);
       
       // Verify
       if (!p.flightPath.empty())
@@ -161,16 +159,14 @@ private:
       Projectile p;
       Angle a;
       Position pos;
-      Velocity mV;
       Projectile::PositionVelocityTime pvt;
 
       // Exercise
       a.setLeft();
       pos.x = 111.0;
       pos.y = 222.0;
-      mV.set(a, 100.0);
 
-      p.fire(pos, 1.0, a, 0.0);
+      p.fire(pos, 1.0, a, 100.0);
 
       // Verify
       if (!p.flightPath.empty())
@@ -196,16 +192,14 @@ private:
       Projectile p;
       Angle a;
       Position pos;
-      Velocity mV;
       Projectile::PositionVelocityTime pvt;
 
       // Exercise
       a.setUp();
       pos.x = 111.0;
       pos.y = 222.0;
-      mV.set(a, 100.0);
 
-      p.fire(pos, 1.0, a, 0.0);
+      p.fire(pos, 1.0, a, 100.0);
 
       // Verify
       if (!p.flightPath.empty())
@@ -244,14 +238,13 @@ private:
       // verify
       assertEquals(p.mass, 46.7);
       assertEquals(p.radius, 0.077545);
-      assertUnit(!p.flightPath.empty());
+      assertUnit(p.flightPath.empty());
       if (!p.flightPath.empty())
       {
          assertEquals(p.flightPath.back().pos.x, 0.0);  
          assertEquals(p.flightPath.back().pos.y, 0.0);
          assertEquals(p.flightPath.back().v.dx, 0.0);   
          assertEquals(p.flightPath.back().v.dy, 0.0); 
-         cout << "time: " << p.flightPath.back().t << endl;
          assertEquals(p.flightPath.back().t, 101.0);
       }
 
@@ -275,8 +268,6 @@ private:
        Position pos;
        Projectile p;
        Projectile::PositionVelocityTime pvt;
-       p.flightPath.push_back(pvt);
-       p.flightPath.push_back(pvt);
        pvt.pos.x = 100.0;
        pvt.pos.y = 200.0;
        pvt.v.dx = 0.0;
@@ -289,16 +280,16 @@ private:
 
 		 
        // verify
-       assertUnit(p.flightPath.size() == 4);
+       assertUnit(p.flightPath.size() == 2);
        assertEquals(p.mass, 46.7);
        assertEquals(p.radius, 0.077545);
        assertUnit(!p.flightPath.empty());
        if (!p.flightPath.empty())
        {
-           assertEquals(p.flightPath.back().pos.x, 100.0);    // pos.x=100      = 100 + 0*1
+           assertEquals(p.flightPath.back().pos.x, 100.000);    // pos.x=100      = 100 + 0*1
            assertEquals(p.flightPath.back().pos.y, 195.0968); // pos.y=195.0968 = 200 + 0*1 + .5(-9.806)*1*1
            assertEquals(p.flightPath.back().v.dx, 0.0);       // v.dx =0        = 0 + 0*1
-           assertEquals(p.flightPath.back().v.dy, -9.8);      // v.dy =-9.8     = 0 + (-9.8064)*1
+           assertEquals(p.flightPath.back().v.dy, -9.8064);      // v.dy =-9.8     = 0 + (-9.8064)*1
            assertEquals(p.flightPath.back().t, 101.0);      
        }
 
@@ -322,8 +313,6 @@ private:
        Position pos;
        Projectile p;
        Projectile::PositionVelocityTime pvt;
-       p.flightPath.push_back(pvt);
-       p.flightPath.push_back(pvt);
        pvt.pos.x = 100.0;
        pvt.pos.y = 200.0;
        pvt.v.dx = 50.0;
@@ -333,15 +322,22 @@ private:
        // exercise
        p.advance(101.0);
        // verify
-       assertUnit(p.flightPath.size() == 4);
+       assertUnit(p.flightPath.size() == 2);
        assertEquals(p.mass, 46.7);
        assertEquals(p.radius, 0.077545);
        assertUnit(!p.flightPath.empty());
+
+       cout << "advance_horizontal" << endl;
+       cout << "pos.x: " << p.flightPath.back().pos.x << endl;
+       cout << "pos.y: " << p.flightPath.back().pos.y << endl;
+       cout << "dx: " << p.flightPath.back().v.dx << endl;
+       cout << "dy: " << p.flightPath.back().v.dy << endl;
+
        if (!p.flightPath.empty())
        {
-           assertEquals(p.flightPath.back().pos.x, 149.9601); //pos.x=149.9756 = 100 + 50*1 + .5(-0.0487)*1*1
+           assertEquals(p.flightPath.back().pos.x, 149.9756); //pos.x=149.9756 = 100 + 50*1 + .5(-0.0487)*1*1
            assertEquals(p.flightPath.back().pos.y, 195.0968); //pos.y=195.0968 = 200 + 0*1  + .5(-9.8064)*1*1
-           assertEquals(p.flightPath.back().v.dx, 49.9201);   //v.dx =49.9513  = 50 + (-0.0487)*1
+           assertEquals(p.flightPath.back().v.dx, 49.9513);   //v.dx =49.9513  = 50 + (-0.0487)*1
            assertEquals(p.flightPath.back().v.dy, -9.8064);   //v.dy =-9.8064  = 0  + (-9.8064)*1
            assertEquals(p.flightPath.back().t, 101.0);
        }
@@ -365,8 +361,6 @@ private:
        Position pos;
        Projectile p;
        Projectile::PositionVelocityTime pvt;
-       p.flightPath.push_back(pvt);
-       p.flightPath.push_back(pvt);
        pvt.pos.x = 100.0;
        pvt.pos.y = 200.0;
        pvt.v.dx = 0.0;
@@ -375,14 +369,21 @@ private:
        p.flightPath.push_back(pvt);
        // exercise
        p.advance(101.0);
+
+
+       cout << "advance_up" << endl;
+       cout << "pos.x: " << p.flightPath.back().pos.x << endl;
+       cout << "pos.y: " << p.flightPath.back().pos.y << endl;
+       cout << "dx: " << p.flightPath.back().v.dx << endl;
+       cout << "dy: " << p.flightPath.back().v.dy << endl;
        // verify
-       assertUnit(p.flightPath.size() == 4);
+       assertUnit(p.flightPath.size() == 2);
        assertEquals(p.mass, 46.7);
        assertEquals(p.radius, 0.077545);
        assertUnit(!p.flightPath.empty());
        if (!p.flightPath.empty())
        {
-           assertEquals(p.flightPath.back().pos.x, 100.0);    //pos.x=100      = 0   + 0*1   + .5(0)*1*1
+           assertEquals(p.flightPath.back().pos.x, 100.000);    //pos.x=100      = 0   + 0*1   + .5(0)*1*1
            assertEquals(p.flightPath.back().pos.y, 294.9021); //pos.y=294.9021 = 200 + 100*1 + .5(-9.8064-.3893)*1*1
            assertEquals(p.flightPath.back().v.dx, 0.0);       //v.dx =0        = 0   + 0*1
            assertEquals(p.flightPath.back().v.dy, 89.8042);   //v.dy =89.8042  = 100 + (-9.8064-.3893)
@@ -408,8 +409,6 @@ private:
        Position pos;
        Projectile p;
        Projectile::PositionVelocityTime pvt;
-       p.flightPath.push_back(pvt);
-       p.flightPath.push_back(pvt);
        pvt.pos.x = 100.0;
        pvt.pos.y = 200.0;
        pvt.v.dx = 50.0;
@@ -419,7 +418,7 @@ private:
        // exercise
        p.advance(101.0);
        // verify
-       assertUnit(p.flightPath.size() == 4);
+       assertUnit(p.flightPath.size() == 2);
        assertEquals(p.mass, 46.7);
        assertEquals(p.radius, 0.077545);
        assertUnit(!p.flightPath.empty());
@@ -450,8 +449,6 @@ private:
       Position pos;
       Projectile p;
       Projectile::PositionVelocityTime pvt;
-      p.flightPath.push_back(pvt);
-      p.flightPath.push_back(pvt);
       pvt.pos.x = 100.0;
       pvt.pos.y = 200.0;
       pvt.v.dx = 50.0;
@@ -461,13 +458,8 @@ private:
       // exercise
       p.advance(101.0);
 
-      cout << "pos.x: " << p.flightPath.back().pos.x << endl;
-      cout << "pos.y: " << p.flightPath.back().pos.y << endl;
-		cout << "dx: " << p.flightPath.back().v.dx  << endl;
-		cout << "dy: " << p.flightPath.back().v.dy << endl;
-
       // verify
-      assertUnit(p.flightPath.size() == 4);
+      assertUnit(p.flightPath.size() == 2);
       assertEquals(p.mass, 46.7);
       assertEquals(p.radius, 0.077545);
       assertUnit(!p.flightPath.empty());

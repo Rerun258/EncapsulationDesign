@@ -33,6 +33,12 @@ public:
        howitzer.generatePosition(posUpperRight);
        ground.reset(howitzer.getPosition());
        this->posUpperRight = posUpperRight;
+       this->projectileXKM = 0.0;
+       this->projectileYKM = 0.0;
+       this->targetXKM = 0.0;
+       this->targetYKM = 0.0;
+       this->simTime = 0.0;
+       this->timeIncrement = 0.1;
    }
 
    void reset();
@@ -50,5 +56,10 @@ private:
     Ground ground;
     Projectile projectile;
     Position posUpperRight;
-
+    double projectileXKM;
+    double projectileYKM;
+    double targetXKM;
+    double targetYKM;
+    double simTime;
+    double timeIncrement;
 };

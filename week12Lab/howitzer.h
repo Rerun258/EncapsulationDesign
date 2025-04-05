@@ -69,14 +69,16 @@ class Howitzer
 			// If the howitzer is facing right, add the radian to the elevation.
 			// If the howitzer is facing left, subtract the radian from the elevation.
 			// This is a little bit of a hack, but it works.
-			if (elevation.isRight())
-			{
-				elevation.add(-radian);
-			}
-			else
-			{
-				elevation.add(radian);
-			}
+			//if (elevation.isRight())
+			//{
+			//	elevation.add(-radian);
+			//}
+			//else
+			//{
+			//	elevation.add(radian);
+			//}
+
+         elevation.add(elevation.isRight() ? -radian : radian);
 		}
       
 
