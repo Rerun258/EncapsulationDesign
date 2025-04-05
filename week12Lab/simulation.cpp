@@ -50,7 +50,7 @@ void Simulator::displayStatus()
    gout.precision(2);
    gout << "Altitude: " << projectile.getAltitude() << endl;
    gout << "Target: " << ground.getTarget().getPixelsX() << ", " << ground.getTarget().getPixelsY() << endl;
-   gout << "Projectile : " << projectile.getPosition().getMetersX() << ", " << projectile.getPosition().getMetersY() << endl;
+   gout << "Projectile : " << projectile.getPosition().getPixelsX() << ", " << projectile.getPosition().getPixelsY() << endl;
 
 }
 
