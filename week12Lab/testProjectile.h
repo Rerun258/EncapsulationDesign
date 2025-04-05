@@ -327,11 +327,11 @@ private:
        assertEquals(p.radius, 0.077545);
        assertUnit(!p.flightPath.empty());
 
-       cout << "advance_horizontal" << endl;
-       cout << "pos.x: " << p.flightPath.back().pos.x << endl;
-       cout << "pos.y: " << p.flightPath.back().pos.y << endl;
-       cout << "dx: " << p.flightPath.back().v.dx << endl;
-       cout << "dy: " << p.flightPath.back().v.dy << endl;
+       //cout << "advance_horizontal" << endl;
+       //cout << "pos.x: " << p.flightPath.back().pos.x << endl;
+       //cout << "pos.y: " << p.flightPath.back().pos.y << endl;
+       //cout << "dx: " << p.flightPath.back().v.dx << endl;
+       //cout << "dy: " << p.flightPath.back().v.dy << endl;
 
        if (!p.flightPath.empty())
        {
@@ -371,11 +371,12 @@ private:
        p.advance(101.0);
 
 
-       cout << "advance_up" << endl;
-       cout << "pos.x: " << p.flightPath.back().pos.x << endl;
-       cout << "pos.y: " << p.flightPath.back().pos.y << endl;
-       cout << "dx: " << p.flightPath.back().v.dx << endl;
-       cout << "dy: " << p.flightPath.back().v.dy << endl;
+       //cout << "advance_up" << endl;
+       //cout << "pos.x: " << p.flightPath.back().pos.x << endl;
+       //cout << "pos.y: " << p.flightPath.back().pos.y << endl;
+       //cout << "dx: " << p.flightPath.back().v.dx << endl;
+       //cout << "dy: " << p.flightPath.back().v.dy << endl;
+       // 
        // verify
        assertUnit(p.flightPath.size() == 2);
        assertEquals(p.mass, 46.7);

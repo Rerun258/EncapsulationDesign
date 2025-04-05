@@ -69,7 +69,7 @@ public:
 
    bool flying() const { return !flightPath.empty(); }
 
-   double getAltitude() const { return flying() ? flightPath.back().pos.getMetersY() : 0.0; }
+   double getAltitude() const { return flying() ? flightPath.back().pos.getMetersY() : 0; }
 
    Position getPosition() const { return flying() ? flightPath.back().pos : Position(); }
 
